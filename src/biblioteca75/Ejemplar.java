@@ -6,12 +6,17 @@ package biblioteca75;
 public class Ejemplar {
     private int codigo ;
     private Libro libro;
-    private boolean estado;
     private int cantidadDeEjemplares;
+    private boolean estado;
+    
 
-    public Ejemplar(int codigo, Libro libro, boolean estado) {
+    public Ejemplar() {
+    }
+
+    public Ejemplar(int codigo, Libro libro, int cantidadDeEjemplares, boolean estado) {
         this.codigo = codigo;
         this.libro = libro;
+        this.cantidadDeEjemplares = cantidadDeEjemplares;
         this.estado = estado;
         
     }
@@ -19,6 +24,13 @@ public class Ejemplar {
     public Ejemplar(int cantidadDeEjemplares) {
         this.cantidadDeEjemplares = cantidadDeEjemplares;
     }
+
+    public Ejemplar(Libro libro, int cantidadDeEjemplares, boolean estado) {
+        this.libro = libro;
+        this.cantidadDeEjemplares = cantidadDeEjemplares;
+        this.estado = estado;
+    }
+    
     
     public int getCodigo() {
         return codigo;

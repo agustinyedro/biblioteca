@@ -1,6 +1,7 @@
 package biblioteca75;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -22,23 +23,22 @@ public class Prestamo {
     public Prestamo() {
     }
 
-    public Prestamo(int idPrestamo, Date fechaInicio, Date fechaFin, Ejemplar ejemplar, Lector lector, boolean estado) {
-        this.idPrestamo = idPrestamo;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
-        this.ejemplar = ejemplar;
-        this.lector = lector;
-        this.estado = estado;
-    }
-    
-    
-    public Prestamo(Date fechaInicio, Date fechaFin, Ejemplar ejemplar, Lector lector, boolean estado) {
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
-        this.ejemplar = ejemplar;
-        this.lector = lector;
-        this.estado = estado;
-    }
+//    public Prestamo(int idPrestamo, Date fechaInicio, Date fechaFin, Ejemplar ejemplar, Lector lector, boolean estado) {
+//        this.idPrestamo = idPrestamo;
+//        this.fechaInicio = fechaInicio;
+//        this.fechaFin = fechaFin;
+//        this.ejemplar = ejemplar;
+//        this.lector = lector;
+//        this.estado = estado;
+//    }
+//
+//    public Prestamo(Date fechaInicio, Date fechaFin, Ejemplar ejemplar, Lector lector, boolean estado) {
+//        this.fechaInicio = fechaInicio;
+//        this.fechaFin = fechaFin;
+//        this.ejemplar = ejemplar;
+//        this.lector = lector;
+//        this.estado = estado;
+//    }
 
     public int getIdPrestamo() {
         return idPrestamo;
@@ -47,9 +47,7 @@ public class Prestamo {
     public void setIdPrestamo(int idPrestamo) {
         this.idPrestamo = idPrestamo;
     }
-    
-    
-    
+
     public Date getFechaInicio() {
         return fechaInicio;
     }
@@ -88,6 +86,26 @@ public class Prestamo {
 
     public void setEstado(boolean estado) {
         this.estado = estado;
+    }
+
+    public void solicitarLibro(Ejemplar e, Lector l) {
+
+        if (e.getCantidadDeEjemplares() > 0 && l.isEstado()) {
+//            this.fechaInicio= fechaInicio;
+//            this.fechaFin= fechaFin;
+            this.ejemplar=e;
+            this.lector=l;
+            this.estado =true;
+            e.setCantidadDeEjemplares(e.getCantidadDeEjemplares() - 1);
+        }
+    }
+
+    public void devolverLibro(Ejemplar e, Lector l) {
+        if (this.isEstado() && l.isEstado() && ejemplar.equals(e)) {
+//            this.fechaFin= Date.valueOf(LocalDate.now());
+            this.estado = false;
+            e.setCantidadDeEjemplares(e.getCantidadDeEjemplares() + 1);
+        }
     }
 
 }
