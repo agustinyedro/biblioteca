@@ -1,23 +1,23 @@
 package biblioteca75;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 
-/**
- *
- * @author luzel
- */
+
+
 public class Ejemplar {
     private int codigo ;
     private Libro libro;
     private boolean estado;
+    private int cantidadDeEjemplares;
 
     public Ejemplar(int codigo, Libro libro, boolean estado) {
         this.codigo = codigo;
         this.libro = libro;
         this.estado = estado;
+        
+    }
+
+    public Ejemplar(int cantidadDeEjemplares) {
+        this.cantidadDeEjemplares = cantidadDeEjemplares;
     }
     
     public int getCodigo() {
@@ -43,6 +43,15 @@ public class Ejemplar {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
+
+    public int getCantidadDeEjemplares() {
+        return cantidadDeEjemplares;
+    }
+
+    public void setCantidadDeEjemplares(int cantidadDeEjemplares) {
+        this.cantidadDeEjemplares = cantidadDeEjemplares;
+    }
+    
 
     @Override
     public String toString() {
