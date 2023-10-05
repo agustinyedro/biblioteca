@@ -1,6 +1,4 @@
-
 package biblioteca.AccesoData;
-
 
 import biblioteca75.*;
 import java.awt.Button;
@@ -13,7 +11,6 @@ import javax.swing.JOptionPane;
  *
  * @author luzel
  */
-
 public class LibroData {
 
     private Connection connection;
@@ -23,7 +20,7 @@ public class LibroData {
         connection = Conexion.getConexion();
     }
 
-    public void guardarAlumno(Libro libro) {
+    public void guardarLibro(Libro libro) {
 
         String sql = "INSERT INTO Libro (isbn, titulo, autor, año, tipo, editorial, estado) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
@@ -52,7 +49,7 @@ public class LibroData {
         }
     }
 
-    public void modificarAlumno(Libro libro) {
+    public void modificarLibro(Libro libro) {
 
         String sql = "UPDATE libro SET isbn = ? , titulo = ?, autor = ?, año = ?, tipo = ?,editorial=?, estado=? WHERE idLibro = ?";
         PreparedStatement ps = null;
@@ -66,7 +63,7 @@ public class LibroData {
             ps.setString(5, libro.getTipo());
             ps.setString(6, libro.getEditorial());
             ps.setBoolean(7, libro.isEstado());
-            ps.setInt(7, libro.getIdLibro());
+            ps.setInt(8, libro.getIdLibro());
 
             int exito = ps.executeUpdate();
 
@@ -132,9 +129,9 @@ public class LibroData {
         PreparedStatement ps = null;
         try {
 //            String[] titulos = {"isbn", "titulo", "autor", "año", "tipo", "editorial"};
-            String filtro="%"+buscado+"%";
-            String sql = "SELECT * FROM libro WHERE isbn LIKE"+'"'+filtro+'"'+"OR titulo LIKE"+'"'+filtro+'"'
-                    +" OR autor LIKE"+'"'+filtro+'"'+"OR año LIKE"+'"'+filtro+'"'+"OR tipo LIKE"+'"'+filtro+'"'+ "OR editorial LIKE"+'"'+filtro+'"';
+            String filtro = "%" + buscado + "%";
+            String sql = "SELECT * FROM libro WHERE isbn LIKE" + '"' + filtro + '"' + "OR titulo LIKE" + '"' + filtro + '"'
+                    + " OR autor LIKE" + '"' + filtro + '"' + "OR año LIKE" + '"' + filtro + '"' + "OR tipo LIKE" + '"' + filtro + '"' + "OR editorial LIKE" + '"' + filtro + '"';
 
             ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -162,7 +159,6 @@ public class LibroData {
 
         return libro;
     }
-    
 
 //public List<Libro> buscarLibros(String buscado) {
 //    List<Libro> librosEncontrados = new ArrayList<>();
@@ -213,6 +209,13 @@ public class LibroData {
 //
 //    return librosEncontrados;
 //}
-    
+    public static void main(String[] args) {
 
+        LibroData libroData = new LibroData();
+//        libroData.guardarLibro(new Libro(2, "2", "2", 3, "CienciaDelNumero", "numeral", true));
+//        libroData.modificarLibro(new Libro(33,22, "2", "2", 3, "CienciaDelNumero", "numeral", true));
+//        libroData.eliminarLibro(33);
+//        System.out.println(libroData.listarLibros());
+        System.out.println(libroData.buscarLibro("1954"));
+    }
 }

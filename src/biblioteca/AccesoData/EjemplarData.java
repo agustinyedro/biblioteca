@@ -127,12 +127,14 @@ public class EjemplarData {
                 ejemplar.setEstado(rs.getBoolean(3));
                 ejemplar.setCantidadDeEjemplares(rs.getInt(4));
 
-            } else {
+            } 
+            else {
                 JOptionPane.showMessageDialog(null, "No existe el ejemplar");
 
             }
             ps.close();
-        } catch (SQLException ex) {
+        }
+        catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Ejemplar " + ex.getMessage());
 
         }

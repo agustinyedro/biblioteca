@@ -142,10 +142,11 @@ public class PrestamoData {
                 lector.setNroSocio(lector.getNroSocio());
                 prestamo.setLector(lector);
                 prestamos.add(prestamo);
-            }
+            } 
             ps.close();
 
-        } catch (SQLException ex) {
+        } 
+        catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Prestamos" + ex.getMessage());
         }
         return prestamos;
@@ -274,4 +275,6 @@ public class PrestamoData {
 
         return prestamo;
     }
+    
+   
 }
