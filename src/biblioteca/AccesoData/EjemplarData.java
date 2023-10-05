@@ -109,6 +109,8 @@ public class EjemplarData {
     }
 
 
+    //buscar ejemplar por ID
+    
 }
      
      

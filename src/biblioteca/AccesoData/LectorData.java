@@ -90,5 +90,7 @@ public class LectorData {
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Lector.");
         }
     }
-
+    
+    // LISTAR LECTORES
+    // BUSCAR POR ID
 }
