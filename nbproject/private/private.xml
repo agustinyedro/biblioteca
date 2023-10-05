@@ -3,15 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/luzel/OneDrive/Documentos/GitHub/Repo/Biblioteca75/src/biblioteca/AccesoData/LectorData.java</file>
-            <file>file:/C:/Users/luzel/OneDrive/Documentos/GitHub/Repo/Biblioteca75/src/biblioteca/AccesoData/PrestamoData.java</file>
-            <file>file:/C:/Users/luzel/OneDrive/Documentos/GitHub/Repo/Biblioteca75/src/biblioteca75/Prestamo.java</file>
-            <file>file:/C:/Users/luzel/OneDrive/Documentos/GitHub/Repo/Biblioteca75/src/biblioteca75/Lector.java</file>
-            <file>file:/C:/Users/luzel/OneDrive/Documentos/GitHub/Repo/Biblioteca75/src/biblioteca75/Ejemplar.java</file>
-            <file>file:/C:/Users/luzel/OneDrive/Documentos/GitHub/Repo/Biblioteca75/src/biblioteca/AccesoData/EjemplarData.java</file>
-            <file>file:/C:/Users/luzel/OneDrive/Documentos/GitHub/Repo/Biblioteca75/src/biblioteca/AccesoData/Conexion.java</file>
-            <file>file:/C:/Users/luzel/OneDrive/Documentos/GitHub/Repo/Biblioteca75/src/biblioteca75/Libro.java</file>
-            <file>file:/C:/Users/luzel/OneDrive/Documentos/GitHub/Repo/Biblioteca75/src/biblioteca/AccesoData/LibroData.java</file>
+            <file>file:/C:/Users/luzel/OneDrive/Documentos/GitHub/Repo/biblioteca/src/biblioteca75/Prestamo.java</file>
+            <file>file:/C:/Users/luzel/OneDrive/Documentos/GitHub/Repo/biblioteca/src/biblioteca75/Libro.java</file>
+            <file>file:/C:/Users/luzel/OneDrive/Documentos/GitHub/Repo/biblioteca/src/biblioteca75/Ejemplar.java</file>
+            <file>file:/C:/Users/luzel/OneDrive/Documentos/GitHub/Repo/biblioteca/src/biblioteca/AccesoData/EjemplarData.java</file>
+            <file>file:/C:/Users/luzel/OneDrive/Documentos/GitHub/Repo/biblioteca/src/biblioteca/AccesoData/LectorData.java</file>
+            <file>file:/C:/Users/luzel/OneDrive/Documentos/GitHub/Repo/biblioteca/src/biblioteca/AccesoData/LibroData.java</file>
+            <file>file:/C:/Users/luzel/OneDrive/Documentos/GitHub/Repo/biblioteca/src/biblioteca/AccesoData/Conexion.java</file>
+            <file>file:/C:/Users/luzel/OneDrive/Documentos/GitHub/Repo/biblioteca/src/biblioteca/AccesoData/PrestamoData.java</file>
+            <file>file:/C:/Users/luzel/OneDrive/Documentos/GitHub/Repo/biblioteca/src/biblioteca75/Lector.java</file>
         </group>
     </open-files>
 </project-private>

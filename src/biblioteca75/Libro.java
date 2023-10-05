@@ -1,6 +1,7 @@
 package biblioteca75;
 
 public class Libro {
+
     
     private int idLibro;
     private int isbn;
@@ -10,6 +11,8 @@ public class Libro {
     private String tipo;
     private String Editorial;
     private boolean estado;
+
+
 
     public Libro() {
     }
@@ -33,6 +36,7 @@ public class Libro {
         this.tipo = tipo;
         this.Editorial = Editorial;
         this.estado = estado;
+
     }
 
     public int getIdLibro() {
@@ -41,8 +45,9 @@ public class Libro {
 
     public void setIdLibro(int idLibro) {
         this.idLibro = idLibro;
+
     }
-    
+
     public boolean isEstado() {
         return estado;
     }
@@ -103,6 +108,7 @@ public class Libro {
     public String toString() {
         return "Libro{" + "idLibro=" + idLibro + ", isbn=" + isbn + ", titulo=" + titulo + ", autor=" + autor + ", anio=" + anio + ", tipo=" + tipo + ", Editorial=" + Editorial + ", estado=" + estado + '}';
     }
+
     
     
 

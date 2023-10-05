@@ -1,8 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package biblioteca.AccesoData;
+
 
 import biblioteca75.*;
 import java.awt.Button;
@@ -15,6 +13,7 @@ import javax.swing.JOptionPane;
  *
  * @author luzel
  */
+
 public class LibroData {
 
     private Connection connection;

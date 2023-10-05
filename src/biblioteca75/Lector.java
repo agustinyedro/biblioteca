@@ -9,24 +9,37 @@ public class Lector {
     private String domicilio;
     private String mail;
     private boolean estado;
+    private int telefono;
 
     public Lector() {
     }
 
-    public Lector(int nroSocio, String nombre, String domicilio, String mail, boolean estado) {
+    public Lector(int nroSocio, String nombre, String domicilio, String mail, boolean estado, int telefono) {
         this.nroSocio = nroSocio;
         this.nombre = nombre;
         this.domicilio = domicilio;
         this.mail = mail;
         this.estado = estado;
+        this.telefono= telefono;
     }
 
-    public Lector(String nombre, String domicilio, String mail, boolean estado) {
+    public Lector(String nombre, String domicilio, String mail, boolean estado, int telefono) {
         this.nombre = nombre;
         this.domicilio = domicilio;
         this.mail = mail;
         this.estado = estado;
+        this.telefono= telefono;
     }
+
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
+    
+    
 
     public int getNroSocio() {
         return nroSocio;
