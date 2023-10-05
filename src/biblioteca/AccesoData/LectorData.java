@@ -122,28 +122,38 @@ public class LectorData {
 
     // BUSCAR POR ID
     
-    public List<Lector> listarLectorPorID(int id) {
-
-        List<Lector> lectores = new ArrayList<>();
+    
+    public Lector buscarLector(int id) {
+        Lector lector = null;
+        String sql = "SELECT nrSocio, nombre, domicilio, mail, estado, telefono FROM lector WHERE nrSocio = ? ";
+        PreparedStatement ps = null;
         try {
-            String sql = "UPDATE lector SET estado = 0 WHERE nroSocio = ? ";
-            PreparedStatement ps = connection.prepareStatement(sql);
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Lector lector = new Lector();
-                ps.setInt(1, lector.getNroSocio());
-                ps.setString(2, lector.getNombre());
-                ps.setString(3, lector.getDomicilio());
-                ps.setString(4, lector.getMail());
-                ps.setBoolean(5, true);
-                ps.setInt(6, lector.getTelefono());
+
+            if (rs.next()) {
+                lector = new Lector();
+                lector.setNroSocio(id);
+                lector.setNombre(rs.getString("nombre"));
+                lector.setDomicilio(rs.getString("domicilio"));
+                lector.setMail(rs.getString("mail"));
+                lector.setEstado(rs.getBoolean("estado"));
+                lector.setTelefono(rs.getInt("telefono"));
+
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe el lector");
+
             }
             ps.close();
-
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Lector " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Lector " + ex.getMessage());
+
         }
-        return lectores;
+
+        return lector;
     }
+    
+    
 }
 
