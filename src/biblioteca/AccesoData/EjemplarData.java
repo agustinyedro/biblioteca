@@ -14,7 +14,7 @@ public class EjemplarData {
 
     private Connection connection;
 
-    public EjemplarData(Connection connection) {
+    public EjemplarData() {
         this.connection = Conexion.getConexion();
 
     }
@@ -111,6 +111,28 @@ public class EjemplarData {
 
     //buscar ejemplar por ID
     
+    public List<Ejemplar> listarEjemplarPorID(int codigo) {
+
+        List<Ejemplar> ejemplares = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM ejemplar WHERE codigo = ? ";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Ejemplar ejemplar = new Ejemplar();
+                ejemplar.getLibro().setIdLibro(rs.getInt(2));
+                ejemplar.setCodigo(rs.getInt(1));
+                ejemplar.setEstado(rs.getBoolean(3));
+                ejemplar.setCantidadDeEjemplares(rs.getInt(4));
+                ejemplares.add(ejemplar);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Ejemplares " + ex.getMessage());
+        }
+        return ejemplares;
+    }
 }
      
      

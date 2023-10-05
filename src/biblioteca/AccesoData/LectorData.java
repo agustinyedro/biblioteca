@@ -7,13 +7,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class LectorData {
 
     private Connection connection;
 
-    public LectorData(Connection connection) {
+    public LectorData() {
         this.connection = Conexion.getConexion();
 
     }
@@ -92,5 +94,56 @@ public class LectorData {
     }
     
     // LISTAR LECTORES
+    
+    public List<Lector> listarLectores() {
+
+        List<Lector> lectores = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM lector WHERE estado = 1 ";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Lector lector = new Lector();
+                ps.setInt(1, lector.getNroSocio());
+                ps.setString(2, lector.getNombre());
+                ps.setString(3, lector.getDomicilio());
+                ps.setString(4, lector.getMail());
+                ps.setBoolean(5, true);
+                ps.setInt(6, lector.getTelefono());
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Lectores " + ex.getMessage());
+        }
+        return lectores;
+    }
+
+
     // BUSCAR POR ID
+    
+    public List<Lector> listarLectorPorID(int id) {
+
+        List<Lector> lectores = new ArrayList<>();
+        try {
+            String sql = "UPDATE lector SET estado = 0 WHERE nroSocio = ? ";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Lector lector = new Lector();
+                ps.setInt(1, lector.getNroSocio());
+                ps.setString(2, lector.getNombre());
+                ps.setString(3, lector.getDomicilio());
+                ps.setString(4, lector.getMail());
+                ps.setBoolean(5, true);
+                ps.setInt(6, lector.getTelefono());
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Lector " + ex.getMessage());
+        }
+        return lectores;
+    }
 }
+
