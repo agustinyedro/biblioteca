@@ -111,27 +111,33 @@ public class EjemplarData {
 
     //buscar ejemplar por ID
     
-    public List<Ejemplar> listarEjemplarPorID(int codigo) {
-
-        List<Ejemplar> ejemplares = new ArrayList<>();
+    public Ejemplar buscarEjemplar(int id) {
+        Ejemplar ejemplar = null;
+        String sql = "SELECT codigo, libro, estado FROM ejemplar WHERE codigo = ? ";
+        PreparedStatement ps = null;
         try {
-            String sql = "SELECT * FROM ejemplar WHERE codigo = ? ";
-            PreparedStatement ps = connection.prepareStatement(sql);
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Ejemplar ejemplar = new Ejemplar();
+
+            if (rs.next()) {
+                ejemplar = new Ejemplar();
                 ejemplar.getLibro().setIdLibro(rs.getInt(2));
                 ejemplar.setCodigo(rs.getInt(1));
                 ejemplar.setEstado(rs.getBoolean(3));
                 ejemplar.setCantidadDeEjemplares(rs.getInt(4));
-                ejemplares.add(ejemplar);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe el ejemplar");
+
             }
             ps.close();
-
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Ejemplares " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Ejemplar " + ex.getMessage());
+
         }
-        return ejemplares;
+
+        return ejemplar;
     }
 }
      
