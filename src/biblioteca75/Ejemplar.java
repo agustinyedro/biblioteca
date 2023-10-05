@@ -8,7 +8,6 @@ public class Ejemplar {
     private Libro libro;
     private int cantidadDeEjemplares;
     private boolean estado;
-    
 
     public Ejemplar() {
     }
@@ -30,7 +29,6 @@ public class Ejemplar {
         this.cantidadDeEjemplares = cantidadDeEjemplares;
         this.estado = estado;
     }
-    
     
     public int getCodigo() {
         return codigo;
