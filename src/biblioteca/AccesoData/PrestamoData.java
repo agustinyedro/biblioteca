@@ -135,10 +135,10 @@ public class PrestamoData {
                 prestamo.setIdPrestamo(rs.getInt(6));
                 prestamo.setFechaInicio(rs.getDate(1));
                 prestamo.setFechaFin(rs.getDate(2));
-                Ejemplar ejemplar = EjemplarData.buscarEjemplar(rs.getInt(3));
+                Ejemplar ejemplar = ejemplarData.buscarEjemplar(rs.getInt(3));
                 ejemplar.setCodigo(ejemplar.getCodigo());
                 prestamo.setEjemplar(ejemplar);
-                Lector lector = LectorData.buscarLector(rs.getInt(4));
+                Lector lector = lectorData.buscarLector(rs.getInt(4));
                 lector.setNroSocio(lector.getNroSocio());
                 prestamo.setLector(lector);
                 prestamos.add(prestamo);
@@ -166,10 +166,10 @@ public class PrestamoData {
                 prestamo.setIdPrestamo(rs.getInt(6));
                 prestamo.setFechaInicio(rs.getDate(1));
                 prestamo.setFechaFin(rs.getDate(2));
-                Ejemplar ejemplar = EjemplarData.buscarEjemplar(rs.getInt(3));
+                Ejemplar ejemplar = ejemplarData.buscarEjemplar(rs.getInt(3));
                 ejemplar.setCodigo(ejemplar.getCodigo());
                 prestamo.setEjemplar(ejemplar);
-                Lector lector = LectorData.buscarLector(rs.getInt(4));
+                Lector lector = lectorData.buscarLector(rs.getInt(4));
                 lector.setNroSocio(lector.getNroSocio());
                 prestamo.setLector(lector);
                 prestamos.add(prestamo);
@@ -254,10 +254,10 @@ public class PrestamoData {
                 prestamo.setIdPrestamo(id);
                 prestamo.setFechaInicio(rs.getDate("fechaInicio"));
                 prestamo.setFechaFin(rs.getDate("fechaFin"));
-                Ejemplar ejemplar = EjemplarData.buscarEjemplar(rs.getInt("idEjemplar"));
+                Ejemplar ejemplar = ejemplarData.buscarEjemplar(rs.getInt("idEjemplar"));
                 ejemplar.setCodigo(ejemplar.getCodigo());
                 prestamo.setEjemplar(ejemplar);
-                Lector lector = LectorData.buscarLector(rs.getInt("idLector"));
+                Lector lector = lectorData.buscarLector(rs.getInt("idLector"));
                 lector.setNroSocio(lector.getNroSocio());
                 prestamo.setLector(lector);
                 prestamo.setEstado(rs.getBoolean("estado"));
