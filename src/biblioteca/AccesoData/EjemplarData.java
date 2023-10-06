@@ -108,9 +108,6 @@ public class EjemplarData {
         return ejemplares;
     }
 
-
-    //buscar ejemplar por ID
-    
     public Ejemplar buscarEjemplar(int id) {
         Ejemplar ejemplar = null;
         String sql = "SELECT codigo, libro, estado FROM ejemplar WHERE codigo = ? ";
@@ -140,6 +137,10 @@ public class EjemplarData {
         }
 
         return ejemplar;
+    }
+    
+    public static void main(String[] args) {
+        
     }
 }
      

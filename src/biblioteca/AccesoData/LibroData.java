@@ -128,8 +128,7 @@ public class LibroData {
         Libro libro = null;
         PreparedStatement ps = null;
         try {
-//            String[] titulos = {"isbn", "titulo", "autor", "año", "tipo", "editorial"};
-            String filtro = "%" + buscado + "%";
+            String filtro = buscado + "%";
             String sql = "SELECT * FROM libro WHERE isbn LIKE" + '"' + filtro + '"' + "OR titulo LIKE" + '"' + filtro + '"'
                     + " OR autor LIKE" + '"' + filtro + '"' + "OR año LIKE" + '"' + filtro + '"' + "OR tipo LIKE" + '"' + filtro + '"' + "OR editorial LIKE" + '"' + filtro + '"';
 
@@ -160,62 +159,62 @@ public class LibroData {
         return libro;
     }
 
-//public List<Libro> buscarLibros(String buscado) {
-//    List<Libro> librosEncontrados = new ArrayList<>();
-//    PreparedStatement ps = null;
-//    ResultSet rs = null;
-//
-//    try {
-//        String filtro = "%" + buscado + "%";
-//        String sql = "SELECT * FROM libro WHERE isbn LIKE ? OR titulo LIKE ? OR autor LIKE ? OR año LIKE ? OR tipo LIKE ? OR editorial LIKE ?";
-//        ps = connection.prepareStatement(sql);
-//        for (int i = 1; i <= 6; i++) {
-//            ps.setString(i, filtro);
-//        }
-//
-//        rs = ps.executeQuery();
-//
-//        while (rs.next()) {
-//            Libro libro = new Libro();
-//            libro.setIdLibro(rs.getInt("idLibro"));
-//            libro.setIsbn(rs.getInt("isbn"));
-//            libro.setTitulo(rs.getString("titulo"));
-//            libro.setAutor(rs.getString("autor"));
-//            libro.setAnio(rs.getInt("año"));
-//            libro.setTipo(rs.getString("tipo"));
-//            libro.setEditorial(rs.getString("editorial"));
-//            libro.setEstado(rs.getBoolean("estado"));
-//            librosEncontrados.add(libro);
-//        }
-//
-//        if (librosEncontrados.isEmpty()) {
-//            JOptionPane.showMessageDialog(null, "No se encontraron libros.");
-//        }
-//
-//    } catch (SQLException ex) {
-//        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Libro: " + ex.getMessage());
-//    } finally {
-//        try {
-//            if (rs != null) {
-//                rs.close();
-//            }
-//            if (ps != null) {
-//                ps.close();
-//            }
-//        } catch (SQLException e) {
-//            JOptionPane.showMessageDialog(null, "Error al cerrar recursos: " + e.getMessage());
-//        }
-//    }
-//
-//    return librosEncontrados;
-//}
-    public static void main(String[] args) {
+    public List<Libro> buscarLibros(String buscado) {
+        List<Libro> librosEncontrados = new ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
-        LibroData libroData = new LibroData();
-//        libroData.guardarLibro(new Libro(2, "2", "2", 3, "CienciaDelNumero", "numeral", true));
-//        libroData.modificarLibro(new Libro(33,22, "2", "2", 3, "CienciaDelNumero", "numeral", true));
-//        libroData.eliminarLibro(33);
-//        System.out.println(libroData.listarLibros());
-        System.out.println(libroData.buscarLibro("1954"));
+        try {
+            String filtro = "%" + buscado + "%";
+            String sql = "SELECT * FROM libro WHERE isbn LIKE ? OR titulo LIKE ? OR autor LIKE ? OR año LIKE ? OR tipo LIKE ? OR editorial LIKE ?";
+            ps = connection.prepareStatement(sql);
+            for (int i = 1; i <= 6; i++) {
+                ps.setString(i, filtro);
+            }
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Libro libro = new Libro();
+                libro.setIdLibro(rs.getInt("idLibro"));
+                libro.setIsbn(rs.getInt("isbn"));
+                libro.setTitulo(rs.getString("titulo"));
+                libro.setAutor(rs.getString("autor"));
+                libro.setAnio(rs.getInt("año"));
+                libro.setTipo(rs.getString("tipo"));
+                libro.setEditorial(rs.getString("editorial"));
+                libro.setEstado(rs.getBoolean("estado"));
+                librosEncontrados.add(libro);
+            }
+
+            if (librosEncontrados.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "No se encontraron libros.");
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Libro: " + ex.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Error al cerrar recursos: " + e.getMessage());
+            }
+        }
+
+        return librosEncontrados;
     }
+//    public static void main(String[] args) {
+//
+//        LibroData libroData = new LibroData();
+////        libroData.guardarLibro(new Libro(2, "2", "2", 3, "CienciaDelNumero", "numeral", true));
+////        libroData.modificarLibro(new Libro(33,22, "2", "2", 3, "CienciaDelNumero", "numeral", true));
+////        libroData.eliminarLibro(33);
+////        System.out.println(libroData.listarLibros());
+//        System.out.print(libroData.buscarLibros("28"));
+//    }
 }

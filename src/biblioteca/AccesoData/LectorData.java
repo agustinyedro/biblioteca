@@ -20,7 +20,6 @@ public class LectorData {
 
     }
 
-    //int nroSocio, String nombre, String domicilio, String mail, boolean estado, int telefono.
     public void guardarLector(Lector lector) {
 
         String sql = "INSERT INTO lector ( nombre, domicilio, mail, estado, telefono ) VALUES (?, ?, ?, ?,?)";
@@ -47,20 +46,19 @@ public class LectorData {
 
         }
     }
-//int nroSocio, String nombre, String domicilio, String mail, boolean estado
 
     public void modificarLector(Lector lector) {
-        String sql = "UPDATE lector SET  nombre = ?, domicilio =?, mail=?, estado=?, telefono=? WHERE nroSocio= ?, ";
+        String sql = "UPDATE lector SET  nombre = ?, domicilio =?, mail=?, estado=?, telefono=? WHERE nrSocio= ? ";
         PreparedStatement ps = null;
 
         try {
             ps = connection.prepareStatement(sql);
-            ps.setInt(1, lector.getNroSocio());
-            ps.setString(2, lector.getNombre());
-            ps.setString(3, lector.getDomicilio());
-            ps.setString(4, lector.getMail());
-            ps.setBoolean(5, true);
-            ps.setInt(6, lector.getTelefono());
+            ps.setString(1, lector.getNombre());
+            ps.setString(2, lector.getDomicilio());
+            ps.setString(3, lector.getMail());
+            ps.setBoolean(4, true);
+            ps.setInt(5, lector.getTelefono());
+            ps.setInt(6, lector.getNroSocio());
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
@@ -69,7 +67,8 @@ public class LectorData {
                 JOptionPane.showMessageDialog(null, "El lector no existe");
             }
 
-        } catch (SQLException ex) {
+        } 
+        catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla lector " + ex.getMessage());
         }
 
@@ -78,7 +77,7 @@ public class LectorData {
     public void eliminarLector(int id) {
 
         try {
-            String sql = "UPDATE lector SET estado = 0 WHERE nroSocio = ? ";
+            String sql = "UPDATE lector SET estado = 0 WHERE nrSocio = ? ";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
             int fila = ps.executeUpdate();
@@ -88,13 +87,12 @@ public class LectorData {
                 JOptionPane.showMessageDialog(null, " El Lector ha sido eliminado.");
             }
             ps.close();
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) {
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Lector.");
         }
     }
-    
-    // LISTAR LECTORES
-    
+
     public List<Lector> listarLectores() {
 
         List<Lector> lectores = new ArrayList<>();
@@ -104,25 +102,23 @@ public class LectorData {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Lector lector = new Lector();
-                ps.setInt(1, lector.getNroSocio());
-                ps.setString(2, lector.getNombre());
-                ps.setString(3, lector.getDomicilio());
-                ps.setString(4, lector.getMail());
-                ps.setBoolean(5, true);
-                ps.setInt(6, lector.getTelefono());
+                lector.setNroSocio(rs.getInt(1));
+                lector.setEstado( rs.getBoolean(5));
+                lector.setDomicilio( rs.getString(3));
+                lector.setMail(rs.getString(4));
+                lector.setNombre( rs.getString(2));
+                lector.setTelefono( rs.getInt(6));
+                lectores.add(lector);
             }
             ps.close();
 
-        } catch (SQLException ex) {
+        } 
+        catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Lectores " + ex.getMessage());
         }
         return lectores;
     }
 
-
-    // BUSCAR POR ID
-    
-    
     public Lector buscarLector(int id) {
         Lector lector = null;
         String sql = "SELECT nrSocio, nombre, domicilio, mail, estado, telefono FROM lector WHERE nrSocio = ? ";
@@ -141,19 +137,28 @@ public class LectorData {
                 lector.setEstado(rs.getBoolean("estado"));
                 lector.setTelefono(rs.getInt("telefono"));
 
-            } else {
+            } 
+            else {
                 JOptionPane.showMessageDialog(null, "No existe el lector");
 
             }
             ps.close();
-        } catch (SQLException ex) {
+        }
+        catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Lector " + ex.getMessage());
 
         }
 
         return lector;
     }
-    
-    
-}
 
+//    public static void main(String[] args) {
+//        LectorData lectorData = new LectorData();
+////        lectorData.guardarLector(new Lector("Juan", "Salta", "juanteextrañamos@hotmail.com", true, 123456789));
+////        lectorData.modificarLector(new Lector(1,"Juan", "Salta", "juanvolveporfavor@hotmail.com", true, 987123456));
+////        lectorData.eliminarLector(31);
+////        System.out.println(lectorData.buscarLector(31));
+////        System.out.println(lectorData.listarLectores());
+//    }
+
+}

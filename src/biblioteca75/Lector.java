@@ -80,14 +80,20 @@ public class Lector {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        return "Lector{" + "nroSocio=" + nroSocio + ", nombre=" + nombre + ", domicilio=" + domicilio + ", mail=" + mail + ", estado=" + estado + ", telefono=" + telefono + '}';
+    }
+    
+    
     
     public void activarLector(){
-        
-        
+        estado=true;
     }
     
     public void desactivarLector(){
-        
+        estado=false;
     }
     
     
