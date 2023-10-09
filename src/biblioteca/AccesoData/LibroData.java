@@ -129,7 +129,7 @@ public class LibroData {
         PreparedStatement ps = null;
         try {
             String filtro = buscado + "%";
-            String sql = "SELECT * FROM libro WHERE isbn LIKE" + '"' + filtro + '"' + "OR titulo LIKE" + '"' + filtro + '"'
+            String sql = "SELECT * FROM libro WHERE idLibro LIKE" + '"' + filtro + '"' + "OR isbn LIKE" + '"' + filtro + '"' + "OR titulo LIKE" + '"' + filtro + '"'
                     + " OR autor LIKE" + '"' + filtro + '"' + "OR año LIKE" + '"' + filtro + '"' + "OR tipo LIKE" + '"' + filtro + '"' + "OR editorial LIKE" + '"' + filtro + '"';
 
             ps = connection.prepareStatement(sql);
@@ -166,7 +166,7 @@ public class LibroData {
 
         try {
             String filtro = "%" + buscado + "%";
-            String sql = "SELECT * FROM libro WHERE isbn LIKE ? OR titulo LIKE ? OR autor LIKE ? OR año LIKE ? OR tipo LIKE ? OR editorial LIKE ?";
+            String sql = "SELECT * FROM libro WHERE idLibro ? OR isbn LIKE ? OR titulo LIKE ? OR autor LIKE ? OR año LIKE ? OR tipo LIKE ? OR editorial LIKE ?";
             ps = connection.prepareStatement(sql);
             for (int i = 1; i <= 6; i++) {
                 ps.setString(i, filtro);
@@ -208,13 +208,14 @@ public class LibroData {
 
         return librosEncontrados;
     }
-//    public static void main(String[] args) {
-//
-//        LibroData libroData = new LibroData();
-////        libroData.guardarLibro(new Libro(2, "2", "2", 3, "CienciaDelNumero", "numeral", true));
-////        libroData.modificarLibro(new Libro(33,22, "2", "2", 3, "CienciaDelNumero", "numeral", true));
-////        libroData.eliminarLibro(33);
-////        System.out.println(libroData.listarLibros());
-//        System.out.print(libroData.buscarLibros("28"));
-//    }
+    
+    public static void main(String[] args) {
+
+        LibroData libroData = new LibroData();
+        libroData.guardarLibro(new Libro(2, "2", "2", 3, "CienciaDelNumero", "numeral", true));
+        libroData.modificarLibro(new Libro(33,22, "2", "2", 3, "CienciaDelNumero", "numeral", true));
+        libroData.eliminarLibro(33);
+        System.out.println(libroData.listarLibros());
+        System.out.print(libroData.buscarLibros("28"));
+    }
 }

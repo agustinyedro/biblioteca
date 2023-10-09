@@ -1,6 +1,7 @@
 package biblioteca.AccesoData;
 
 import biblioteca75.Ejemplar;
+import biblioteca75.Libro;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +14,7 @@ import javax.swing.JOptionPane;
 public class EjemplarData {
 
     private Connection connection;
+    private LibroData libroData;
 
     public EjemplarData() {
         this.connection = Conexion.getConexion();
@@ -21,7 +23,7 @@ public class EjemplarData {
 
     public void guardarEjemplar(Ejemplar ejemplar) {
 
-        String sql = "INSERT INTO ejemplar (libro, estado, cantidadDeEjemplares ) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO ejemplar (IdLibro, estado, cantidadDeEjemplares ) VALUES (?, ?, ?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -53,6 +55,7 @@ public class EjemplarData {
             ps.setInt(1, ejemplar.getLibro().getIdLibro());
             ps.setBoolean(2, ejemplar.isEstado());
             ps.setInt(3, ejemplar.getCantidadDeEjemplares());
+            ps.setInt(4, ejemplar.getCodigo());
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
@@ -84,9 +87,9 @@ public class EjemplarData {
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Ejemplar.");
         }
     }
-    
-    public List<Ejemplar> listarEjemplar() {
 
+    public List<Ejemplar> listarEjemplar() {
+        libroData = new LibroData();
         List<Ejemplar> ejemplares = new ArrayList<>();
         try {
             String sql = "SELECT * FROM ejemplar WHERE estado = 1 ";
@@ -94,7 +97,8 @@ public class EjemplarData {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Ejemplar ejemplar = new Ejemplar();
-                ejemplar.getLibro().setIdLibro(rs.getInt(2));
+                Libro libro = libroData.buscarLibro(String.valueOf(rs.getInt(2)));
+                ejemplar.setLibro(libro);
                 ejemplar.setCodigo(rs.getInt(1));
                 ejemplar.setEstado(rs.getBoolean(3));
                 ejemplar.setCantidadDeEjemplares(rs.getInt(4));
@@ -109,8 +113,9 @@ public class EjemplarData {
     }
 
     public Ejemplar buscarEjemplar(int id) {
+        libroData = new LibroData();
         Ejemplar ejemplar = null;
-        String sql = "SELECT codigo, libro, estado FROM ejemplar WHERE codigo = ? ";
+        String sql = "SELECT codigo, idLibro, estado, cantidadDeEjemplares FROM ejemplar WHERE codigo = ? ";
         PreparedStatement ps = null;
         try {
             ps = connection.prepareStatement(sql);
@@ -119,32 +124,30 @@ public class EjemplarData {
 
             if (rs.next()) {
                 ejemplar = new Ejemplar();
-                ejemplar.getLibro().setIdLibro(rs.getInt(2));
                 ejemplar.setCodigo(rs.getInt(1));
+                Libro libro = libroData.buscarLibro(String.valueOf(rs.getInt(2)));
+                ejemplar.setLibro(libro);
                 ejemplar.setEstado(rs.getBoolean(3));
                 ejemplar.setCantidadDeEjemplares(rs.getInt(4));
 
-            } 
-            else {
+            } else {
                 JOptionPane.showMessageDialog(null, "No existe el ejemplar");
 
             }
             ps.close();
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Ejemplar " + ex.getMessage());
 
         }
 
         return ejemplar;
     }
-    
-    public static void main(String[] args) {
-        
-    }
+
+//    public static void main(String[] args) {
+//        EjemplarData ejemplarData = new EjemplarData();
+////        ejemplarData.guardarEjemplar(new Ejemplar(new Libro(33,22, "2", "2", 3, "CienciaDelNumero", "numeral", true), 3, true));
+////        ejemplarData.modificarEjemplar(new Ejemplar(2,new Libro(33,22, "2", "2", 3, "CienciaDelNumero", "numeral", true), 5, true));
+//        System.out.println(ejemplarData.listarEjemplar());
+////        System.out.println(ejemplarData.buscarEjemplar(2));
+//    }
 }
-     
-     
-
-    
-

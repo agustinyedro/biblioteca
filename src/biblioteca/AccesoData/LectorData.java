@@ -154,7 +154,7 @@ public class LectorData {
 
 //    public static void main(String[] args) {
 //        LectorData lectorData = new LectorData();
-////        lectorData.guardarLector(new Lector("Juan", "Salta", "juanteextrañamos@hotmail.com", true, 123456789));
+///        lectorData.guardarLector(new Lector("Juan", "Salta", "juanteextrañamos@hotmail.com", true, 123456789));
 ////        lectorData.modificarLector(new Lector(1,"Juan", "Salta", "juanvolveporfavor@hotmail.com", true, 987123456));
 ////        lectorData.eliminarLector(31);
 ////        System.out.println(lectorData.buscarLector(31));
