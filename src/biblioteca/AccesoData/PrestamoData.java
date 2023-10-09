@@ -2,6 +2,7 @@ package biblioteca.AccesoData;
 
 import biblioteca75.*;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -23,12 +24,17 @@ public class PrestamoData {
 
     public void guardarPrestamo(Prestamo prestamo) {
 
-        String sql = "INSERT INTO Prestamo (fechaInicio, fechaFin, idEjemplar, idLector, estado) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO prestamo (fechaInicio, fechaFin, idEjemplar, idLector, estado) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setDate(1, prestamo.getFechaInicio());
             ps.setDate(2, prestamo.getFechaFin());
+            //Ejemplar ejemplar=ejemplarData.buscarEjemplar(prestamo.getEjemplar().getCodigo());
+            
             ps.setInt(3, prestamo.getEjemplar().getCodigo());
+            if(ejemplarData.buscarEjemplar(prestamo.getEjemplar().getCodigo())==null){
+                throw new NullPointerException("No hay ejemplares disponibles.");
+            }
             ps.setInt(4, prestamo.getLector().getNroSocio());
             ps.setBoolean(5, prestamo.isEstado());
             ps.executeUpdate();
@@ -45,9 +51,12 @@ public class PrestamoData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla prestamo" + ex.getMessage());
 
+        } catch (NullPointerException e){
+            JOptionPane.showMessageDialog(null, "No hay ejemplares disponibles.");
         }
+        
     }
-
+    
     public void modificarPrestamo(Prestamo prestamo) {
 
         String sql = "UPDATE prestamo SET fechaInicio=? fechaFin=? idEjemplar=? idLector=? estado=? WHERE idPrestamo = ?";
@@ -276,5 +285,18 @@ public class PrestamoData {
         return prestamo;
     }
     
-   
+   public static void main(String[] args) {
+       Lector lect= new Lector(1,"Juan", "Salta", "juanvolveporfavor@hotmail.com", true, 987123456);
+       Ejemplar ejemp= new Ejemplar(1,new Libro(28,-1234566823, "El Aleph", "Jorge Luis Borges", 1949, "Cuentos", "Editorial Sur", true), 3, true);
+       PrestamoData prestamoData = new PrestamoData();
+       System.out.println(Date.valueOf("2023-10-01")); 
+       System.out.println(Date.valueOf("2023-10-12"));
+       prestamoData.guardarPrestamo(new Prestamo (Date.valueOf("2023-10-01"),Date.valueOf("2023-10-12"),ejemp, lect, true));
+////        lectorData.guardarLector(new Lector("Juan", "Salta", "juanteextrañamos@hotmail.com", true, 123456789));
+////        lectorData.modificarLector(new Lector(1,"Juan", "Salta", "juanvolveporfavor@hotmail.com", true, 987123456));
+////        lectorData.eliminarLector(31);
+////        System.out.println(lectorData.buscarLector(31));
+////        System.out.println(lectorData.listarLectores());
+//    }
+}
 }

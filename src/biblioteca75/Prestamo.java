@@ -16,22 +16,22 @@ public class Prestamo {
     public Prestamo() {
     }
 
-//    public Prestamo(int idPrestamo, Date fechaInicio, Date fechaFin, Ejemplar ejemplar, Lector lector, boolean estado) {
-//        this.idPrestamo = idPrestamo;
-//        this.fechaInicio = fechaInicio;
-//        this.fechaFin = fechaFin;
-//        this.ejemplar = ejemplar;
-//        this.lector = lector;
-//        this.estado = estado;
-//    }
-//
-//    public Prestamo(Date fechaInicio, Date fechaFin, Ejemplar ejemplar, Lector lector, boolean estado) {
-//        this.fechaInicio = fechaInicio;
-//        this.fechaFin = fechaFin;
-//        this.ejemplar = ejemplar;
-//        this.lector = lector;
-//        this.estado = estado;
-//    }
+    public Prestamo(int idPrestamo, Date fechaInicio, Date fechaFin, Ejemplar ejemplar, Lector lector, boolean estado) {
+        this.idPrestamo = idPrestamo;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.ejemplar = ejemplar;
+        this.lector = lector;
+        this.estado = estado;
+    }
+
+    public Prestamo(Date fechaInicio, Date fechaFin, Ejemplar ejemplar, Lector lector, boolean estado) {
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.ejemplar = ejemplar;
+        this.lector = lector;
+        this.estado = estado;
+    }
 
     public int getIdPrestamo() {
         return idPrestamo;
