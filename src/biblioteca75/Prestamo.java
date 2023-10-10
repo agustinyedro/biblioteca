@@ -3,7 +3,6 @@ package biblioteca75;
 import java.sql.Date;
 import java.time.LocalDate;
 
-
 public class Prestamo {
 
     private int idPrestamo;
@@ -86,19 +85,26 @@ public class Prestamo {
         if (e.getCantidadDeEjemplares() > 0 && l.isEstado()) {
 //            this.fechaInicio= fechaInicio;
 //            this.fechaFin= fechaFin;
-            this.ejemplar=e;
-            this.lector=l;
-            this.estado =true;
+            this.ejemplar = e;
+            this.lector = l;
+            this.estado = true;
             e.setCantidadDeEjemplares(e.getCantidadDeEjemplares() - 1);
         }
     }
 
     public void devolverLibro(Ejemplar e, Lector l) {
-        if (this.isEstado() && l.isEstado() && ejemplar.equals(e)) {
+        if (l.isEstado() && ejemplar.equals(e)) {
 //            this.fechaFin= Date.valueOf(LocalDate.now());
+            this.ejemplar = e;
+            this.lector = l;
             this.estado = false;
             e.setCantidadDeEjemplares(e.getCantidadDeEjemplares() + 1);
         }
     }
 
+    @Override
+    public String toString() {
+        return "Prestamo{" + "idPrestamo=" + idPrestamo + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", ejemplar=" + ejemplar + ", lector=" + lector + ", estado=" + estado + '}';
+    }
+    
 }

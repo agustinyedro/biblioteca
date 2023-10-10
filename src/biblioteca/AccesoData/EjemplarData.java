@@ -59,7 +59,7 @@ public class EjemplarData {
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Ejemplar modificado Exitosamente.");
+//                JOptionPane.showMessageDialog(null, "Ejemplar modificado Exitosamente.");
             } else {
                 JOptionPane.showMessageDialog(null, "El ejemplar no existe");
             }

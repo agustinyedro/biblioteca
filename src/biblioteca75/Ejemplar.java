@@ -61,13 +61,14 @@ public class Ejemplar {
     public void setCantidadDeEjemplares(int cantidadDeEjemplares) {
         this.cantidadDeEjemplares = cantidadDeEjemplares;
     }
-    
 
     @Override
     public String toString() {
-        return "Ejemplar{" + "codigo=" + codigo + ", libro=" + libro + ", estado=" + estado + '}';
+        return "Ejemplar{" + "codigo=" + codigo + ", libro=" + libro + ", cantidadDeEjemplares=" + cantidadDeEjemplares + ", estado=" + estado + '}';
     }
     
+
+  
     
     
 }
