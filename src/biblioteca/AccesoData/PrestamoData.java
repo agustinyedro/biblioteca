@@ -158,7 +158,7 @@ public class PrestamoData {
     }
 
     public void devolverPrestamo(int id) {
-     prestamo = buscarPrestamo(id);
+        prestamo = buscarPrestamo(id);
         try {
             String sql = "UPDATE prestamo SET estado = 0 WHERE idPrestamo = ? ";
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -195,7 +195,7 @@ public class PrestamoData {
             while (rs.next()) {
                 Prestamo prestamo = new Prestamo();
 
-               prestamo.setIdPrestamo(rs.getInt(6));
+                prestamo.setIdPrestamo(rs.getInt(6));
                 prestamo.setFechaInicio(rs.getDate(1));
                 prestamo.setFechaFin(rs.getDate(2));
 //                Ejemplar ejemplar = ));
@@ -226,8 +226,7 @@ public class PrestamoData {
             while (rs.next()) {
                 Prestamo prestamo = new Prestamo();
 
-                
-               prestamo.setIdPrestamo(rs.getInt(6));
+                prestamo.setIdPrestamo(rs.getInt(6));
                 prestamo.setFechaInicio(rs.getDate(1));
                 prestamo.setFechaFin(rs.getDate(2));
 //                Ejemplar ejemplar = ));
@@ -259,8 +258,7 @@ public class PrestamoData {
             while (rs.next()) {
                 Prestamo prestamo = new Prestamo();
 
-                
-               prestamo.setIdPrestamo(rs.getInt(6));
+                prestamo.setIdPrestamo(rs.getInt(6));
                 prestamo.setFechaInicio(rs.getDate(1));
                 prestamo.setFechaFin(rs.getDate(2));
 //                Ejemplar ejemplar = ));
@@ -306,17 +304,17 @@ public class PrestamoData {
         return lectores;
     }
 
-//    public List<Libro> obtenerLibro() {
-//
-//        List<Libro> libros = new ArrayList<>();
-//        try {
-//            String sql = "SELECT libro.idLibro, isbn, titulo, autor, año, tipo, editorial, libro.estado FROM prestamo, ejemplar"
-//                    + "WHERE prestamo.idLibro = libro.idLibro";
-//            PreparedStatement ps = connection.prepareStatement(sql);
-//            ResultSet rs = ps.executeQuery();
-//            Libro libro;
-//            while (rs.next()) {
-//                libro = new Libro();
+    public List<Libro> obtenerLibro() {
+
+        List<Libro> libros = new ArrayList<>();
+        try {
+            String sql = "SELECT idEjemplar FROM prestamo";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            Libro libro;
+            while (rs.next()) {
+                LibroData libroData = new LibroData();
+                libro = libroData.buscarLibro(String.valueOf(ejemplarData.buscarEjemplar(rs.getInt("idEjemplar")).getLibro().getIdLibro()));
 //                libro.setIdLibro(rs.getInt("idLibro"));
 //                libro.setIsbn(rs.getInt("isbn"));
 //                libro.setTitulo(rs.getString("Titulo"));
@@ -324,15 +322,15 @@ public class PrestamoData {
 //                libro.setTipo(rs.getString("tipo"));
 //                libro.setEditorial(rs.getString("editorial"));
 //                libro.setEstado(rs.getBoolean("estado"));
-//                libros.add(libro);
-//            }
-//            ps.close();
-//
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, " Error al obtener lectores de los prestamos " + ex.getMessage());
-//        }
-//        return libros;
-//    }
+                libros.add(libro);
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, " Error al obtener lectores de los prestamos " + ex.getMessage());
+        }
+        return libros;
+    }
 
     public Prestamo buscarPrestamo(int id) {
         ejemplarData = new EjemplarData();
@@ -384,7 +382,6 @@ public class PrestamoData {
 ////        System.out.println(lectorData.buscarLector(31));
 ////        System.out.println(lectorData.listarLectores());
 
-
 //      prestamoData.obtenerPrestamos().forEach(Prestamo->{
 //          System.out.println(Prestamo);
 //      });
@@ -397,14 +394,12 @@ public class PrestamoData {
 //prestamoData.obtenerLectores().forEach(lectores ->{
 //    System.out.println(lectores);
 //});
-prestamoData.obtenerLibro().forEach(lectores ->{
-    System.out.println(lectores);
-});
+        prestamoData.obtenerLibro().forEach(lectores -> {
+            System.out.println(lectores);
+        });
 
-      
 // prestamoData.modificarPrestamo(new Prestamo(15,Date.valueOf("2023-10-09"), Date.valueOf("2023-10-13"), ejemp, lect, true));
 //        prestamoData.devolverPrestamo(10);
-
     }
 
 }
