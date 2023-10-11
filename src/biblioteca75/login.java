@@ -2,43 +2,35 @@
 package biblioteca75;
 
 
-public class login {
+public class Login {
     
     
     private int idLogin;
     private String usuario;
     private String contrasenia;
-    private String nombre;
-    private String apellido;
-    private String mail;
+   private Lector lector;
     private String pregunta;
     private String respueta;
 
-    public login() {
+    public Login() {
     }
 
-    public login(int idLogin, String usuario, String contrasenia, String nombre, String apellido, String mail, String pregunta, String respueta) {
+    public Login(int idLogin, String usuario, String contrasenia, Lector lector, String pregunta, String respueta) {
         this.idLogin = idLogin;
         this.usuario = usuario;
         this.contrasenia = contrasenia;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.mail = mail;
+        this.lector = lector;
         this.pregunta = pregunta;
         this.respueta = respueta;
     }
 
-    public login(String usuario, String contrasenia, String nombre, String apellido, String mail, String pregunta, String respueta) {
+    public Login(String usuario, String contrasenia, Lector lector, String pregunta, String respueta) {
         this.usuario = usuario;
         this.contrasenia = contrasenia;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.mail = mail;
+        this.lector = lector;
         this.pregunta = pregunta;
         this.respueta = respueta;
     }
-    
-    
 
     public int getIdLogin() {
         return idLogin;
@@ -64,28 +56,12 @@ public class login {
         this.contrasenia = contrasenia;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Lector getLector() {
+        return lector;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getApellido() {
-        return apellido;
-    }
-
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setLector(Lector lector) {
+        this.lector = lector;
     }
 
     public String getPregunta() {
@@ -106,8 +82,10 @@ public class login {
 
     @Override
     public String toString() {
-        return "login{" + "idLogin=" + idLogin + ", usuario=" + usuario + ", contrasenia=" + contrasenia + ", nombre=" + nombre + ", apellido=" + apellido + ", mail=" + mail + ", pregunta=" + pregunta + ", respueta=" + respueta + '}';
+        return "login{" + "idLogin=" + idLogin + ", usuario=" + usuario + ", contrasenia=" + contrasenia + ", lector=" + lector + ", pregunta=" + pregunta + ", respueta=" + respueta + '}';
     }
+
+   
     
     
 

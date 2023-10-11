@@ -209,13 +209,13 @@ public class LibroData {
         return librosEncontrados;
     }
     
-    public static void main(String[] args) {
-
-        LibroData libroData = new LibroData();
-        libroData.guardarLibro(new Libro(2, "2", "2", 3, "CienciaDelNumero", "numeral", true));
-        libroData.modificarLibro(new Libro(33,22, "2", "2", 3, "CienciaDelNumero", "numeral", true));
-        libroData.eliminarLibro(33);
-        System.out.println(libroData.listarLibros());
-        System.out.print(libroData.buscarLibros("28"));
-    }
+//    public static void main(String[] args) {
+//
+//        LibroData libroData = new LibroData();
+//        libroData.guardarLibro(new Libro(2, "2", "2", 3, "CienciaDelNumero", "numeral", true));
+//        libroData.modificarLibro(new Libro(33,22, "2", "2", 3, "CienciaDelNumero", "numeral", true));
+//        libroData.eliminarLibro(33);
+//        System.out.println(libroData.listarLibros());
+//        System.out.print(libroData.buscarLibros("28"));
+//    }
 }

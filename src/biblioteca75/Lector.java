@@ -86,8 +86,6 @@ public class Lector {
         return "Lector{" + "nroSocio=" + nroSocio + ", nombre=" + nombre + ", domicilio=" + domicilio + ", mail=" + mail + ", estado=" + estado + ", telefono=" + telefono + '}';
     }
     
-    
-    
     public void activarLector(){
         estado=true;
     }

@@ -286,6 +286,7 @@ public class PrestamoData {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             Lector lector;
+            int codigo=0;
             while (rs.next()) {
                 lector = new Lector();
                 lector.setNroSocio(rs.getInt("nrSocio"));
@@ -294,7 +295,12 @@ public class PrestamoData {
                 lector.setMail(rs.getString("mail"));
                 lector.setEstado(rs.getBoolean("estado"));
                 lector.setTelefono(rs.getInt("telefono"));
-                lectores.add(lector);
+                
+                if (lector.getNroSocio() != codigo) {
+                    lectores.add(lector);
+                    codigo= lector.getNroSocio();
+                }
+                
             }
             ps.close();
 
@@ -312,6 +318,7 @@ public class PrestamoData {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             Libro libro;
+            int codigo = 0;
             while (rs.next()) {
                 LibroData libroData = new LibroData();
                 libro = libroData.buscarLibro(String.valueOf(ejemplarData.buscarEjemplar(rs.getInt("idEjemplar")).getLibro().getIdLibro()));
@@ -322,7 +329,10 @@ public class PrestamoData {
 //                libro.setTipo(rs.getString("tipo"));
 //                libro.setEditorial(rs.getString("editorial"));
 //                libro.setEstado(rs.getBoolean("estado"));
-                libros.add(libro);
+                if (libro.getIdLibro() != codigo) {
+                    libros.add(libro);
+                    codigo= libro.getIdLibro();
+                }
             }
             ps.close();
 
@@ -369,37 +379,37 @@ public class PrestamoData {
         return prestamo;
     }
 
-    public static void main(String[] args) {
-        Lector lect = new Lector(1, "Juan", "Salta", "juanvolveporfavor@hotmail.com", false, 987123456);
-        Ejemplar ejemp = new Ejemplar(2, new Libro(33, 22, "2", "2", 3, "CienciaDelNumero", "numeral", true), 5, true);
-        PrestamoData prestamoData = new PrestamoData();
-//        System.out.println(Date.valueOf("2023-10-01"));
-//        System.out.println(Date.valueOf("2023-10-12"));
-//        prestamoData.guardarPrestamo(new Prestamo(Date.valueOf("2023-10-08"), Date.valueOf("2023-10-14"), ejemp, lect, true));
-////        lectorData.guardarLector(new Lector("Juan", "Salta", "juanteextrañamos@hotmail.com", true, 123456789));
-////        lectorData.modificarLector(new Lector(1,"Juan", "Salta", "juanvolveporfavor@hotmail.com", true, 987123456));
-////        lectorData.eliminarLector(31);
-////        System.out.println(lectorData.buscarLector(31));
-////        System.out.println(lectorData.listarLectores());
-
-//      prestamoData.obtenerPrestamos().forEach(Prestamo->{
-//          System.out.println(Prestamo);
-//      });
-//      prestamoData.obtenerPrestamosPorLector(1).forEach(Prestamo->{
-//          System.out.println(Prestamo);
-//      });
-//      prestamoData.obtenerPrestamosPorFecha(Date.valueOf("2023-10-13")).forEach(Prestamo->{
-//          System.out.println(Prestamo);
-//      });
+//    public static void main(String[] args) {
+//        Lector lect = new Lector(1, "Juan", "Salta", "juanvolveporfavor@hotmail.com", false, 987123456);
+//        Ejemplar ejemp = new Ejemplar(2, new Libro(33, 22, "2", "2", 3, "CienciaDelNumero", "numeral", true), 5, true);
+//        PrestamoData prestamoData = new PrestamoData();
+////        System.out.println(Date.valueOf("2023-10-01"));
+////        System.out.println(Date.valueOf("2023-10-12"));
+////        prestamoData.guardarPrestamo(new Prestamo(Date.valueOf("2023-10-08"), Date.valueOf("2023-10-14"), ejemp, lect, true));
+//////        lectorData.guardarLector(new Lector("Juan", "Salta", "juanteextrañamos@hotmail.com", true, 123456789));
+//////        lectorData.modificarLector(new Lector(1,"Juan", "Salta", "juanvolveporfavor@hotmail.com", true, 987123456));
+//////        lectorData.eliminarLector(31);
+//////        System.out.println(lectorData.buscarLector(31));
+//////        System.out.println(lectorData.listarLectores());
+//
+////      prestamoData.obtenerPrestamos().forEach(Prestamo->{
+////          System.out.println(Prestamo);
+////      });
+////      prestamoData.obtenerPrestamosPorLector(1).forEach(Prestamo->{
+////          System.out.println(Prestamo);
+////      });
+////      prestamoData.obtenerPrestamosPorFecha(Date.valueOf("2023-10-13")).forEach(Prestamo->{
+////          System.out.println(Prestamo);
+////      });
 //prestamoData.obtenerLectores().forEach(lectores ->{
 //    System.out.println(lectores);
 //});
-        prestamoData.obtenerLibro().forEach(lectores -> {
-            System.out.println(lectores);
-        });
-
-// prestamoData.modificarPrestamo(new Prestamo(15,Date.valueOf("2023-10-09"), Date.valueOf("2023-10-13"), ejemp, lect, true));
-//        prestamoData.devolverPrestamo(10);
-    }
+////        prestamoData.obtenerLibro().forEach(lectores -> {
+////            System.out.println(lectores);
+////        });
+//
+//// prestamoData.modificarPrestamo(new Prestamo(15,Date.valueOf("2023-10-09"), Date.valueOf("2023-10-13"), ejemp, lect, true));
+////        prestamoData.devolverPrestamo(10);
+//    }
 
 }
