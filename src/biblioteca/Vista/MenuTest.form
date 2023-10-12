@@ -28,7 +28,10 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-              <Component id="VistaLogin" min="-2" pref="117" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="VistaLogin" pref="117" max="32767" attributes="0"/>
+                  <Component id="VistaRegistrarse" max="32767" attributes="0"/>
+              </Group>
               <EmptySpace pref="135" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -38,7 +41,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Component id="VistaLogin" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="442" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="VistaRegistrarse" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="397" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -50,6 +55,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="VistaLoginActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="VistaRegistrarse">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="VistaRegistrarse"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="VistaRegistrarseActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

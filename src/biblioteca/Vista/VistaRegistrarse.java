@@ -6,6 +6,18 @@
 package biblioteca.Vista;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import javax.swing.plaf.basic.BasicComboBoxUI;
 
 /**
  *
@@ -16,6 +28,8 @@ public class VistaRegistrarse extends javax.swing.JFrame {
     /** Creates new form CrearContrasenia */
     public VistaRegistrarse() {
         initComponents();
+        cargarCombo();
+        this.setResizable(false);
     }
 
     /** This method is called from within the constructor to
@@ -29,178 +43,468 @@ public class VistaRegistrarse extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        Fondo = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
-        jSeparator1 = new javax.swing.JSeparator();
-        jTexApellido = new javax.swing.JTextField();
-        jTexcontraseña = new javax.swing.JTextField();
-        jTexRepetirContra = new javax.swing.JTextField();
-        jTexNombre = new javax.swing.JTextField();
-        jButRegistrarse = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JSeparator();
+        jComboBoxPreg = new javax.swing.JComboBox<>();
+        jSeparator5 = new javax.swing.JSeparator();
+        jTextContra2 = new javax.swing.JTextField();
+        jTextContra = new javax.swing.JTextField();
+        jTextUsuario = new javax.swing.JTextField();
+        jTextRespuesta = new javax.swing.JTextField();
+        jTextNombre = new javax.swing.JTextField();
+        jTextApellido = new javax.swing.JTextField();
+        jTextMail = new javax.swing.JTextField();
+        jTextTelefono = new javax.swing.JTextField();
+        jTextDomicilio = new javax.swing.JTextField();
+        jSeparator6 = new javax.swing.JSeparator();
+        jSeparator7 = new javax.swing.JSeparator();
+        jSeparator8 = new javax.swing.JSeparator();
+        jSeparator9 = new javax.swing.JSeparator();
+        jSeparator10 = new javax.swing.JSeparator();
+        jButtonRegistrarse = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(600, 400));
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(44, 33, 89));
         jPanel1.setForeground(new java.awt.Color(204, 255, 204));
 
-        jLabel1.setBackground(new java.awt.Color(51, 51, 51));
+        jLabel1.setBackground(new java.awt.Color(44, 33, 89));
         jLabel1.setFont(new java.awt.Font("High Tower Text", 3, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setText("Registrarse");
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Nuevo Usuario");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(710, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jPanel2.setBackground(new java.awt.Color(146, 81, 184));
 
-        jPanel2.setBackground(new java.awt.Color(209, 170, 145));
+        jSeparator1.setBackground(new java.awt.Color(44, 33, 89));
 
-        jTexApellido.setFont(new java.awt.Font("High Tower Text", 3, 24)); // NOI18N
-        jTexApellido.setText("Apellido");
-        jTexApellido.setBorder(null);
+        jSeparator2.setBackground(new java.awt.Color(44, 33, 89));
 
-        jTexcontraseña.setFont(new java.awt.Font("High Tower Text", 3, 24)); // NOI18N
-        jTexcontraseña.setText("Contraseña");
-        jTexcontraseña.setBorder(null);
+        jSeparator3.setBackground(new java.awt.Color(44, 33, 89));
 
-        jTexRepetirContra.setFont(new java.awt.Font("High Tower Text", 3, 24)); // NOI18N
-        jTexRepetirContra.setText("Repetir Contraseña");
-        jTexRepetirContra.setBorder(null);
+        jSeparator4.setBackground(new java.awt.Color(44, 33, 89));
 
-        jTexNombre.setFont(new java.awt.Font("High Tower Text", 3, 24)); // NOI18N
-        jTexNombre.setText("Nombre");
-        jTexNombre.setBorder(null);
-        jTexNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+        jComboBoxPreg.setBackground(new java.awt.Color(146, 81, 184));
+        jComboBoxPreg.setForeground(new java.awt.Color(255, 255, 255));
+        jComboBoxPreg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija una pregunta" }));
+        jComboBoxPreg.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBoxPregMouseClicked(evt);
+            }
+        });
+
+        jSeparator5.setBackground(new java.awt.Color(44, 33, 89));
+
+        jTextContra2.setBackground(new java.awt.Color(146, 81, 184));
+        jTextContra2.setForeground(new java.awt.Color(255, 255, 255));
+        jTextContra2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextContra2.setText("Repetir Contraseña");
+        jTextContra2.setBorder(null);
+        jTextContra2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTexNombreFocusGained(evt);
+                jTextContra2FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextContra2FocusLost(evt);
             }
         });
-        jTexNombre.addActionListener(new java.awt.event.ActionListener() {
+        jTextContra2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTexNombreActionPerformed(evt);
+                jTextContra2ActionPerformed(evt);
             }
         });
+
+        jTextContra.setBackground(new java.awt.Color(146, 81, 184));
+        jTextContra.setForeground(new java.awt.Color(255, 255, 255));
+        jTextContra.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextContra.setText("Contraseña");
+        jTextContra.setBorder(null);
+        jTextContra.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextContraFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextContraFocusLost(evt);
+            }
+        });
+        jTextContra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextContraActionPerformed(evt);
+            }
+        });
+
+        jTextUsuario.setBackground(new java.awt.Color(146, 81, 184));
+        jTextUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        jTextUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextUsuario.setText("Usuario");
+        jTextUsuario.setBorder(null);
+        jTextUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextUsuarioFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextUsuarioFocusLost(evt);
+            }
+        });
+
+        jTextRespuesta.setBackground(new java.awt.Color(146, 81, 184));
+        jTextRespuesta.setForeground(new java.awt.Color(255, 255, 255));
+        jTextRespuesta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextRespuesta.setText("Respuesta");
+        jTextRespuesta.setBorder(null);
+        jTextRespuesta.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextRespuestaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextRespuestaFocusLost(evt);
+            }
+        });
+
+        jTextNombre.setBackground(new java.awt.Color(146, 81, 184));
+        jTextNombre.setForeground(new java.awt.Color(255, 255, 255));
+        jTextNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextNombre.setText("Nombre");
+        jTextNombre.setBorder(null);
+        jTextNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextNombreFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextNombreFocusLost(evt);
+            }
+        });
+
+        jTextApellido.setBackground(new java.awt.Color(146, 81, 184));
+        jTextApellido.setForeground(new java.awt.Color(255, 255, 255));
+        jTextApellido.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextApellido.setText("Apellido");
+        jTextApellido.setBorder(null);
+        jTextApellido.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextApellidoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextApellidoFocusLost(evt);
+            }
+        });
+
+        jTextMail.setBackground(new java.awt.Color(146, 81, 184));
+        jTextMail.setForeground(new java.awt.Color(255, 255, 255));
+        jTextMail.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextMail.setText("Mail");
+        jTextMail.setBorder(null);
+        jTextMail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextMailFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextMailFocusLost(evt);
+            }
+        });
+
+        jTextTelefono.setBackground(new java.awt.Color(146, 81, 184));
+        jTextTelefono.setForeground(new java.awt.Color(255, 255, 255));
+        jTextTelefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextTelefono.setText("Teléfono");
+        jTextTelefono.setBorder(null);
+        jTextTelefono.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextTelefonoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextTelefonoFocusLost(evt);
+            }
+        });
+
+        jTextDomicilio.setBackground(new java.awt.Color(146, 81, 184));
+        jTextDomicilio.setForeground(new java.awt.Color(255, 255, 255));
+        jTextDomicilio.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextDomicilio.setText("Domicilio");
+        jTextDomicilio.setBorder(null);
+        jTextDomicilio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextDomicilioFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextDomicilioFocusLost(evt);
+            }
+        });
+
+        jSeparator7.setBackground(new java.awt.Color(44, 33, 89));
+
+        jSeparator8.setBackground(new java.awt.Color(44, 33, 89));
+
+        jSeparator9.setBackground(new java.awt.Color(44, 33, 89));
+
+        jSeparator10.setBackground(new java.awt.Color(44, 33, 89));
+
+        jButtonRegistrarse.setBackground(new java.awt.Color(44, 33, 89));
+        jButtonRegistrarse.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonRegistrarse.setText("Registrarse");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 427, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(11, 11, 11)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTexApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTexcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTexRepetirContra, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGap(81, 81, 81)
-                            .addComponent(jTexNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addContainerGap(12, Short.MAX_VALUE)))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator9, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jTextUsuario)
+                        .addComponent(jTextContra)
+                        .addComponent(jSeparator3)
+                        .addComponent(jTextContra2)
+                        .addComponent(jComboBoxPreg, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSeparator1)
+                        .addComponent(jSeparator4)
+                        .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jTextRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(62, 62, 62)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jSeparator8)
+                    .addComponent(jTextTelefono)
+                    .addComponent(jTextNombre)
+                    .addComponent(jSeparator2)
+                    .addComponent(jTextApellido)
+                    .addComponent(jSeparator6)
+                    .addComponent(jSeparator7, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextMail, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextDomicilio, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(180, 180, 180))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(226, 226, 226)
+                .addComponent(jButtonRegistrarse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(385, 385, 385))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 546, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(111, 111, 111)
-                    .addComponent(jTexNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(24, 24, 24)
-                    .addComponent(jTexApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(28, 28, 28)
-                    .addComponent(jTexcontraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(38, 38, 38)
-                    .addComponent(jTexRepetirContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(111, Short.MAX_VALUE)))
-        );
-
-        jButRegistrarse.setBackground(new java.awt.Color(255, 0, 0));
-        jButRegistrarse.setFont(new java.awt.Font("High Tower Text", 3, 24)); // NOI18N
-        jButRegistrarse.setText("Registrarse");
-
-        javax.swing.GroupLayout FondoLayout = new javax.swing.GroupLayout(Fondo);
-        Fondo.setLayout(FondoLayout);
-        FondoLayout.setHorizontalGroup(
-            FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FondoLayout.createSequentialGroup()
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(FondoLayout.createSequentialGroup()
-                    .addGap(303, 303, 303)
-                    .addComponent(jButRegistrarse)
-                    .addContainerGap(830, Short.MAX_VALUE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jTextUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jTextContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jTextContra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jComboBoxPreg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jTextRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonRegistrarse, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
-        FondoLayout.setVerticalGroup(
-            FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FondoLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(FondoLayout.createSequentialGroup()
-                    .addGap(453, 453, 453)
-                    .addComponent(jButRegistrarse)
-                    .addContainerGap(62, Short.MAX_VALUE)))
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 575, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Fondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(457, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTexNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTexNombreActionPerformed
+    private void jTextContra2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextContra2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTexNombreActionPerformed
+    }//GEN-LAST:event_jTextContra2ActionPerformed
 
-    private void jTexNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTexNombreFocusGained
-        if (jTexNombre.getText().equalsIgnoreCase("Ingrese su Nombre")) {
-            jTexNombre.setText("");
+    private void jTextContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextContraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextContraActionPerformed
+
+    private void jTextUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextUsuarioFocusLost
+        if (jTextUsuario.getText().isEmpty()||jTextUsuario.getText().equalsIgnoreCase("usuario")) {
+            jTextUsuario.setText("Usuario");
         }
-    }//GEN-LAST:event_jTexNombreFocusGained
+    }//GEN-LAST:event_jTextUsuarioFocusLost
 
+    private void jTextUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextUsuarioFocusGained
+        if (jTextUsuario.getText().equalsIgnoreCase("usuario")) {
+            jTextUsuario.setText("");
+        }
+    }//GEN-LAST:event_jTextUsuarioFocusGained
+
+    private void jTextContraFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextContraFocusGained
+        if (jTextContra.getText().equalsIgnoreCase("contraseña")) {
+            jTextContra.setText("");
+        }
+    }//GEN-LAST:event_jTextContraFocusGained
+
+    private void jTextContraFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextContraFocusLost
+        if (jTextContra.getText().isEmpty()||jTextContra.getText().equalsIgnoreCase("contraseña")) {
+            jTextContra.setText("Contraseña");
+        }
+    }//GEN-LAST:event_jTextContraFocusLost
+
+    private void jTextContra2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextContra2FocusGained
+        if (jTextContra2.getText().equalsIgnoreCase("repetir contraseña")) {
+            jTextContra2.setText("");
+        }
+    }//GEN-LAST:event_jTextContra2FocusGained
+
+    private void jTextContra2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextContra2FocusLost
+        if (jTextContra2.getText().isEmpty()||jTextContra2.getText().equalsIgnoreCase("repetir contraseña")) {
+            jTextContra2.setText("Repetir Contraseña");
+        }
+    }//GEN-LAST:event_jTextContra2FocusLost
+
+    private void jComboBoxPregMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxPregMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxPregMouseClicked
+
+    private void jTextRespuestaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextRespuestaFocusGained
+        if (jTextRespuesta.getText().equalsIgnoreCase("respuesta")) {
+            jTextRespuesta.setText("");
+        }
+    }//GEN-LAST:event_jTextRespuestaFocusGained
+
+    private void jTextRespuestaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextRespuestaFocusLost
+        if (jTextRespuesta.getText().isEmpty()||jTextRespuesta.getText().equalsIgnoreCase("respuesta")) {
+            jTextRespuesta.setText("Respuesta");
+        }
+    }//GEN-LAST:event_jTextRespuestaFocusLost
+
+    private void jTextNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextNombreFocusGained
+        if (jTextNombre.getText().equalsIgnoreCase("nombre")) {
+            jTextNombre.setText("");
+        }
+    }//GEN-LAST:event_jTextNombreFocusGained
+
+    private void jTextNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextNombreFocusLost
+        if (jTextNombre.getText().isEmpty()||jTextNombre.getText().equalsIgnoreCase("nombre")) {
+            jTextNombre.setText("Nombre");
+        }
+    }//GEN-LAST:event_jTextNombreFocusLost
+
+    private void jTextApellidoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextApellidoFocusGained
+        if (jTextApellido.getText().equalsIgnoreCase("apellido")) {
+            jTextApellido.setText("");
+        }
+    }//GEN-LAST:event_jTextApellidoFocusGained
+
+    private void jTextApellidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextApellidoFocusLost
+        if (jTextApellido.getText().isEmpty()||jTextApellido.getText().equalsIgnoreCase("apellido")) {
+            jTextApellido.setText("Apellido");
+        }
+    }//GEN-LAST:event_jTextApellidoFocusLost
+
+    private void jTextMailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextMailFocusGained
+        if (jTextMail.getText().equalsIgnoreCase("mail")) {
+            jTextMail.setText("");
+        }
+    }//GEN-LAST:event_jTextMailFocusGained
+
+    private void jTextMailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextMailFocusLost
+        if (jTextMail.getText().isEmpty()||jTextMail.getText().equalsIgnoreCase("mail")) {
+            jTextMail.setText("Mail");
+        }
+    }//GEN-LAST:event_jTextMailFocusLost
+
+    private void jTextTelefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextTelefonoFocusGained
+        if (jTextTelefono.getText().equalsIgnoreCase("teléfono")) {
+            jTextTelefono.setText("");
+        }
+    }//GEN-LAST:event_jTextTelefonoFocusGained
+
+    private void jTextTelefonoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextTelefonoFocusLost
+        if (jTextTelefono.getText().isEmpty()||jTextTelefono.getText().equalsIgnoreCase("teléfono")) {
+            jTextTelefono.setText("Teléfono");
+        }
+    }//GEN-LAST:event_jTextTelefonoFocusLost
+
+    private void jTextDomicilioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextDomicilioFocusGained
+        if (jTextDomicilio.getText().equalsIgnoreCase("domicilio")) {
+            jTextDomicilio.setText("");
+        }
+    }//GEN-LAST:event_jTextDomicilioFocusGained
+
+    private void jTextDomicilioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextDomicilioFocusLost
+        if (jTextDomicilio.getText().isEmpty()||jTextDomicilio.getText().equalsIgnoreCase("domicilio")) {
+            jTextDomicilio.setText("Domicilio");
+        }
+    }//GEN-LAST:event_jTextDomicilioFocusLost
+
+    public void cargarCombo() {
+        DefaultComboBoxModel<String> mdlCombo = new DefaultComboBoxModel(preguntas().toArray());
+        jComboBoxPreg.setModel(mdlCombo);
+    }
+
+    public List<String> preguntas() {
+        List<String> preguntas = new ArrayList<>();
+
+        preguntas.add("¿Como se llamaba tu primer pareja?");
+        preguntas.add("¿Como se llamaba tu primer mascota?");
+        preguntas.add("¿Cual es tu lugar favorito?");
+        preguntas.add("¿Cual es tu juego favorito?");
+
+        return preguntas;
+    }
+
+    
+    
 //    /**
 //     * @param args the command line arguments
 //     */
@@ -238,19 +542,30 @@ public class VistaRegistrarse extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Fondo;
-    private javax.swing.JButton jButRegistrarse;
+    private javax.swing.JButton jButtonRegistrarse;
+    private javax.swing.JComboBox<String> jComboBoxPreg;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTextField jTexApellido;
-    private javax.swing.JTextField jTexNombre;
-    private javax.swing.JTextField jTexRepetirContra;
-    private javax.swing.JTextField jTexcontraseña;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
+    private javax.swing.JTextField jTextApellido;
+    private javax.swing.JTextField jTextContra;
+    private javax.swing.JTextField jTextContra2;
+    private javax.swing.JTextField jTextDomicilio;
+    private javax.swing.JTextField jTextMail;
+    private javax.swing.JTextField jTextNombre;
+    private javax.swing.JTextField jTextRespuesta;
+    private javax.swing.JTextField jTextTelefono;
+    private javax.swing.JTextField jTextUsuario;
     // End of variables declaration//GEN-END:variables
 
 }

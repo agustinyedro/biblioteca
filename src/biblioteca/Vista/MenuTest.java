@@ -36,6 +36,7 @@ public class MenuTest extends javax.swing.JFrame {
     private void initComponents() {
 
         VistaLogin = new javax.swing.JButton();
+        VistaRegistrarse = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImages(null);
@@ -47,13 +48,22 @@ public class MenuTest extends javax.swing.JFrame {
             }
         });
 
+        VistaRegistrarse.setText("VistaRegistrarse");
+        VistaRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VistaRegistrarseActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(VistaLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(VistaLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                    .addComponent(VistaRegistrarse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(135, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -61,7 +71,9 @@ public class MenuTest extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(VistaLogin)
-                .addContainerGap(442, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(VistaRegistrarse)
+                .addContainerGap(397, Short.MAX_VALUE))
         );
 
         pack();
@@ -75,12 +87,17 @@ public class MenuTest extends javax.swing.JFrame {
         
     }//GEN-LAST:event_VistaLoginActionPerformed
 
+    private void VistaRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VistaRegistrarseActionPerformed
+        VistaRegistrarse r = new VistaRegistrarse();
+        r.setVisible(true);
+    }//GEN-LAST:event_VistaRegistrarseActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         
-        
+        FlatSolarizedLightIJTheme.registerCustomDefaultsSource("style");
         FlatSolarizedLightIJTheme.setup();
         
         
@@ -93,5 +110,6 @@ public class MenuTest extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton VistaLogin;
+    private javax.swing.JButton VistaRegistrarse;
     // End of variables declaration//GEN-END:variables
 }
