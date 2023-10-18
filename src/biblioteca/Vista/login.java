@@ -6,10 +6,10 @@ import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
 import java.awt.Color;
 
 
-public class Login extends javax.swing.JFrame {
+public class login extends javax.swing.JFrame {
     private LoginData loginData;
     
-    public Login(){
+    public login(){
         initComponents();
         this.setLocationRelativeTo(null);
         init();
