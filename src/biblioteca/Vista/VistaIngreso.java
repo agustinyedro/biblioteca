@@ -1,6 +1,7 @@
 
 package biblioteca.Vista;
 
+import biblioteca75.Login;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -9,8 +10,9 @@ import javax.swing.JLabel;
 
 public class VistaIngreso extends javax.swing.JFrame {
 
-   
+   private Login login;
     public VistaIngreso() {
+        login = new Login();
         initComponents();
         SetImageLabel(jLlibrito,"src/iconos/Sunday Lounge.jpg");
         

@@ -20,10 +20,35 @@ public class LibroData {
         connection = Conexion.getConexion();
     }
 
+    private boolean existeLibro(Libro libro) throws SQLException {
+
+        String sql = "SELECT COUNT(*) FROM libro WHERE isbn = ? AND idLibro = ? AND titulo = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, libro.getIsbn());
+            ps.setInt(2, libro.getIdLibro());
+            ps.setString(3, libro.getTitulo());
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int count = rs.getInt(1);
+                    return count > 0;
+                }
+            }
+        }
+        return false;
+    }
+    
+    
+    
     public void guardarLibro(Libro libro) {
 
         String sql = "INSERT INTO Libro (isbn, titulo, autor, año, tipo, editorial, estado) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
+            
+            if(existeLibro(libro)){
+                JOptionPane.showMessageDialog(null, "Este libro ya existe.");
+                return;
+            }
+            
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, libro.getIsbn());
             ps.setString(2, libro.getTitulo());
