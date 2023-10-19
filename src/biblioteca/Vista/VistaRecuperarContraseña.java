@@ -432,6 +432,7 @@ public class VistaRecuperarContraseña extends javax.swing.JFrame {
                     jButton1.setText("crear");
                 }
                 else{
+                    
                     JtErrorPregunta.setText("La pregunta o la respuesta no coiciden");
                     JtErrorPregunta.setForeground(Color.red);
                     JtErrorPregunta.setVisible(true);

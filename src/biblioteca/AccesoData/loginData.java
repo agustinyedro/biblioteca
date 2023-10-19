@@ -17,8 +17,7 @@ public class LoginData {
         this.lectorData = new LectorData();
     }
 
-    private boolean
-            existeLogin(Login login) throws SQLException {
+    private boolean existeLogin(Login login) throws SQLException {
 
         String sql = "SELECT COUNT(*) FROM lector WHERE idLogin = ? AND usuario = ? AND contraseña = ? AND pregunta = ? AND respuesta = ? ";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {

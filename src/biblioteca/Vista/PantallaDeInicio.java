@@ -22,7 +22,7 @@ import javax.swing.UIManager;
  * @author USURIO
  */
 public class PantallaDeInicio extends javax.swing.JFrame {
-
+    private boolean sincarga = false;
     private boolean panelFondo = true;
     private int auxiliar = 0;
     private boolean realizado = false;
@@ -48,6 +48,15 @@ public class PantallaDeInicio extends javax.swing.JFrame {
         jPanel2.setVisible(false);
 
     }
+
+    public boolean isSincarga() {
+        return sincarga;
+    }
+
+    public void setSincarga(boolean sincarga) {
+        this.sincarga = sincarga;
+    }
+    
 
     public boolean isPanelFondo() {
         return panelFondo;
@@ -123,7 +132,7 @@ public class PantallaDeInicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        if(panelFondo==true){
+        if(panelFondo==true || sincarga== true){
              if (realizado == false) {
             realizado = true;
             ejecutar.start();
@@ -204,7 +213,7 @@ public class PantallaDeInicio extends javax.swing.JFrame {
                             VistaLogin objeto = new VistaLogin();
 
                             objeto.setVisible(true);
-                            if (isPanelFondo()) {
+                            if (isPanelFondo() && !isSincarga()) {
                                 panelRound1.setVisible(true);
                             }
 

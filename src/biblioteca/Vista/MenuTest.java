@@ -27,7 +27,7 @@ public class MenuTest extends javax.swing.JFrame {
         //Titulo
         setTitle("ALERLO");
         //Icono
-        setIconImage(new ImageIcon(getClass().getResource("/iconos/menu_book_FILL0_wght400_GRAD0_opsz24.png")).getImage());
+        setIconImage(new ImageIcon(getClass().getResource("/iconos/icono3.png")).getImage());
     }
 
     /**

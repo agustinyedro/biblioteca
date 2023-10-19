@@ -1,33 +1,31 @@
-
 package biblioteca.Vista;
 
 import biblioteca75.Login;
+import java.awt.Color;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-
+import javax.swing.JOptionPane;
 
 public class VistaIngreso extends javax.swing.JFrame {
 
-   private Login login;
+    private Login login;
+
     public VistaIngreso() {
         login = new Login();
         initComponents();
-        SetImageLabel(jLlibrito,"src/iconos/Sunday Lounge.jpg");
-        
+        SetImageLabel(jLlibrito, "src/iconos/Sunday Lounge.jpg");
+
     }
-    
-    
-    
-    private void SetImageLabel(JLabel labelName, String root){
+
+    private void SetImageLabel(JLabel labelName, String root) {
         ImageIcon image = new ImageIcon(root);
         Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(), labelName.getHeight(), Image.SCALE_DEFAULT));
         labelName.setIcon(icon);
         this.repaint();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -47,32 +45,48 @@ public class VistaIngreso extends javax.swing.JFrame {
         setForeground(new java.awt.Color(255, 204, 255));
         setPreferredSize(new java.awt.Dimension(1280, 720));
 
-        jPanel1.setBackground(new java.awt.Color(105, 60, 121));
+        jPanel1.setBackground(new java.awt.Color(146, 81, 184));
 
         jLabel1.setText("Nuestros clientes son ");
 
         jLabel2.setText("lo mas importante");
 
+        JLperfil.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
         JLperfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/persona.png"))); // NOI18N
         JLperfil.setText("Perfil");
         JLperfil.setIconTextGap(30);
         JLperfil.setName(""); // NOI18N
 
+        jLprestamos.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
         jLprestamos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/prestamo.png"))); // NOI18N
         jLprestamos.setText(" Prestamos");
-        jLprestamos.setIconTextGap(25);
+        jLprestamos.setIconTextGap(23);
+        jLprestamos.setInheritsPopupMenu(false);
         jLprestamos.setName(""); // NOI18N
 
+        jLibros.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
         jLibros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/librito.png"))); // NOI18N
         jLibros.setText(" Libros");
         jLibros.setAutoscrolls(true);
-        jLibros.setIconTextGap(27);
+        jLibros.setIconTextGap(23);
 
+        jLogout.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
         jLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/logout.png"))); // NOI18N
         jLogout.setText("Logout");
         jLogout.setFocusCycleRoot(true);
-        jLogout.setIconTextGap(27);
+        jLogout.setIconTextGap(29);
+        jLogout.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jLogoutFocusLost(evt);
+            }
+        });
+        jLogout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLogoutMouseClicked(evt);
+            }
+        });
 
+        JLperfil1.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
         JLperfil1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/casita.png"))); // NOI18N
         JLperfil1.setText("Inicio");
         JLperfil1.setIconTextGap(30);
@@ -97,8 +111,8 @@ public class VistaIngreso extends javax.swing.JFrame {
                             .addComponent(jLabel1))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLibros, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(JLperfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLprestamos, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
@@ -145,40 +159,71 @@ public class VistaIngreso extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaIngreso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaIngreso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaIngreso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaIngreso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLogoutMouseClicked
+        String si = "SI";
+        String no = "NO";
+        String cancelar = "Cancelar";
+        Object[] opciones = {si, no};
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VistaIngreso().setVisible(true);
-            }
-        });
+        
+        
+        jLogout.setBackground(new Color(157, 82, 148));
+        int confirmacion = JOptionPane.showOptionDialog(this, "¿Cerrar sesión?", "", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, si);
+//                    System.out.println(confirmacion);
+        if (confirmacion == 0) {
+            this.setVisible(false);
+            PantallaDeInicio p  = new PantallaDeInicio();
+            p.setSincarga(true);
+            p.setVisible(true);
+        }
+    }//GEN-LAST:event_jLogoutMouseClicked
+
+    private void jLogoutFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jLogoutFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLogoutFocusLost
+
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(VistaIngreso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(VistaIngreso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(VistaIngreso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(VistaIngreso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new VistaIngreso().setVisible(true);
+//            }
+//        });
+//    }
+    public Login getLogin() {
+        return login;
     }
+
+    public void setLogin(Login login) {
+        this.login = login;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLperfil;
