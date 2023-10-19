@@ -20,10 +20,37 @@ public class LectorData {
 
     }
 
+    private boolean
+            existeLector(Lector lector) throws SQLException {
+
+        String sql = "SELECT COUNT(*) FROM lector WHERE nrSocio = ? AND nombre = ? AND apellido = ? AND domicilio = ? AND mail = ? AND telefono = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, lector.getNroSocio());
+            ps.setString(2, lector.getNombre());
+            ps.setString(3, lector.getApellido());
+            ps.setString(4, lector.getDomicilio());
+            ps.setString(1, lector.getMail());
+            ps.setInt(3, lector.getTelefono());
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int count = rs.getInt(1);
+                    return count > 0;
+                }
+            }
+        }
+        return false;
+    }
+    
     public void guardarLector(Lector lector) {
 
         String sql = "INSERT INTO lector ( nombre, apellido, domicilio, mail, estado, telefono ) VALUES (?, ?, ?, ?,?)";
         try {
+            
+            if (existeLector(lector)) {
+                JOptionPane.showMessageDialog(null, "El lector ya existe.");
+                return;
+            }
+            
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, lector.getNombre());
