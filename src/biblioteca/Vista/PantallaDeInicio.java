@@ -132,11 +132,22 @@ public class PantallaDeInicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        if(panelFondo==true || sincarga== true){
+        if(panelFondo==true&& sincarga==false){
              if (realizado == false) {
             realizado = true;
             ejecutar.start();
         }
+        }else if(sincarga==true){
+            text.setVisible(false);
+            barra.setVisible(false);
+            jPanel2.setVisible(true);
+            jPanel2.setBackground(new Color(64, 55, 57, 180));
+            PantallaDeInicio.this.setCursor(new Cursor(DEFAULT_CURSOR) {});
+            VistaLogin objeto = new VistaLogin();
+            objeto.setVisible(true);
+            panelRound1.setVisible(true);
+            panelRound1.setBackground(new Color(85, 85, 85, 200));
+            objeto.setLocation(250, 200);
         }else {
             text.setVisible(false);
             barra.setVisible(false);
