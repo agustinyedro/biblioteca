@@ -9,6 +9,7 @@ import biblioteca.AccesoData.LoginData;
 import biblioteca75.Lector;
 import biblioteca75.Login;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -23,6 +24,10 @@ import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import java.lang.Integer;
 import javax.swing.JOptionPane;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.Icon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -36,6 +41,7 @@ public class VistaRegistrarse extends javax.swing.JFrame {
         setSize(580, 395);
         setLocationRelativeTo(null);
         jPanel2.requestFocusInWindow();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -45,6 +51,7 @@ public class VistaRegistrarse extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        verificacion = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
@@ -83,6 +90,7 @@ public class VistaRegistrarse extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(146, 81, 184));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.add(verificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(522, 126, 18, 18));
 
         jSeparator1.setBackground(new java.awt.Color(44, 33, 89));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 55, 226, 18));
@@ -378,6 +386,15 @@ public class VistaRegistrarse extends javax.swing.JFrame {
         if (jTextMail.getText().isEmpty() || jTextMail.getText().equalsIgnoreCase("mail")) {
             jTextMail.setText("Mail");
         }
+        String email = jTextMail.getText();
+        if (validarEmail(email)) {
+            SetImageLabel(verificacion, "src/iconos/correcto.png");
+            
+        } else {
+            
+            SetImageLabel(verificacion, "src/iconos/incorrecto.png");
+        }
+        this.setVisible(true);
     }//GEN-LAST:event_jTextMailFocusLost
 
     private void jTextTelefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextTelefonoFocusGained
@@ -435,16 +452,23 @@ public class VistaRegistrarse extends javax.swing.JFrame {
                 Login login = new Login(usuario, contrasenia, lector, pregunta, respuesta);
 
                 loginData.guardarLogin(login);
-                
+
                 this.setVisible(false);
                 VistaLogin s = new VistaLogin();
                 s.setVisible(true);
-      
+
             }
         });
 
     }//GEN-LAST:event_jButtonRegistrarseActionPerformed
 
+    private void SetImageLabel(JLabel labelName, String root) {
+        ImageIcon image = new ImageIcon(root);
+        Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(), labelName.getHeight(), Image.SCALE_DEFAULT));
+        labelName.setIcon(icon);
+        this.repaint();
+    }
+    
     /*
     import java.util.Scanner;
 
@@ -472,8 +496,7 @@ public class Main {
         return email.matches(emailRegex);
     }
 }
-    */
-    
+     */
     public void cargarCombo() {
         DefaultComboBoxModel<String> mdlCombo = new DefaultComboBoxModel(preguntas().toArray());
         jComboBoxPreg.setModel(mdlCombo);
@@ -488,6 +511,18 @@ public class Main {
         preguntas.add("¿Cual es tu juego favorito?");
 
         return preguntas;
+    }
+    public static boolean validarEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."
+                + "[a-zA-Z0-9_+&*-]+)*@"
+                + "(?:[a-zA-Z0-9-]+\\.)+[a-z"
+                + "A-Z]{2,7}$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null) {
+            return false;
+        }
+        return pat.matcher(email).matches();
     }
 
 //    /**
@@ -551,6 +586,8 @@ public class Main {
     private javax.swing.JTextField jTextRespuesta;
     private javax.swing.JTextField jTextTelefono;
     private javax.swing.JTextField jTextUsuario;
+    private javax.swing.JLabel verificacion;
     // End of variables declaration//GEN-END:variables
 
+    
 }
