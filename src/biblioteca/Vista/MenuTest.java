@@ -4,6 +4,8 @@
  */
 package biblioteca.Vista;
 
+//import biblioteca75.Login;
+import biblioteca.AccesoData.LoginData;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
 import java.awt.Image;
@@ -37,6 +39,9 @@ public class MenuTest extends javax.swing.JFrame {
 
         VistaLogin = new javax.swing.JButton();
         VistaRegistrarse = new javax.swing.JButton();
+        VistaRecuperarContraseña = new javax.swing.JButton();
+        PantallaInicio = new javax.swing.JButton();
+        VistaIngreso = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImages(null);
@@ -55,25 +60,55 @@ public class MenuTest extends javax.swing.JFrame {
             }
         });
 
+        VistaRecuperarContraseña.setText("VistaRecuperarContraseña");
+        VistaRecuperarContraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VistaRecuperarContraseñaActionPerformed(evt);
+            }
+        });
+
+        PantallaInicio.setText("Pantalla Inicio");
+        PantallaInicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PantallaInicioActionPerformed(evt);
+            }
+        });
+
+        VistaIngreso.setText("VistaIngreso");
+        VistaIngreso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VistaIngresoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(VistaLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-                    .addComponent(VistaRegistrarse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(VistaIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                    .addComponent(PantallaInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(VistaRecuperarContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(VistaRegistrarse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(VistaLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(15, 15, 15)
                 .addComponent(VistaLogin)
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
                 .addComponent(VistaRegistrarse)
-                .addContainerGap(397, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(PantallaInicio)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(VistaRecuperarContraseña)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(VistaIngreso)
+                .addContainerGap(287, Short.MAX_VALUE))
         );
 
         pack();
@@ -81,16 +116,29 @@ public class MenuTest extends javax.swing.JFrame {
 
     private void VistaLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VistaLoginActionPerformed
         
-        Login p = new Login();
+        VistaLogin p = new VistaLogin();
         p.setVisible(true);
-        
-        
     }//GEN-LAST:event_VistaLoginActionPerformed
 
     private void VistaRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VistaRegistrarseActionPerformed
         VistaRegistrarse r = new VistaRegistrarse();
         r.setVisible(true);
     }//GEN-LAST:event_VistaRegistrarseActionPerformed
+
+    private void VistaRecuperarContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VistaRecuperarContraseñaActionPerformed
+        VistaRecuperarContraseña r = new VistaRecuperarContraseña();
+        r.setVisible(true);
+    }//GEN-LAST:event_VistaRecuperarContraseñaActionPerformed
+
+    private void PantallaInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PantallaInicioActionPerformed
+        PantallaDeInicio r = new PantallaDeInicio();
+        r.setVisible(true);
+    }//GEN-LAST:event_PantallaInicioActionPerformed
+
+    private void VistaIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VistaIngresoActionPerformed
+        VistaIngreso r = new VistaIngreso();
+        r.setVisible(true);
+    }//GEN-LAST:event_VistaIngresoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -109,7 +157,10 @@ public class MenuTest extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton PantallaInicio;
+    private javax.swing.JButton VistaIngreso;
     private javax.swing.JButton VistaLogin;
+    private javax.swing.JButton VistaRecuperarContraseña;
     private javax.swing.JButton VistaRegistrarse;
     // End of variables declaration//GEN-END:variables
 }

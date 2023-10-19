@@ -2,11 +2,7 @@ package biblioteca.AccesoData;
 
 import biblioteca75.Lector;
 import biblioteca75.Login;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import javax.swing.JOptionPane;
 
 public class LoginData {
@@ -16,7 +12,7 @@ public class LoginData {
     private Lector lector;
 
     public LoginData() {
-        connection = Conexion.getConexion();
+       connection = Conexion.getConexion();
         this.lector = new Lector();
         this.lectorData = new LectorData();
     }

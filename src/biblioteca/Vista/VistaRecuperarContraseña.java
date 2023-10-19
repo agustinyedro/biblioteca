@@ -4,17 +4,50 @@
  */
 package biblioteca.Vista;
 
+import biblioteca.AccesoData.*;
+import biblioteca75.*;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author USURIO
  */
 public class VistaRecuperarContraseña extends javax.swing.JFrame {
+    
+    private Lector lector;
+    private LectorData lectorData;
+    private LoginData loginData;
+    private boolean pregunta = true;
 
     /**
      * Creates new form VistaRecuperarContraseña
      */
     public VistaRecuperarContraseña() {
+        setUndecorated(true);
         initComponents();
+        if (pregunta) {
+            passwoe.setVisible(false);
+            passwoe1.setVisible(false);
+            jPasswordField1.setVisible(false);
+            jPasswordField2.setVisible(false);
+            jSeparator1.setVisible(false);
+            jSeparator2.setVisible(false);
+            jButton1.setText("Ingresar");
+        }
+        if (jTxtUsuario.getText().isEmpty() || jTxtUsuario.getText().equalsIgnoreCase("Ingrese un Usuario")) {
+            jTxtUsuario.setText("Ingrese un Usuario");
+        }
+        if (jTxtRespuesta.getText().isEmpty() || jTxtRespuesta.getText().equalsIgnoreCase("Conteste a la pregunta elegida")) {
+            jTxtRespuesta.setText("Conteste a la pregunta elegida");
+        }
+        setResizable(false);
+        JtErrorPregunta.setVisible(false);
+        cargarCombo();
+        panelRound1.requestFocus();
+        setBackground(new Color(0, 0, 0, 0));
     }
 
     /**
@@ -24,21 +57,422 @@ public class VistaRecuperarContraseña extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelRound1 = new biblioteca.Vista.PanelRound();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        passwoe1 = new javax.swing.JLabel();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        jSeparator1 = new javax.swing.JSeparator();
+        passwoe = new javax.swing.JLabel();
+        jPasswordField2 = new javax.swing.JPasswordField();
+        jSeparator2 = new javax.swing.JSeparator();
+        jTxtRespuesta = new javax.swing.JTextField();
+        jSRespuesta = new javax.swing.JSeparator();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jTxtUsuario = new javax.swing.JTextField();
+        jSUsuario = new javax.swing.JSeparator();
+        jButton1 = new javax.swing.JButton();
+        JtErrorPregunta = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        panelRound1.setRoundBottomLeft(50);
+        panelRound1.setRoundBottomRight(50);
+        panelRound1.setRoundTopLeft(50);
+        panelRound1.setRoundTopRight(50);
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 22)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Nueva contraseña");
+
+        jLabel4.setBackground(new java.awt.Color(228, 228, 231));
+        jLabel4.setFont(new java.awt.Font("Open Sans Medium", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(200, 202, 192));
+        jLabel4.setText("X");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel4MouseExited(evt);
+            }
+        });
+
+        passwoe1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        passwoe1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        passwoe1.setText("Ingrese una nueva contraseña");
+
+        jPasswordField1.setBackground(new java.awt.Color(238, 232, 213));
+        jPasswordField1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPasswordField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPasswordField1.setText("Ingrese su password");
+        jPasswordField1.setBorder(null);
+        jPasswordField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPasswordField1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jPasswordField1FocusLost(evt);
+            }
+        });
+        jPasswordField1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPasswordField1MouseClicked(evt);
+            }
+        });
+
+        passwoe.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        passwoe.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        passwoe.setText("Repita la contraseña");
+
+        jPasswordField2.setBackground(new java.awt.Color(238, 232, 213));
+        jPasswordField2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPasswordField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jPasswordField2.setText("Repita el password");
+        jPasswordField2.setBorder(null);
+        jPasswordField2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPasswordField2FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jPasswordField2FocusLost(evt);
+            }
+        });
+        jPasswordField2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPasswordField2MouseClicked(evt);
+            }
+        });
+
+        jTxtRespuesta.setBackground(new java.awt.Color(238, 232, 213));
+        jTxtRespuesta.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTxtRespuesta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtRespuesta.setBorder(null);
+        jTxtRespuesta.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTxtRespuestaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTxtRespuestaFocusLost(evt);
+            }
+        });
+        jTxtRespuesta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTxtRespuestaMouseClicked(evt);
+            }
+        });
+
+        jComboBox1.setBackground(new java.awt.Color(238, 232, 213));
+
+        jTxtUsuario.setBackground(new java.awt.Color(238, 232, 213));
+        jTxtUsuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTxtUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTxtUsuario.setBorder(null);
+        jTxtUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTxtUsuarioFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTxtUsuarioFocusLost(evt);
+            }
+        });
+        jTxtUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTxtUsuarioMouseClicked(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton1.setText("Crear");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        JtErrorPregunta.setFont(new java.awt.Font("Open Sans Medium", 0, 14)); // NOI18N
+        JtErrorPregunta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JtErrorPregunta.setText("Nueva contraseña");
+
+        javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
+        panelRound1.setLayout(panelRound1Layout);
+        panelRound1Layout.setHorizontalGroup(
+            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
+            .addComponent(JtErrorPregunta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelRound1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelRound1Layout.createSequentialGroup()
+                            .addGap(370, 370, 370)
+                            .addComponent(jLabel4))
+                        .addComponent(passwoe1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelRound1Layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addComponent(jTxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panelRound1Layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jSUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(panelRound1Layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(passwoe, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelRound1Layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panelRound1Layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTxtRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(panelRound1Layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addComponent(jSRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panelRound1Layout.createSequentialGroup()
+                            .addGap(29, 29, 29)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(0, 7, Short.MAX_VALUE)))
+        );
+        panelRound1Layout.setVerticalGroup(
+            panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(JtErrorPregunta)
+                .addContainerGap(237, Short.MAX_VALUE))
+            .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelRound1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel4)
+                    .addGap(54, 54, 54)
+                    .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(passwoe1)
+                        .addComponent(jTxtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(passwoe)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelRound1Layout.createSequentialGroup()
+                            .addGap(30, 30, 30)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(panelRound1Layout.createSequentialGroup()
+                            .addGap(10, 10, 10)
+                            .addComponent(jTxtRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jSRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(20, 20, 20)
+                    .addComponent(jButton1)
+                    .addGap(0, 20, Short.MAX_VALUE)))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 412, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 309, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(panelRound1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseEntered
+        jLabel4.setForeground(new Color(46, 78, 88));
+    }//GEN-LAST:event_jLabel4MouseEntered
+
+    private void jLabel4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseExited
+        jLabel4.setForeground(new Color(200, 202, 192));
+    }//GEN-LAST:event_jLabel4MouseExited
+
+    private void jPasswordField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField1FocusGained
+        if (String.valueOf(jPasswordField1.getPassword()).equalsIgnoreCase("Ingrese su password")) {
+            jPasswordField1.setText("");
+        }
+        passwoe1.setText("Ingrese una nueva contraseña");
+        passwoe1.setForeground(new Color(46, 78, 88));
+        jSeparator1.setForeground(new Color(105, 108, 90));
+        jSeparator1.setBackground(new Color(105, 108, 90));
+    }//GEN-LAST:event_jPasswordField1FocusGained
+
+    private void jPasswordField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField1FocusLost
+        if (String.valueOf(jPasswordField1.getPassword()).isEmpty() || String.valueOf(jPasswordField1.getPassword()).equalsIgnoreCase("Ingrese su password")) {
+            jPasswordField1.setText("Ingrese su password");
+        }
+        jSeparator1.setForeground(new Color(46, 78, 88));
+        jSeparator1.setBackground(new Color(46, 78, 88));
+    }//GEN-LAST:event_jPasswordField1FocusLost
+
+    private void jPasswordField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField1MouseClicked
+        if (String.valueOf(jPasswordField1.getPassword()).equalsIgnoreCase("Ingrese su password")) {
+            jPasswordField1.setText("");
+        }
+
+    }//GEN-LAST:event_jPasswordField1MouseClicked
+
+    private void jPasswordField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField2FocusGained
+        if (String.valueOf(jPasswordField2.getPassword()).equalsIgnoreCase("Repita el password")) {
+            jPasswordField2.setText("");
+        }
+        jSeparator2.setForeground(new Color(105, 108, 90));
+        jSeparator2.setBackground(new Color(105, 108, 90));
+    }//GEN-LAST:event_jPasswordField2FocusGained
+
+    private void jPasswordField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField2FocusLost
+        if (String.valueOf(jPasswordField2.getPassword()).isEmpty() || String.valueOf(jPasswordField2.getPassword()).equalsIgnoreCase("Repita el password")) {
+            jPasswordField2.setText("Repita el password");
+        }
+        jSeparator2.setForeground(new Color(46, 78, 88));
+        jSeparator2.setBackground(new Color(46, 78, 88));
+    }//GEN-LAST:event_jPasswordField2FocusLost
+
+    private void jPasswordField2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPasswordField2MouseClicked
+        if (String.valueOf(jPasswordField2.getPassword()).equalsIgnoreCase("Repita el password")) {
+            jPasswordField2.setText("");
+        }
+//        passwoe.setText("Repita el Contraseña");
+//        passwoe.setForeground(new Color(228, 228, 231));
+//        jSeparator2.setForeground(new Color(228, 228, 231));
+//        jSeparator2.setBackground(new Color(228, 228, 231));
+    }//GEN-LAST:event_jPasswordField2MouseClicked
+
+    private void jTxtRespuestaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTxtRespuestaFocusGained
+        if (jTxtRespuesta.getText().equalsIgnoreCase("Conteste a la pregunta elegida")) {
+            jTxtRespuesta.setText("");
+        }
+        JtErrorPregunta.setVisible(false);
+        jSRespuesta.setForeground(new Color(105, 108, 90));
+        jSRespuesta.setBackground(new Color(105, 108, 90));
+    }//GEN-LAST:event_jTxtRespuestaFocusGained
+
+    private void jTxtRespuestaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTxtRespuestaFocusLost
+        if (jTxtRespuesta.getText().isEmpty() || jTxtRespuesta.getText().equalsIgnoreCase("Conteste a la pregunta elegida")) {
+            jTxtRespuesta.setText("Conteste a la pregunta elegida");
+        }
+        jSRespuesta.setForeground(new Color(46, 78, 88));
+        jSRespuesta.setBackground(new Color(46, 78, 88));
+    }//GEN-LAST:event_jTxtRespuestaFocusLost
+
+    private void jTxtRespuestaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTxtRespuestaMouseClicked
+        if (jTxtRespuesta.getText().equalsIgnoreCase("Conteste a la pregunta elegida")) {
+            jTxtRespuesta.setText("");
+        }
+//        jSRespuesta.setForeground(new Color(228, 228, 231));
+//        jSRespuesta.setBackground(new Color(228, 228, 231));
+    }//GEN-LAST:event_jTxtRespuestaMouseClicked
+
+    private void jTxtUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTxtUsuarioFocusGained
+        if (jTxtUsuario.getText().equalsIgnoreCase("Ingrese un Usuario")) {
+            jTxtUsuario.setText("");
+        }
+        JtErrorPregunta.setVisible(false);
+        jSUsuario.setForeground(new Color(105, 108, 90));
+        jSUsuario.setBackground(new Color(105, 108, 90));
+    }//GEN-LAST:event_jTxtUsuarioFocusGained
+
+    private void jTxtUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTxtUsuarioFocusLost
+        if (jTxtUsuario.getText().isEmpty() || jTxtUsuario.getText().equalsIgnoreCase("Ingrese un Usuario")) {
+            jTxtUsuario.setText("Ingrese un Usuario");
+        }
+        jSUsuario.setForeground(new Color(46, 78, 88));
+        jSUsuario.setBackground(new Color(46, 78, 88));
+    }//GEN-LAST:event_jTxtUsuarioFocusLost
+
+    private void jTxtUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTxtUsuarioMouseClicked
+        if (jTxtUsuario.getText().equalsIgnoreCase("Ingrese un Usuario")) {
+            jTxtUsuario.setText("");
+        }
+
+    }//GEN-LAST:event_jTxtUsuarioMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        loginData = new LoginData();
+        Login usuario = loginData.buscarLoginPorUsuario(jTxtUsuario.getText());
+        if (pregunta) {
+            loginData = new LoginData();
+            
+            try {
+                //                usuario = loginData.buscarLoginPorUsuario(jTxtUsuario.getText());
+
+                if (jComboBox1.getItemAt(jComboBox1.getSelectedIndex()).equals(usuario.getPregunta()) && jTxtRespuesta.getText().equals(usuario.getRespueta())) {
+                    pregunta = false;
+                    passwoe.setVisible(true);
+                    passwoe1.setVisible(true);
+                    jPasswordField1.setVisible(true);
+                    jPasswordField2.setVisible(true);
+                    jSeparator1.setVisible(true);
+                    jSeparator2.setVisible(true);
+                    jTxtUsuario.setVisible(false);
+                    jComboBox1.setVisible(false);
+                    jTxtRespuesta.setVisible(false);
+                    jSUsuario.setVisible(false);
+                    jSRespuesta.setVisible(pregunta);
+                    jButton1.setText("crear");
+                }else{
+                    JtErrorPregunta.setText("La pregunta o la respuesta no coiciden");
+                    JtErrorPregunta.setForeground(Color.red);
+                    JtErrorPregunta.setVisible(true);
+                    jSRespuesta.setBackground(Color.red);
+                    jSRespuesta.setForeground(Color.red);
+                    jSUsuario.setBackground(Color.red);
+                    jSUsuario.setForeground(Color.red);
+                }
+                
+            } catch (NullPointerException e) {
+                //                jLerror.setForeground(Color.red);
+                //                jLerror.setText("*Usuario y/o contraseña incorrecto");
+                //                jLerror.setVisible(true);
+                //                jSeparator1.setForeground(Color.red);
+                //                jSeparator1.setBackground(Color.red);
+                //                jSeparator2.setForeground(Color.red);
+                //                jSeparator2.setBackground(Color.red);
+
+            } finally {
+                panelRound1.requestFocus();
+            }
+        } else {
+            if (String.valueOf(jPasswordField1.getPassword()).equalsIgnoreCase(String.valueOf(jPasswordField2.getPassword()))) {
+                lectorData = new LectorData();
+                lector = lectorData.buscarLector(usuario.getLector().getNroSocio());
+                usuario.setLector(lector);
+                usuario.setPregunta(usuario.getPregunta());
+                usuario.setRespueta(usuario.getRespueta());
+                usuario.setIdLogin(usuario.getIdLogin());
+                usuario.setUsuario(usuario.getUsuario());
+                usuario.setContrasenia(String.valueOf(jPasswordField1.getPassword()));
+                loginData.modificarLogin(usuario);
+            } else {
+                passwoe1.setText("Las contraseñas no coiciden");
+                passwoe1.setForeground(Color.red);
+                jSeparator1.setForeground(Color.RED);
+                jSeparator1.setBackground(Color.RED);
+                jSeparator2.setForeground(Color.RED);
+                jSeparator2.setBackground(Color.RED);
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 //
 //    /**
 //     * @param args the command line arguments
@@ -75,6 +509,38 @@ public class VistaRecuperarContraseña extends javax.swing.JFrame {
 //        });
 //    }
 
+    public List<String> preguntas() {
+        List<String> prefuntas = new ArrayList<>();
+        
+        prefuntas.add("¿Como se llamaba tu primer pareja?");
+        prefuntas.add("¿Como se llamaba tu primer mascota?");
+        prefuntas.add("¿Cual es tu lugar favorito?");
+        prefuntas.add("¿Cual es tu juego favorito?");
+        
+        return prefuntas;
+    }
+    
+    public void cargarCombo() {
+        DefaultComboBoxModel<String> mdlCombo = new DefaultComboBoxModel(preguntas().toArray());
+        jComboBox1.setModel(mdlCombo);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel JtErrorPregunta;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField jPasswordField2;
+    private javax.swing.JSeparator jSRespuesta;
+    private javax.swing.JSeparator jSUsuario;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JTextField jTxtRespuesta;
+    private javax.swing.JTextField jTxtUsuario;
+    private biblioteca.Vista.PanelRound panelRound1;
+    private javax.swing.JLabel passwoe;
+    private javax.swing.JLabel passwoe1;
     // End of variables declaration//GEN-END:variables
 }
