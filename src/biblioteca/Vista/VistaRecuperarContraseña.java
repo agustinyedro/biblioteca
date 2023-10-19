@@ -430,7 +430,8 @@ public class VistaRecuperarContraseña extends javax.swing.JFrame {
                     jSUsuario.setVisible(false);
                     jSRespuesta.setVisible(pregunta);
                     jButton1.setText("crear");
-                }else{
+                }
+                else{
                     JtErrorPregunta.setText("La pregunta o la respuesta no coiciden");
                     JtErrorPregunta.setForeground(Color.red);
                     JtErrorPregunta.setVisible(true);
@@ -440,7 +441,8 @@ public class VistaRecuperarContraseña extends javax.swing.JFrame {
                     jSUsuario.setForeground(Color.red);
                 }
                 
-            } catch (NullPointerException e) {
+            } 
+            catch (NullPointerException e) {
                 //                jLerror.setForeground(Color.red);
                 //                jLerror.setText("*Usuario y/o contraseña incorrecto");
                 //                jLerror.setVisible(true);
@@ -449,10 +451,12 @@ public class VistaRecuperarContraseña extends javax.swing.JFrame {
                 //                jSeparator2.setForeground(Color.red);
                 //                jSeparator2.setBackground(Color.red);
 
-            } finally {
+            } 
+            finally {
                 panelRound1.requestFocus();
             }
-        } else {
+        } 
+        else {
             if (String.valueOf(jPasswordField1.getPassword()).equalsIgnoreCase(String.valueOf(jPasswordField2.getPassword()))) {
                 lectorData = new LectorData();
                 lector = lectorData.buscarLector(usuario.getLector().getNroSocio());
@@ -463,7 +467,11 @@ public class VistaRecuperarContraseña extends javax.swing.JFrame {
                 usuario.setUsuario(usuario.getUsuario());
                 usuario.setContrasenia(String.valueOf(jPasswordField1.getPassword()));
                 loginData.modificarLogin(usuario);
-            } else {
+                this.setVisible(false);
+                VistaLogin s = new VistaLogin();
+                s.setVisible(true);
+            }
+            else {
                 passwoe1.setText("Las contraseñas no coiciden");
                 passwoe1.setForeground(Color.red);
                 jSeparator1.setForeground(Color.RED);

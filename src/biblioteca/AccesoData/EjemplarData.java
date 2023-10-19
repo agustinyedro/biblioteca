@@ -1,7 +1,6 @@
 package biblioteca.AccesoData;
 
-import biblioteca75.Ejemplar;
-import biblioteca75.Libro;
+import biblioteca75.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,11 +19,33 @@ public class EjemplarData {
         this.connection = Conexion.getConexion();
 
     }
+    
+    private boolean existeEjemplar(Ejemplar ejemplar) throws SQLException {
+
+        String sql = "SELECT COUNT(*) FROM ejemplar WHERE codigo = ? AND idLibro = ? AND cantidadDeEjemplares = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, ejemplar.getCodigo());
+            ps.setInt(2, ejemplar.getLibro().getIdLibro());
+            ps.setInt(3, ejemplar.getCantidadDeEjemplares());
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int count = rs.getInt(1);
+                    return count > 0;
+                }
+            }
+        }
+        return false;
+    }
 
     public void guardarEjemplar(Ejemplar ejemplar) {
 
         String sql = "INSERT INTO ejemplar (IdLibro, estado, cantidadDeEjemplares ) VALUES (?, ?, ?)";
         try {
+            
+            if(existeEjemplar(ejemplar)){
+                JOptionPane.showMessageDialog(null, "Este ejemplar ya existe.");
+                return;
+            }
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             ps.setInt(1, ejemplar.getLibro().getIdLibro());
