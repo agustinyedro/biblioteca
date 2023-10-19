@@ -6,6 +6,7 @@ package biblioteca75;
 public class Lector {
     private int nroSocio;
     private String nombre;
+    private String apellido;
     private String domicilio;
     private String mail;
     private boolean estado;
@@ -14,22 +15,34 @@ public class Lector {
     public Lector() {
     }
 
-    public Lector(int nroSocio, String nombre, String domicilio, String mail, boolean estado, int telefono) {
+    public Lector(int nroSocio, String nombre, String apellido, String domicilio, String mail, boolean estado, int telefono) {
         this.nroSocio = nroSocio;
         this.nombre = nombre;
+        this.apellido = apellido;
         this.domicilio = domicilio;
         this.mail = mail;
         this.estado = estado;
-        this.telefono= telefono;
+        this.telefono = telefono;
     }
 
-    public Lector(String nombre, String domicilio, String mail, boolean estado, int telefono) {
+    public Lector(String nombre, String apellido, String domicilio, String mail, boolean estado, int telefono) {
         this.nombre = nombre;
+        this.apellido = apellido;
         this.domicilio = domicilio;
         this.mail = mail;
         this.estado = estado;
-        this.telefono= telefono;
+        this.telefono = telefono;
     }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+   
 
     public int getTelefono() {
         return telefono;
@@ -83,8 +96,9 @@ public class Lector {
 
     @Override
     public String toString() {
-        return "Lector{" + "nroSocio=" + nroSocio + ", nombre=" + nombre + ", domicilio=" + domicilio + ", mail=" + mail + ", estado=" + estado + ", telefono=" + telefono + '}';
+        return "Lector{" + "nroSocio=" + nroSocio + ", nombre=" + nombre + ", apellido=" + apellido + ", domicilio=" + domicilio + ", mail=" + mail + ", estado=" + estado + ", telefono=" + telefono + '}';
     }
+
     
     public void activarLector(){
         estado=true;

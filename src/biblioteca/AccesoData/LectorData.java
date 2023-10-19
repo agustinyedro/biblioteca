@@ -22,15 +22,16 @@ public class LectorData {
 
     public void guardarLector(Lector lector) {
 
-        String sql = "INSERT INTO lector ( nombre, domicilio, mail, estado, telefono ) VALUES (?, ?, ?, ?,?)";
+        String sql = "INSERT INTO lector ( nombre, apellido, domicilio, mail, estado, telefono ) VALUES (?, ?, ?, ?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, lector.getNombre());
-            ps.setString(2, lector.getDomicilio());
-            ps.setString(3, lector.getMail());
-            ps.setBoolean(4, lector.isEstado());
-            ps.setInt(5, lector.getTelefono());
+            ps.setString(2, lector.getApellido());
+            ps.setString(3, lector.getDomicilio());
+            ps.setString(4, lector.getMail());
+            ps.setBoolean(5, lector.isEstado());
+            ps.setInt(6, lector.getTelefono());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
 
@@ -48,17 +49,18 @@ public class LectorData {
     }
 
     public void modificarLector(Lector lector) {
-        String sql = "UPDATE lector SET  nombre = ?, domicilio =?, mail=?, estado=?, telefono=? WHERE nrSocio= ? ";
+        String sql = "UPDATE lector SET  nombre = ?, apellido=?, domicilio =?, mail=?, estado=?, telefono=? WHERE nrSocio= ? ";
         PreparedStatement ps = null;
 
         try {
             ps = connection.prepareStatement(sql);
             ps.setString(1, lector.getNombre());
-            ps.setString(2, lector.getDomicilio());
-            ps.setString(3, lector.getMail());
-            ps.setBoolean(4, true);
-            ps.setInt(5, lector.getTelefono());
-            ps.setInt(6, lector.getNroSocio());
+            ps.setString(2, lector.getApellido());
+            ps.setString(3, lector.getDomicilio());
+            ps.setString(4, lector.getMail());
+            ps.setBoolean(5, true);
+            ps.setInt(6, lector.getTelefono());
+            ps.setInt(7, lector.getNroSocio());
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
@@ -103,11 +105,12 @@ public class LectorData {
             while (rs.next()) {
                 Lector lector = new Lector();
                 lector.setNroSocio(rs.getInt(1));
-                lector.setEstado( rs.getBoolean(5));
-                lector.setDomicilio( rs.getString(3));
-                lector.setMail(rs.getString(4));
+                lector.setEstado( rs.getBoolean(6));
+                lector.setDomicilio( rs.getString(4));
+                lector.setMail(rs.getString(5));
                 lector.setNombre( rs.getString(2));
-                lector.setTelefono( rs.getInt(6));
+                lector.setApellido(rs.getString(3));
+                lector.setTelefono( rs.getInt(7));
                 lectores.add(lector);
             }
             ps.close();
@@ -121,7 +124,7 @@ public class LectorData {
 
     public Lector buscarLector(int id) {
         Lector lector = null;
-        String sql = "SELECT nrSocio, nombre, domicilio, mail, estado, telefono FROM lector WHERE nrSocio = ? ";
+        String sql = "SELECT nrSocio, nombre, apellido, domicilio, mail, estado, telefono FROM lector WHERE nrSocio = ? ";
         PreparedStatement ps = null;
         try {
             ps = connection.prepareStatement(sql);
@@ -132,6 +135,7 @@ public class LectorData {
                 lector = new Lector();
                 lector.setNroSocio(id);
                 lector.setNombre(rs.getString("nombre"));
+                lector.setApellido(rs.getString("apellido"));
                 lector.setDomicilio(rs.getString("domicilio"));
                 lector.setMail(rs.getString("mail"));
                 lector.setEstado(rs.getBoolean("estado"));
