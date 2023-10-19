@@ -1,4 +1,3 @@
-
 package biblioteca75;
 
 
@@ -84,10 +83,6 @@ public class Login {
     public String toString() {
         return "login{" + "idLogin=" + idLogin + ", usuario=" + usuario + ", contrasenia=" + contrasenia + ", lector=" + lector + ", pregunta=" + pregunta + ", respueta=" + respueta + '}';
     }
-
-   
-    
-    
 
     
 }
