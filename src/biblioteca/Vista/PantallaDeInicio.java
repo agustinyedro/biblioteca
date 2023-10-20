@@ -224,7 +224,7 @@ public class PantallaDeInicio extends javax.swing.JFrame {
                             VistaLogin objeto = new VistaLogin();
 
                             objeto.setVisible(true);
-                            if (isPanelFondo() && !isSincarga()) {
+                            if (isPanelFondo() ) {
                                 panelRound1.setVisible(true);
                             }
 

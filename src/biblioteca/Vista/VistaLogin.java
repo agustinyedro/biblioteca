@@ -265,6 +265,7 @@ public class VistaLogin extends javax.swing.JFrame {
             if (jTxUsuario.getText().equals(usuario.getUsuario()) && String.valueOf(jPasswordField1.getPassword()).equals(usuario.getContrasenia())) {
                 VistaIngreso menu = new VistaIngreso();
                 menu.setVisible(true);
+                menu.setLogin(usuario);
                 this.setVisible(false);
             }
 //            if (jTxtUsuario.getText().isEmpty()) {
