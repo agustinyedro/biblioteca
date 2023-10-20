@@ -55,7 +55,7 @@ public class VistaPerfil extends javax.swing.JInternalFrame {
         jMonthChooser1 = new com.toedter.calendar.JMonthChooser();
         jSpinner1 = new javax.swing.JSpinner();
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(146, 81, 184));
         jPanel1.setForeground(new java.awt.Color(0, 0, 0));
 
         jTcel.addActionListener(new java.awt.event.ActionListener() {
