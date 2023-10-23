@@ -26,7 +26,6 @@ public class VistaIngreso extends javax.swing.JFrame {
 
     private Login login;
     private int tamañoDeEscritorio;
-    
 
     public VistaIngreso() {
         login = new Login();
@@ -96,7 +95,7 @@ public class VistaIngreso extends javax.swing.JFrame {
         MenuAmpliado = new javax.swing.JPanel();
         jLlibrito = new javax.swing.JLabel();
         JPInicio = new javax.swing.JPanel();
-        JLperfil1 = new javax.swing.JLabel();
+        JLInicio = new javax.swing.JLabel();
         JPPerfil = new javax.swing.JPanel();
         JLperfil = new javax.swing.JLabel();
         jPPrestamos = new javax.swing.JPanel();
@@ -123,8 +122,8 @@ public class VistaIngreso extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 204, 204));
         setForeground(new java.awt.Color(255, 204, 255));
-        setMinimumSize(new java.awt.Dimension(1280, 780));
-        setPreferredSize(new java.awt.Dimension(1280, 780));
+        setMinimumSize(new java.awt.Dimension(1290, 760));
+        setPreferredSize(new java.awt.Dimension(1290, 760));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -149,25 +148,32 @@ public class VistaIngreso extends javax.swing.JFrame {
             .addGap(0, 720, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 0, 20, 720));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 0, -1, -1));
 
-        MenuAmpliado.setBackground(new java.awt.Color(146, 81, 184));
+        MenuAmpliado.setBackground(new java.awt.Color(98, 51, 125));
         MenuAmpliado.setMinimumSize(new java.awt.Dimension(290, 720));
         MenuAmpliado.setName(""); // NOI18N
         MenuAmpliado.setVerifyInputWhenFocusTarget(false);
         MenuAmpliado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         MenuAmpliado.add(jLlibrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 60, 60));
 
-        JPInicio.setBackground(new java.awt.Color(146, 81, 184));
+        JPInicio.setBackground(new java.awt.Color(98, 51, 125));
 
-        JLperfil1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        JLperfil1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/menu/casita_blanca.png"))); // NOI18N
-        JLperfil1.setText("Inicio");
-        JLperfil1.setIconTextGap(50);
-        JLperfil1.setName(""); // NOI18N
-        JLperfil1.addMouseListener(new java.awt.event.MouseAdapter() {
+        JLInicio.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        JLInicio.setForeground(new java.awt.Color(255, 255, 255));
+        JLInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/menu/casita_blanca.png"))); // NOI18N
+        JLInicio.setText("Inicio");
+        JLInicio.setIconTextGap(50);
+        JLInicio.setName(""); // NOI18N
+        JLInicio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                JLperfil1MouseClicked(evt);
+                JLInicioMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                JLInicioMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                JLInicioMouseExited(evt);
             }
         });
 
@@ -176,22 +182,24 @@ public class VistaIngreso extends javax.swing.JFrame {
         JPInicioLayout.setHorizontalGroup(
             JPInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPInicioLayout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
-                .addComponent(JLperfil1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(JLInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
         JPInicioLayout.setVerticalGroup(
             JPInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPInicioLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(JLperfil1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JLInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(240, 240, 240))
         );
 
-        MenuAmpliado.add(JPInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 280, 43));
+        MenuAmpliado.add(JPInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 270, 43));
 
-        JPPerfil.setBackground(new java.awt.Color(146, 81, 184));
+        JPPerfil.setBackground(new java.awt.Color(98, 51, 125));
 
         JLperfil.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        JLperfil.setForeground(new java.awt.Color(255, 255, 255));
         JLperfil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/menu/persona_blanco.png"))); // NOI18N
         JLperfil.setText("Perfil");
         JLperfil.setIconTextGap(50);
@@ -200,6 +208,12 @@ public class VistaIngreso extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 JLperfilMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                JLperfilMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                JLperfilMouseExited(evt);
+            }
         });
 
         javax.swing.GroupLayout JPPerfilLayout = new javax.swing.GroupLayout(JPPerfil);
@@ -207,8 +221,9 @@ public class VistaIngreso extends javax.swing.JFrame {
         JPPerfilLayout.setHorizontalGroup(
             JPPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPPerfilLayout.createSequentialGroup()
-                .addGap(0, 8, Short.MAX_VALUE)
-                .addComponent(JLperfil, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(JLperfil, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
         JPPerfilLayout.setVerticalGroup(
             JPPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,23 +232,36 @@ public class VistaIngreso extends javax.swing.JFrame {
                 .addComponent(JLperfil, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        MenuAmpliado.add(JPPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 280, 43));
+        MenuAmpliado.add(JPPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 270, 43));
 
-        jPPrestamos.setBackground(new java.awt.Color(146, 81, 184));
+        jPPrestamos.setBackground(new java.awt.Color(98, 51, 125));
 
         jLprestamos.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jLprestamos.setForeground(new java.awt.Color(255, 255, 255));
         jLprestamos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/menu/prestamo_blanco.png"))); // NOI18N
         jLprestamos.setText("Prestamos");
         jLprestamos.setIconTextGap(50);
         jLprestamos.setName(""); // NOI18N
+        jLprestamos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLprestamosMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLprestamosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLprestamosMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPPrestamosLayout = new javax.swing.GroupLayout(jPPrestamos);
         jPPrestamos.setLayout(jPPrestamosLayout);
         jPPrestamosLayout.setHorizontalGroup(
             jPPrestamosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPrestamosLayout.createSequentialGroup()
-                .addGap(0, 8, Short.MAX_VALUE)
-                .addComponent(jLprestamos, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLprestamos, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
         jPPrestamosLayout.setVerticalGroup(
             jPPrestamosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,23 +270,36 @@ public class VistaIngreso extends javax.swing.JFrame {
                 .addComponent(jLprestamos, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        MenuAmpliado.add(jPPrestamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 280, 43));
+        MenuAmpliado.add(jPPrestamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 270, 43));
 
-        jPLibros.setBackground(new java.awt.Color(146, 81, 184));
+        jPLibros.setBackground(new java.awt.Color(98, 51, 125));
 
         jLibros.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jLibros.setForeground(new java.awt.Color(255, 255, 255));
         jLibros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/menu/librito_blamco.png"))); // NOI18N
         jLibros.setText("Libros");
         jLibros.setAutoscrolls(true);
         jLibros.setIconTextGap(50);
+        jLibros.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLibrosMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLibrosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLibrosMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPLibrosLayout = new javax.swing.GroupLayout(jPLibros);
         jPLibros.setLayout(jPLibrosLayout);
         jPLibrosLayout.setHorizontalGroup(
             jPLibrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPLibrosLayout.createSequentialGroup()
-                .addGap(0, 8, Short.MAX_VALUE)
-                .addComponent(jLibros, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLibros, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
         jPLibrosLayout.setVerticalGroup(
             jPLibrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,11 +308,12 @@ public class VistaIngreso extends javax.swing.JFrame {
                 .addComponent(jLibros, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        MenuAmpliado.add(jPLibros, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 280, 43));
+        MenuAmpliado.add(jPLibros, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 270, 43));
 
-        jPLogout.setBackground(new java.awt.Color(146, 81, 184));
+        jPLogout.setBackground(new java.awt.Color(98, 51, 125));
 
         jLogout.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jLogout.setForeground(new java.awt.Color(255, 255, 255));
         jLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/menu/logout_blanco.png"))); // NOI18N
         jLogout.setText("Logout");
         jLogout.setFocusCycleRoot(true);
@@ -293,8 +335,9 @@ public class VistaIngreso extends javax.swing.JFrame {
         jPLogoutLayout.setHorizontalGroup(
             jPLogoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPLogoutLayout.createSequentialGroup()
-                .addGap(0, 8, Short.MAX_VALUE)
-                .addComponent(jLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
         jPLogoutLayout.setVerticalGroup(
             jPLogoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -303,16 +346,17 @@ public class VistaIngreso extends javax.swing.JFrame {
                 .addComponent(jLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        MenuAmpliado.add(jPLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 280, 43));
+        MenuAmpliado.add(jPLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 270, 43));
 
         jLNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLNombre.setForeground(new java.awt.Color(255, 255, 255));
         jLNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLNombre.setText("jLabel1");
         MenuAmpliado.add(jLNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 70, -1));
 
-        getContentPane().add(MenuAmpliado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 720));
+        getContentPane().add(MenuAmpliado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 720));
 
-        MenuAcotado.setBackground(new java.awt.Color(146, 81, 184));
+        MenuAcotado.setBackground(new java.awt.Color(98, 51, 125));
         MenuAcotado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 MenuAcotadoMouseEntered(evt);
@@ -320,7 +364,7 @@ public class VistaIngreso extends javax.swing.JFrame {
         });
         MenuAcotado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPLibros1.setBackground(new java.awt.Color(146, 81, 184));
+        jPLibros1.setBackground(new java.awt.Color(98, 51, 125));
 
         jLibros1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jLibros1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/menu/librito_blamco.png"))); // NOI18N
@@ -333,17 +377,16 @@ public class VistaIngreso extends javax.swing.JFrame {
             jPLibros1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPLibros1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLibros1, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jLibros1, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE))
         );
         jPLibros1Layout.setVerticalGroup(
             jPLibros1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLibros1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, Short.MAX_VALUE)
         );
 
-        MenuAcotado.add(jPLibros1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 70, 43));
+        MenuAcotado.add(jPLibros1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 60, 43));
 
-        jPPrestamos1.setBackground(new java.awt.Color(146, 81, 184));
+        jPPrestamos1.setBackground(new java.awt.Color(98, 51, 125));
 
         jLprestamos1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jLprestamos1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/menu/prestamo_blanco.png"))); // NOI18N
@@ -356,16 +399,16 @@ public class VistaIngreso extends javax.swing.JFrame {
             jPPrestamos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPrestamos1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLprestamos1, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
+                .addComponent(jLprestamos1, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE))
         );
         jPPrestamos1Layout.setVerticalGroup(
             jPPrestamos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLprestamos1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, Short.MAX_VALUE)
         );
 
-        MenuAcotado.add(jPPrestamos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 70, 43));
+        MenuAcotado.add(jPPrestamos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 60, 43));
 
-        JPInicio1.setBackground(new java.awt.Color(146, 81, 184));
+        JPInicio1.setBackground(new java.awt.Color(98, 51, 125));
 
         JLperfil3.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         JLperfil3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/menu/casita_blanca.png"))); // NOI18N
@@ -378,16 +421,16 @@ public class VistaIngreso extends javax.swing.JFrame {
             JPInicio1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPInicio1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JLperfil3, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
+                .addComponent(JLperfil3, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE))
         );
         JPInicio1Layout.setVerticalGroup(
             JPInicio1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(JLperfil3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, Short.MAX_VALUE)
         );
 
-        MenuAcotado.add(JPInicio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 70, 43));
+        MenuAcotado.add(JPInicio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 60, 43));
 
-        jPLogout1.setBackground(new java.awt.Color(146, 81, 184));
+        jPLogout1.setBackground(new java.awt.Color(98, 51, 125));
 
         jLogout1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jLogout1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/menu/logout_blanco.png"))); // NOI18N
@@ -411,16 +454,16 @@ public class VistaIngreso extends javax.swing.JFrame {
             jPLogout1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPLogout1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLogout1, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE))
+                .addComponent(jLogout1, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE))
         );
         jPLogout1Layout.setVerticalGroup(
             jPLogout1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLogout1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, Short.MAX_VALUE)
         );
 
-        MenuAcotado.add(jPLogout1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 70, 43));
+        MenuAcotado.add(jPLogout1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 480, 60, 43));
 
-        JPPerfil1.setBackground(new java.awt.Color(146, 81, 184));
+        JPPerfil1.setBackground(new java.awt.Color(98, 51, 125));
 
         JLperfil2.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         JLperfil2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/menu/persona_blanco.png"))); // NOI18N
@@ -441,7 +484,7 @@ public class VistaIngreso extends javax.swing.JFrame {
             .addComponent(JLperfil2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        MenuAcotado.add(JPPerfil1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 70, 43));
+        MenuAcotado.add(JPPerfil1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 60, 43));
         MenuAcotado.add(jLlibrito1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 60, 60));
 
         getContentPane().add(MenuAcotado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 65, 720));
@@ -469,10 +512,8 @@ public class VistaIngreso extends javax.swing.JFrame {
         String no = "NO";
         String cancelar = "Cancelar";
         Object[] opciones = {si, no};
-
-        jPLogout.setBackground(new Color(157, 82, 148));
+        darleColorPanel(jPLogout, jPLogout1);
         int confirmacion = JOptionPane.showOptionDialog(this, "¿Cerrar sesión?", "", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, si);
-//                    System.out.println(confirmacion);
         if (confirmacion == 0) {
             this.setVisible(false);
             PantallaDeInicio p = new PantallaDeInicio();
@@ -499,21 +540,18 @@ public class VistaIngreso extends javax.swing.JFrame {
     }//GEN-LAST:event_jLogout1MouseExited
 
     private void MenuAcotadoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuAcotadoMouseEntered
-       
+
         Timer timer = new Timer(280, new ActionListener() { // 1000 ms = 1 segundo
             @Override
             public void actionPerformed(ActionEvent e) {
                 MenuAcotado.setVisible(false);
                 jPanel1.setVisible(true);
                 MenuAmpliado.setVisible(true);
-                escritorio.setLocation(290, 0);
-        escritorio.setSize(990, 720);
             }
         });
         timer.setRepeats(false);
         timer.start();
-       
-        
+
 //        escritorio.removeAll();
 //        escritorio.repaint();
     }//GEN-LAST:event_MenuAcotadoMouseEntered
@@ -521,24 +559,19 @@ public class VistaIngreso extends javax.swing.JFrame {
     private void JLperfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLperfilMouseClicked
         escritorio.removeAll();
         escritorio.repaint();
-//        panelRound1.setVisible(true);
         VistaPerfil materiaView = new VistaPerfil();
-//        Dimension descot = escritorio.getSize();
-//        Dimension Internal = materiaView.getSize();
-//        materiaView.setLocation((descot.width - Internal.width) / 2, (descot.height - Internal.height) / 2);
-//        materiaView.setResizable(true);
+        Dimension descot = escritorio.getSize();
+        materiaView.setSize(descot);
         materiaView.setVisible(true);
-//        BasicInternalFrameUI internalFrameUI = (BasicInternalFrameUI) materiaView.getUI();
-//        internalFrameUI.setNorthPane(null);
-//        materiaView.setBorder(null);
-//        materiaView.setBackground(new Color(0,0,0,0));
-//        escritorio.add(panelRound1);
-achicarMenu();
+        BasicInternalFrameUI internalFrameUI = (BasicInternalFrameUI) materiaView.getUI();
+        internalFrameUI.setNorthPane(null);
+        materiaView.setBorder(null);
+        materiaView.setBackground(new Color(0, 0, 0, 0));
+        achicarMenu();
         escritorio.add(materiaView);
         escritorio.moveToFront(materiaView);
+        darleColorPanel(JPPerfil, JPPerfil1);
 
-        createPanel(JPPerfil, JPPerfil1);
-        
     }//GEN-LAST:event_JLperfilMouseClicked
 
     private void jPanel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseExited
@@ -553,30 +586,104 @@ achicarMenu();
         });
         timer.setRepeats(false);
         timer.start();
-        escritorio.setLocation(80, 0);
-        escritorio.setSize(1200, 720);
-
     }//GEN-LAST:event_jPanel1MouseExited
 
     private void jLogoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLogoutMouseExited
-        jPLogout.setBackground(new Color(146, 81, 184));
+        jPLogout.setBackground(new Color(98,51,125));
     }//GEN-LAST:event_jLogoutMouseExited
 
     private void jLogoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLogoutMouseEntered
         jPLogout.setBackground(new Color(111, 58, 141));
     }//GEN-LAST:event_jLogoutMouseEntered
 
-    private void JLperfil1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLperfil1MouseClicked
-        createPanel(JPInicio, JPInicio1);
-    }//GEN-LAST:event_JLperfil1MouseClicked
+    private void JLInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLInicioMouseClicked
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaInicio materiaView = new VistaInicio();
+        Dimension descot = escritorio.getSize();
+        materiaView.setSize(descot);
+        materiaView.setVisible(true);
+        BasicInternalFrameUI internalFrameUI = (BasicInternalFrameUI) materiaView.getUI();
+        internalFrameUI.setNorthPane(null);
+        materiaView.setBorder(null);
+        materiaView.setBackground(new Color(0, 0, 0, 0));
+        achicarMenu();
+        escritorio.add(materiaView);
+        escritorio.moveToFront(materiaView);
+        darleColorPanel(JPInicio, JPInicio1);
+    }//GEN-LAST:event_JLInicioMouseClicked
+
+    private void jLibrosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLibrosMouseEntered
+        jPLibros.setBackground(new Color(111, 58, 141));
+    }//GEN-LAST:event_jLibrosMouseEntered
+
+    private void jLibrosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLibrosMouseExited
+        jPLibros.setBackground(new Color(98,51,125));
+    }//GEN-LAST:event_jLibrosMouseExited
+
+    private void jLprestamosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLprestamosMouseEntered
+        jPPrestamos.setBackground(new Color(111, 58, 141));
+    }//GEN-LAST:event_jLprestamosMouseEntered
+
+    private void jLprestamosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLprestamosMouseExited
+        jPPrestamos.setBackground(new Color(98,51,125));
+    }//GEN-LAST:event_jLprestamosMouseExited
+
+    private void JLperfilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLperfilMouseEntered
+        JPPerfil.setBackground(new Color(111, 58, 141));
+    }//GEN-LAST:event_JLperfilMouseEntered
+
+    private void JLperfilMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLperfilMouseExited
+        JPPerfil.setBackground(new Color(98,51,125));
+    }//GEN-LAST:event_JLperfilMouseExited
+
+    private void JLInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLInicioMouseEntered
+        JPInicio.setBackground(new Color(111, 58, 141));
+    }//GEN-LAST:event_JLInicioMouseEntered
+
+    private void JLInicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLInicioMouseExited
+        JPInicio.setBackground(new Color(98,51,125));
+    }//GEN-LAST:event_JLInicioMouseExited
+
+    private void jLprestamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLprestamosMouseClicked
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaPrestamo materiaView = new VistaPrestamo();
+        Dimension descot = escritorio.getSize();
+        materiaView.setSize(descot);
+        materiaView.setVisible(true);
+        BasicInternalFrameUI internalFrameUI = (BasicInternalFrameUI) materiaView.getUI();
+        internalFrameUI.setNorthPane(null);
+        materiaView.setBorder(null);
+        materiaView.setBackground(new Color(0, 0, 0, 0));
+        achicarMenu();
+        escritorio.add(materiaView);
+        escritorio.moveToFront(materiaView);
+        darleColorPanel(jPPrestamos, jPPrestamos1);
+    }//GEN-LAST:event_jLprestamosMouseClicked
+
+    private void jLibrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLibrosMouseClicked
+       escritorio.removeAll();
+        escritorio.repaint();
+        VistaLibro materiaView = new VistaLibro();
+        Dimension descot = escritorio.getSize();
+        materiaView.setSize(descot);
+        materiaView.setVisible(true);
+        BasicInternalFrameUI internalFrameUI = (BasicInternalFrameUI) materiaView.getUI();
+        internalFrameUI.setNorthPane(null);
+        materiaView.setBorder(null);
+        materiaView.setBackground(new Color(0, 0, 0, 0));
+        achicarMenu();
+        escritorio.add(materiaView);
+        escritorio.moveToFront(materiaView);
+        darleColorPanel(jPLibros1, jPLibros1);
+    }//GEN-LAST:event_jLibrosMouseClicked
 
     public void achicarMenu() {
         Timer timer = new Timer(280, new ActionListener() { // 1000 ms = 1 segundo
             @Override
             public void actionPerformed(ActionEvent e) {
                 MenuAcotado.setVisible(true);
-                escritorio.setLocation(290, 0);
-                escritorio.setSize(990, 720);
                 jPanel1.setVisible(false);
                 MenuAmpliado.setVisible(false);
             }
@@ -620,10 +727,10 @@ achicarMenu();
 //        });
 //    }
 
-    private void createPanel(JPanel panel, JPanel panel2) {
+    private void darleColorPanel(JPanel panel, JPanel panel2) {
         for (JPanel p : paneles()) {
             if (p != panel && p != panel2) {
-                p.setBackground(new Color(146, 81, 184));
+                p.setBackground(new Color(98,51,125));
             } else {
                 panel.setBackground(new Color(111, 58, 141));
                 panel2.setBackground(new Color(111, 58, 141));
@@ -641,8 +748,8 @@ achicarMenu();
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel JLInicio;
     private javax.swing.JLabel JLperfil;
-    private javax.swing.JLabel JLperfil1;
     private javax.swing.JLabel JLperfil2;
     private javax.swing.JLabel JLperfil3;
     private javax.swing.JPanel JPInicio;
