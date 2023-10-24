@@ -42,10 +42,27 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace pref="30" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jLPersonita" min="-2" pref="48" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel1" min="-2" pref="130" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLNombre" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="-2" pref="502" max="-2" attributes="0"/>
+              </Group>
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLNombre" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLusuario" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jLCumpleanios" min="-2" max="-2" attributes="0"/>
                       <Component id="jLemail" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -53,36 +70,35 @@
                       <Component id="jLgenero" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jTMail" max="32767" attributes="0"/>
-                              <Component id="jTmail" max="32767" attributes="0"/>
-                              <Component id="jTNombre" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jTcel" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="348" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jTapellido" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jCgenero" max="32767" attributes="0"/>
-                          <EmptySpace min="-2" pref="343" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jSpinner1" min="-2" pref="65" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jYearChooser1" min="-2" pref="78" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jMonthChooser1" min="-2" pref="74" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="306" max="-2" attributes="0"/>
+                          <Component id="jTcel" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jTusuario" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jTMail" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jTNombre" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jSDia" min="-2" pref="65" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jMonMes" min="-2" pref="74" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jYAño" min="-2" pref="78" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="30" max="32767" attributes="0"/>
-                  <Component id="jLPersonita" min="-2" pref="48" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" pref="130" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="502" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jBEditar" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="verificacion" min="-2" pref="20" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
           </Group>
         </DimensionLayout>
@@ -94,21 +110,29 @@
                       <Component id="jLPersonita" min="-2" pref="39" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jTapellido" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLusuario" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jTNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="verificacion" alignment="1" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jTMail" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLemail" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jTMail" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLemail" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTmail" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTusuario" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
@@ -119,16 +143,17 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLCumpleanios" min="-2" max="-2" attributes="0"/>
-                      <Component id="jSpinner1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jYearChooser1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jMonthChooser1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jSDia" min="-2" max="-2" attributes="0"/>
+                      <Component id="jMonMes" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jYAño" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLgenero" min="-2" max="-2" attributes="0"/>
-                      <Component id="jCgenero" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="44" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jBEditar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jCgenero" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLgenero" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="49" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -137,8 +162,12 @@
         <Component class="javax.swing.JTextField" name="jTNombre">
         </Component>
         <Component class="javax.swing.JTextField" name="jTMail">
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTMailFocusLost"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTMailActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTmail">
+        <Component class="javax.swing.JTextField" name="jTusuario">
         </Component>
         <Component class="javax.swing.JTextField" name="jTcel">
           <Events>
@@ -167,9 +196,6 @@
               <StringArray count="0"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCgeneroActionPerformed"/>
-          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
@@ -181,6 +207,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Nombre"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLNombreMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLemail">
           <Properties>
@@ -216,11 +245,32 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLPersonita">
         </Component>
-        <Component class="com.toedter.calendar.JYearChooser" name="jYearChooser1">
+        <Component class="com.toedter.calendar.JYearChooser" name="jYA&#xf1;o">
         </Component>
-        <Component class="com.toedter.calendar.JMonthChooser" name="jMonthChooser1">
+        <Component class="com.toedter.calendar.JMonthChooser" name="jMonMes">
         </Component>
-        <Component class="javax.swing.JSpinner" name="jSpinner1">
+        <Component class="javax.swing.JSpinner" name="jSDia">
+        </Component>
+        <Component class="javax.swing.JButton" name="jBEditar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Editar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBEditarMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBEditarActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="verificacion">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel2">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="33" red="33" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Apellido"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTapellido">
         </Component>
       </SubComponents>
     </Container>
