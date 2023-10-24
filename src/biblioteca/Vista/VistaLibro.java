@@ -6,7 +6,9 @@ package biblioteca.Vista;
 
 import biblioteca.AccesoData.LibroData;
 import biblioteca75.Libro;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class VistaLibro extends javax.swing.JInternalFrame {
 
     DefaultTableModel modelo = new DefaultTableModel();
+    LibroData libroData;
     public VistaLibro() {
         initComponents();
         
@@ -59,6 +62,12 @@ public class VistaLibro extends javax.swing.JInternalFrame {
         jTextTitulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextTituloActionPerformed(evt);
+            }
+        });
+
+        jTextAutor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextAutorFocusLost(evt);
             }
         });
 
@@ -174,11 +183,12 @@ public class VistaLibro extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBAgregar)
-                    .addComponent(jBReservar)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabelCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jBAgregar)
+                        .addComponent(jBReservar)
+                        .addComponent(jLabel7)))
                 .addGap(29, 29, 29))
         );
 
@@ -190,6 +200,7 @@ public class VistaLibro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextTituloActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+        libroData = new LibroData();
         String titulo = jTextTitulo.getText();
         String autor = jTextAutor.getText();
         String isbn = jTextIsbn.getText();
@@ -197,7 +208,9 @@ public class VistaLibro extends javax.swing.JInternalFrame {
         String tipo = jTextGenero.getText();
         String editorial = jTextEditorial.getText();
         
-        List<Libro> resultados = LibroData.buscarLibro(titulo, autor, isbn, anio, tipo, editorial);
+        
+        
+        List<Libro> resultados = libroData.buscarLibrosFiltrado(autor,jTextAutor.getText());
         
         
         for (Libro libro : resultados) {
@@ -213,6 +226,43 @@ public class VistaLibro extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
 
+    private void jTextAutorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextAutorFocusLost
+        
+    }//GEN-LAST:event_jTextAutorFocusLost
+
+    public static Set<Libro> buscarLibrosFiltrados(List<Libro> productos, String filtroNombre, double filtroPrecioMin, double filtroPrecioMax, String filtroCategoria, String filtroUbicacion) {
+        Set<Libro> resultados = new HashSet<>(); // Usamos un conjunto en lugar de una lista
+
+        for (Libro producto : productos) {
+            boolean cumpleFiltros = true;
+
+            if (filtroNombre != null && !filtroNombre.isEmpty()) {
+                cumpleFiltros = cumpleFiltros && producto.getNombre().contains(filtroNombre);
+            }
+
+            if (filtroPrecioMin > 0) {
+                cumpleFiltros = cumpleFiltros && producto.getPrecio() >= filtroPrecioMin;
+            }
+
+            if (filtroPrecioMax > 0) {
+                cumpleFiltros = cumpleFiltros && producto.getPrecio() <= filtroPrecioMax;
+            }
+
+            if (filtroCategoria != null && !filtroCategoria.isEmpty()) {
+                cumpleFiltros = cumpleFiltros && producto.getCategoria().equals(filtroCategoria);
+            }
+
+            if (filtroUbicacion != null && !filtroUbicacion.isEmpty()) {
+                cumpleFiltros = cumpleFiltros && producto.getUbicacion().equals(filtroUbicacion);
+            }
+
+            if (cumpleFiltros) {
+                resultados.add(producto);
+            }
+        }
+
+        return resultados;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAgregar;

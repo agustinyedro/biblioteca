@@ -657,6 +657,7 @@ public class VistaIngreso extends javax.swing.JFrame {
         materiaView.setBorder(null);
         materiaView.setBackground(new Color(0, 0, 0, 0));
         achicarMenu();
+        materiaView.setLogin(login);
         escritorio.add(materiaView);
         escritorio.moveToFront(materiaView);
         darleColorPanel(jPPrestamos, jPPrestamos1);

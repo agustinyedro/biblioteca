@@ -8,6 +8,7 @@ package biblioteca.Vista;
 import biblioteca.AccesoData.LoginData;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedLightIJTheme;
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import java.awt.Image;
 import java.awt.Toolkit;
 //import java.awt.Image;
@@ -149,7 +150,7 @@ public class MenuTest extends javax.swing.JFrame {
         FlatSolarizedLightIJTheme.registerCustomDefaultsSource("style");
         FlatSolarizedLightIJTheme.setup();
         
-        
+//        FlatMacDarkLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MenuTest().setVisible(true);
