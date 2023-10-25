@@ -72,19 +72,17 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jTapellido" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jCgenero" max="32767" attributes="0"/>
-                          <Component id="jTcel" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jTusuario" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTMail" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jTNombre" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jSDia" min="-2" pref="65" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jMonMes" min="-2" pref="74" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jYAño" min="-2" pref="78" max="-2" attributes="0"/>
-                          </Group>
+                      <Component id="jCgenero" max="32767" attributes="0"/>
+                      <Component id="jTcel" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jTusuario" alignment="1" max="32767" attributes="0"/>
+                      <Component id="jTMail" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jTNombre" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jSDia" min="-2" pref="65" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jMonMes" min="-2" pref="74" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jYAño" min="-2" pref="78" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
