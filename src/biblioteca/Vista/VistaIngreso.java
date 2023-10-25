@@ -678,6 +678,8 @@ public class VistaIngreso extends javax.swing.JFrame {
         escritorio.add(materiaView);
         escritorio.moveToFront(materiaView);
         darleColorPanel(jPLibros1, jPLibros1);
+        
+        materiaView.setLogin(login);
     }//GEN-LAST:event_jLibrosMouseClicked
 
     public void achicarMenu() {
@@ -743,6 +745,24 @@ public class VistaIngreso extends javax.swing.JFrame {
         return login;
     }
 
+    public void IngresoPrestamo(){
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaPrestamo materiaView = new VistaPrestamo();
+        Dimension descot = escritorio.getSize();
+        materiaView.setSize(descot);
+        materiaView.setVisible(true);
+        BasicInternalFrameUI internalFrameUI = (BasicInternalFrameUI) materiaView.getUI();
+        internalFrameUI.setNorthPane(null);
+        materiaView.setBorder(null);
+        materiaView.setBackground(new Color(0, 0, 0, 0));
+        achicarMenu();
+        materiaView.setLogin(login);
+        escritorio.add(materiaView);
+        escritorio.moveToFront(materiaView);
+        darleColorPanel(jPPrestamos, jPPrestamos1);
+    }
+    
     public void setLogin(Login login) {
         this.login = login;
     }

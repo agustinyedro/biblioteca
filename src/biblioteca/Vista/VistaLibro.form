@@ -68,20 +68,23 @@
               <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
-              <EmptySpace pref="21" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabelCheck" min="-2" pref="19" max="-2" attributes="0"/>
+                      <Component id="verificacion" min="-2" pref="19" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="408" max="-2" attributes="0"/>
                       <Component id="jBReservar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Component id="jBAgregar" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" min="-2" pref="650" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jScrollPane1" max="32767" attributes="0"/>
+                      <EmptySpace min="22" pref="22" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="19" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -117,7 +120,7 @@
               <Component id="jScrollPane1" pref="173" max="32767" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabelCheck" alignment="0" min="-2" pref="19" max="-2" attributes="0"/>
+                  <Component id="verificacion" alignment="0" min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jBAgregar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jBReservar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -196,6 +199,10 @@
               </Table>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTable1FocusGained"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -203,11 +210,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Agregar"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBAgregarMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBReservar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Reservar"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBReservarMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBBuscar">
       <Properties>
@@ -222,7 +235,7 @@
         <Property name="text" type="java.lang.String" value="Disponible:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelCheck">
+    <Component class="javax.swing.JLabel" name="verificacion">
     </Component>
   </SubComponents>
 </Form>

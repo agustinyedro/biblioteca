@@ -4,26 +4,72 @@
  */
 package biblioteca.Vista;
 
+import biblioteca.AccesoData.EjemplarData;
+import biblioteca.AccesoData.LectorData;
 import biblioteca.AccesoData.LibroData;
+import biblioteca.AccesoData.LoginData;
+import biblioteca.AccesoData.PrestamoData;
+import biblioteca75.Ejemplar;
+import biblioteca75.Lector;
 import biblioteca75.Libro;
+import biblioteca75.Login;
+import biblioteca75.Prestamo;
+import java.awt.Image;
+import java.time.LocalDate;
+import java.sql.Date;
+import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author luzel
  */
-public class VistaLibro extends javax.swing.JInternalFrame {
+public final class VistaLibro extends javax.swing.JInternalFrame {
 
-    DefaultTableModel modelo = new DefaultTableModel();
+    Login login = new Login();
+
+    private DefaultTableModel modelo = new DefaultTableModel() {
+        public boolean isCellEditable(int fila, int columna) {
+            for (int i = 0; i < tabla.getColumnCount(); i++) {
+                for (int j = 0; j < tabla.getRowCount(); j++) {
+                    return false;
+                }
+            }
+            return false;
+        }
+    };
+    JTable tabla = new JTable(modelo);
+    JScrollPane scrollPane = new JScrollPane(tabla);
+
     LibroData libroData;
+
     public VistaLibro() {
         initComponents();
-        
+
         cargarTabla();
+        this.add(scrollPane);
+        
+
+    }
+
+    public Login getLogin() {
+        return login;
+    }
+
+    public void setLogin(Login login) {
+        this.login = login;
     }
 
     /**
@@ -51,7 +97,7 @@ public class VistaLibro extends javax.swing.JInternalFrame {
         jBReservar = new javax.swing.JButton();
         jBBuscar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        jLabelCheck = new javax.swing.JLabel();
+        verificacion = new javax.swing.JLabel();
 
         jLabel1.setText("Título:");
 
@@ -88,11 +134,31 @@ public class VistaLibro extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTable1FocusGained(evt);
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jBAgregar.setText("Agregar");
+        jBAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBAgregarMouseClicked(evt);
+            }
+        });
 
         jBReservar.setText("Reservar");
+        jBReservar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBReservarMouseClicked(evt);
+            }
+        });
 
         jBBuscar.setText("Buscar");
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -143,18 +209,20 @@ public class VistaLibro extends javax.swing.JInternalFrame {
                                 .addComponent(jTextEditorial, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(84, 84, 84))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(verificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(408, 408, 408)
                         .addComponent(jBReservar)
                         .addGap(26, 26, 26)
                         .addComponent(jBAgregar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addGap(22, 22, 22)))
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,7 +252,7 @@ public class VistaLibro extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(verificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jBAgregar)
                         .addComponent(jBReservar)
@@ -199,61 +267,44 @@ public class VistaLibro extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextTituloActionPerformed
 
-    private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-        libroData = new LibroData();
-        String titulo = jTextTitulo.getText();
-        String autor = jTextAutor.getText();
-        String isbn = jTextIsbn.getText();
-        String anio = jTextAnio.getText();
-        String tipo = jTextGenero.getText();
-        String editorial = jTextEditorial.getText();
-        
-        
-        
-        List<Libro> resultados = libroData.buscarLibrosFiltrado(autor,jTextAutor.getText());
-        
-        
-        for (Libro libro : resultados) {
-            Object[] fila = {
-                libro.getTitulo(),
-                libro.getAutor(),
-                libro.getIsbn(),
-                libro.getAnio(),
-                libro.getTipo(),
-                libro.getEditorial()
-            };
-            modelo.addRow(fila);
-        }
-    }//GEN-LAST:event_jBBuscarActionPerformed
-
-    private void jTextAutorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextAutorFocusLost
-        
-    }//GEN-LAST:event_jTextAutorFocusLost
-
-    public static Set<Libro> buscarLibrosFiltrados(List<Libro> productos, String filtroNombre, double filtroPrecioMin, double filtroPrecioMax, String filtroCategoria, String filtroUbicacion) {
+    public static Set<Libro> buscarLibrosFiltrados(List<Libro> productos, String filtroTitulo, String filtroAutor, Integer filtroISBN, Integer filtroAnio, String filtroGenero, String filtroEditorial) {
         Set<Libro> resultados = new HashSet<>(); // Usamos un conjunto en lugar de una lista
+
+        filtroTitulo = filtroTitulo.toLowerCase();
+        filtroAutor = filtroAutor.toLowerCase();
+        filtroGenero = filtroGenero.toLowerCase();
+        filtroEditorial = filtroEditorial.toLowerCase();
 
         for (Libro producto : productos) {
             boolean cumpleFiltros = true;
 
-            if (filtroNombre != null && !filtroNombre.isEmpty()) {
-                cumpleFiltros = cumpleFiltros && producto.getNombre().contains(filtroNombre);
+            String titulo = producto.getTitulo().toLowerCase();
+            String autor = producto.getAutor().toLowerCase();
+            String genero = producto.getTipo().toLowerCase();
+            String editorial = producto.getEditorial().toLowerCase();
+
+            if (filtroTitulo != null && !filtroTitulo.isEmpty()) {
+                cumpleFiltros = cumpleFiltros && titulo.contains(filtroTitulo);
             }
 
-            if (filtroPrecioMin > 0) {
-                cumpleFiltros = cumpleFiltros && producto.getPrecio() >= filtroPrecioMin;
+            if (filtroAutor != null && !filtroAutor.isEmpty()) {
+                cumpleFiltros = cumpleFiltros && autor.contains(filtroAutor);
             }
 
-            if (filtroPrecioMax > 0) {
-                cumpleFiltros = cumpleFiltros && producto.getPrecio() <= filtroPrecioMax;
+            if (filtroISBN != null) {
+                cumpleFiltros = cumpleFiltros && producto.getIsbn() == filtroISBN;
             }
 
-            if (filtroCategoria != null && !filtroCategoria.isEmpty()) {
-                cumpleFiltros = cumpleFiltros && producto.getCategoria().equals(filtroCategoria);
+            if (filtroAnio != null) {
+                cumpleFiltros = cumpleFiltros && producto.getAnio() == filtroAnio;
             }
 
-            if (filtroUbicacion != null && !filtroUbicacion.isEmpty()) {
-                cumpleFiltros = cumpleFiltros && producto.getUbicacion().equals(filtroUbicacion);
+            if (filtroGenero != null && !filtroGenero.isEmpty()) {
+                cumpleFiltros = cumpleFiltros && genero.contains(filtroGenero);
+            }
+
+            if (filtroEditorial != null && !filtroEditorial.isEmpty()) {
+                cumpleFiltros = cumpleFiltros && editorial.contains(filtroEditorial);
             }
 
             if (cumpleFiltros) {
@@ -263,6 +314,120 @@ public class VistaLibro extends javax.swing.JInternalFrame {
 
         return resultados;
     }
+
+    private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+        LibroData libro = new LibroData();
+
+        List<Libro> listaDeLibros = libro.listarLibros();
+
+        String titulo = jTextTitulo.getText();
+        String autor = jTextAutor.getText();
+        Integer isbn = null;
+        Integer anio = null;
+        String tipo = jTextGenero.getText();
+        String editorial = jTextEditorial.getText();
+
+        try {
+            if (!jTextIsbn.getText().isEmpty()) {
+                isbn = Integer.valueOf(jTextIsbn.getText());
+            }
+            if (!jTextAnio.getText().isEmpty()) {
+                anio = Integer.parseInt(jTextAnio.getText());
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El ISBN y el año deben ser números válidos.");
+            return;
+        }
+
+        Set<Libro> resultados = buscarLibrosFiltrados(listaDeLibros, titulo, autor, isbn, anio, tipo, editorial);
+
+        borrarFilas();
+        for (Libro libros : resultados) {
+            Object[] fila = {
+                libros.getTitulo(),
+                libros.getAutor(),
+                libros.getIsbn(),
+                libros.getAnio(),
+                libros.getTipo(),
+                libros.getEditorial()
+            };
+            modelo.addRow(fila);
+        }
+
+        jTextAnio.setText("");
+        jTextAutor.setText("");
+        jTextEditorial.setText("");
+        jTextGenero.setText("");
+        jTextIsbn.setText("");
+        jTextTitulo.setText("");
+    }//GEN-LAST:event_jBBuscarActionPerformed
+
+    private void jTextAutorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextAutorFocusLost
+
+    }//GEN-LAST:event_jTextAutorFocusLost
+
+    private void jTable1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTable1FocusGained
+       //  TablaSeleccion();
+
+    }//GEN-LAST:event_jTable1FocusGained
+
+    private void jBReservarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBReservarMouseClicked
+        // VA LO DE PREMIUM
+        Premium();
+    }//GEN-LAST:event_jBReservarMouseClicked
+
+    private void jBAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBAgregarMouseClicked
+        // MISMO METODO QUE AL AGREGAR PRESTAMO
+        Lector lector = new Lector();
+        LoginData loginD = new LoginData();
+        LectorData lectorD = new LectorData();
+        LibroData libro = new LibroData();
+        EjemplarData ejemplar = new EjemplarData();
+        Prestamo prest = new Prestamo();
+        Ejemplar ejem = null;
+        PrestamoData prestamo = new PrestamoData();
+
+        Libro libro1 = libro.buscarLibro(modelo.getValueAt(jTable1.getSelectedRow(), 2).toString());
+
+        for (Ejemplar buscar : ejemplar.listarEjemplar()) {
+            if (buscar.getLibro().getIdLibro() == libro1.getIdLibro() && buscar.getCantidadDeEjemplares() != 0 && buscar.isEstado()) {
+                ejem = new Ejemplar(buscar.getCodigo(), buscar.getLibro(), buscar.getCantidadDeEjemplares(), buscar.isEstado());
+
+            }
+        }
+
+        if (ejem != null) {
+            prest.setFechaInicio(Date.valueOf(LocalDate.now()));
+            LocalDate fechaactual = LocalDate.now();
+            prest.setFechaFin(Date.valueOf(fechaactual.plusDays(7)));
+            prest.setEjemplar(ejem);
+
+            prest.setLector(login.getLector());
+            prest.setEstado(true);
+
+            prestamo.guardarPrestamo(prest);
+
+            if (prestamo.B == 0) {
+                VistaIngreso p = new VistaIngreso();
+                p.IngresoPrestamo();
+                p.setLogin(login);
+                p.setVisible(true);
+                this.setVisible(false);
+
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay ejemplares disponibles.");
+            Premium();
+        }
+
+
+    }//GEN-LAST:event_jBAgregarMouseClicked
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+         TablaSeleccion();
+    }//GEN-LAST:event_jTable1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAgregar;
@@ -275,7 +440,6 @@ public class VistaLibro extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabelCheck;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextAnio;
@@ -284,18 +448,20 @@ public class VistaLibro extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextGenero;
     private javax.swing.JTextField jTextIsbn;
     private javax.swing.JTextField jTextTitulo;
+    private javax.swing.JLabel verificacion;
     // End of variables declaration//GEN-END:variables
 
-
     public void cargarTabla() {
-        
+
         jTable1.setModel(modelo);
+
         modelo.addColumn("Título");
         modelo.addColumn("Autor");
+        modelo.addColumn("ISBN");
         modelo.addColumn("Año");
         modelo.addColumn("Género");
         modelo.addColumn("Editorial");
-        
+
     }
 
     private void borrarFilas() {
@@ -303,5 +469,66 @@ public class VistaLibro extends javax.swing.JInternalFrame {
         for (; f >= 0; f--) {
             modelo.removeRow(f);
         }
+    }
+
+    public void Premium() {
+        int respuesta = JOptionPane.showOptionDialog(this, "Para reservar este libro, debe suscribirse al plan Premium.",
+                "Suscripción Premium Requerida",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                new String[]{"Suscribir", "Cancelar"},
+                "Suscribir");
+        if (respuesta == JOptionPane.YES_OPTION) {
+
+            JOptionPane.showMessageDialog(this, "Gracias por suscribirte al plan Premium.", "¡Felicidades!", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Has cancelado la suscripción.", "Cancelado", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    // LLAMO A UNA LISTA QUE SOLO ME MUESTRA LOS LIBROS QUE ESTAN DISPONIBLES (LIBRODATA LINEA 125)
+    public void TablaSeleccion() {
+        // Agregar un ListSelectionListener para manejar la selección de filas
+
+        
+        
+        jTable1.getSelectionModel().addListSelectionListener((ListSelectionEvent e) -> {
+            // if (!e.getValueIsAdjusting()) { // Evita eventos duplicados
+            EjemplarData ejemplar = new EjemplarData();
+            Ejemplar ejem = null;
+            int selectedRow = jTable1.getSelectedRow();
+            if (selectedRow != -1) { // -1 significa que no hay filas seleccionadas
+                // Realiza la acción que desees con la fila seleccionada
+                int isbn = (int) modelo.getValueAt(selectedRow, 3);
+                Libro libro = new LibroData().buscarLibro(String.valueOf(isbn));
+                for (Ejemplar buscar : ejemplar.listarEjemplar()) {
+                    if (buscar.getLibro().getIdLibro() == libro.getIdLibro()) {
+                        ejem = new Ejemplar(buscar.getCodigo(), buscar.getLibro(), buscar.getCantidadDeEjemplares(), buscar.isEstado());
+                    }
+                }
+                if (ejem != null) {
+                if (ejem.isEstado()){
+                    SetImageLabel(verificacion, "src/iconos/correcto.png");
+                    System.out.println("Correcto");
+                }
+                } else {
+                    SetImageLabel(verificacion, "src/iconos/incorrecto.png");
+                    System.out.println("Funcionaaaaaaa");
+                            
+                }
+            } 
+            //}
+        });
+
+        this.setVisible(true);
+    }
+
+    private void SetImageLabel(JLabel labelName, String root) {
+        ImageIcon image = new ImageIcon(root);
+        Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(), labelName.getHeight(), Image.SCALE_DEFAULT));
+        labelName.setIcon(icon);
+        this.repaint();
     }
 }

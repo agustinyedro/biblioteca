@@ -16,7 +16,8 @@ public class PrestamoData {
     private LectorData lectorData;
     private EjemplarData ejemplarData;
     private Prestamo prestamo;
-
+    public int B=0;
+    
     public PrestamoData() {
         connection = Conexion.getConexion();
         ejemplarData = new EjemplarData();
@@ -46,6 +47,7 @@ public class PrestamoData {
         try {
 
             if (existePrestamo(prestamo)) {
+                B = 1;
                 JOptionPane.showMessageDialog(null, "El préstamo ya existe.");
                 return;
             }

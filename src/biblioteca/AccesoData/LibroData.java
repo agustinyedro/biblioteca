@@ -1,3 +1,4 @@
+
 package biblioteca.AccesoData;
 
 import biblioteca75.*;
@@ -125,7 +126,7 @@ public class LibroData {
 
         List<Libro> libros = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM libro WHERE estado = 1 ";
+            String sql = "SELECT * FROM libro ";
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

@@ -46,6 +46,7 @@ public class PantallaDeInicio extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         panelRound1.setVisible(false);
         jPanel2.setVisible(false);
+        
 
     }
 
@@ -77,6 +78,7 @@ public class PantallaDeInicio extends javax.swing.JFrame {
         barra = new javax.swing.JProgressBar();
         panelRound1 = new biblioteca.Vista.PanelRound();
         jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -114,15 +116,35 @@ public class PantallaDeInicio extends javax.swing.JFrame {
 
         getContentPane().add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 127, 375, 400));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel2.setText("X");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLabel2MouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1280, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(1252, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(14, 14, 14))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel2)
+                .addContainerGap(664, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
@@ -157,6 +179,22 @@ public class PantallaDeInicio extends javax.swing.JFrame {
         }
        
     }//GEN-LAST:event_formWindowActivated
+
+    private void jLabel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseEntered
+        jLabel2.setForeground(new Color (153,153,153));
+        jLabel2.setOpaque(false);
+        jLabel2.repaint();
+    }//GEN-LAST:event_jLabel2MouseEntered
+
+    private void jLabel2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseExited
+        jLabel2.setForeground(new Color(221,221,221));
+        jLabel2.setOpaque(false);
+        jLabel2.repaint();
+    }//GEN-LAST:event_jLabel2MouseExited
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -255,6 +293,7 @@ public class PantallaDeInicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JProgressBar barra;
     private javax.swing.JLabel fondo;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private biblioteca.Vista.PanelRound panelRound1;
     private javax.swing.JLabel text;
