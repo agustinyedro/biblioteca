@@ -59,7 +59,7 @@ public class LectorData {
             ps.setString(3, lector.getDomicilio());
             ps.setString(4, lector.getMail());
             ps.setBoolean(5, lector.isEstado());
-            ps.setInt(6, lector.getTelefono());
+            ps.setLong(6, lector.getTelefono());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
 
@@ -87,7 +87,7 @@ public class LectorData {
             ps.setString(3, lector.getDomicilio());
             ps.setString(4, lector.getMail());
             ps.setBoolean(5, true);
-            ps.setInt(6, lector.getTelefono());
+            ps.setLong(6, lector.getTelefono());
             ps.setInt(7, lector.getNroSocio());
             int exito = ps.executeUpdate();
 
@@ -136,7 +136,7 @@ public class LectorData {
                 lector.setMail(rs.getString(5));
                 lector.setNombre(rs.getString(2));
                 lector.setApellido(rs.getString(3));
-                lector.setTelefono(rs.getInt(7));
+                lector.setTelefono(rs.getLong(7));
                 lectores.add(lector);
             }
             ps.close();
@@ -164,7 +164,7 @@ public class LectorData {
                 lector.setDomicilio(rs.getString("domicilio"));
                 lector.setMail(rs.getString("mail"));
                 lector.setEstado(rs.getBoolean("estado"));
-                lector.setTelefono(rs.getInt("telefono"));
+                lector.setTelefono(rs.getLong("telefono"));
 
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el lector");

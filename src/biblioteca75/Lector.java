@@ -10,12 +10,12 @@ public class Lector {
     private String domicilio;
     private String mail;
     private boolean estado;
-    private int telefono;
+    private long telefono;
 
     public Lector() {
     }
 
-    public Lector(int nroSocio, String nombre, String apellido, String domicilio, String mail, boolean estado, int telefono) {
+    public Lector(int nroSocio, String nombre, String apellido, String domicilio, String mail, boolean estado, long telefono) {
         this.nroSocio = nroSocio;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -25,7 +25,7 @@ public class Lector {
         this.telefono = telefono;
     }
 
-    public Lector(String nombre, String apellido, String domicilio, String mail, boolean estado, int telefono) {
+    public Lector(String nombre, String apellido, String domicilio, String mail, boolean estado, long telefono) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.domicilio = domicilio;
@@ -44,11 +44,11 @@ public class Lector {
 
    
 
-    public int getTelefono() {
+    public long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(long telefono) {
         this.telefono = telefono;
     }
     

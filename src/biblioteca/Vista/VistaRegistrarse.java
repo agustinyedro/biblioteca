@@ -23,6 +23,7 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import java.lang.Integer;
+import java.math.BigInteger;
 import javax.swing.JOptionPane;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -445,7 +446,8 @@ public class VistaRegistrarse extends javax.swing.JFrame {
             String domicilio = jTextDomicilio.getText();
             String mail = jTextMail.getText();
             boolean estado = true;
-            int telefono = Integer.parseInt(jTextTelefono.getText());
+            long telefono = Long.parseLong(jTextTelefono.getText());
+           
 
             Lector lector = new Lector(nombre, apellido, domicilio, mail, estado, telefono);
             System.out.println(lector);
