@@ -12,6 +12,7 @@ import com.formdev.flatlaf.*;
 import java.awt.Image;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.Month;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -25,6 +26,7 @@ import javax.swing.text.TabableView;
 public class VistaPrestamo extends javax.swing.JInternalFrame {
 
     DefaultTableModel modelo = new DefaultTableModel();
+    DefaultTableModel modelo2 = new DefaultTableModel();
     Login login = new Login();
 
     public VistaPrestamo() {
@@ -32,8 +34,9 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
 //        setSize(1100,720);
         Tabla.requestFocus();
         cargarTabla();
-        cargarTabla2();
         cargarComboBox();
+        IdPrestamo.setVisible(false);
+        jBNuevoPrestamo.setEnabled(false);
 
     }
 
@@ -52,12 +55,14 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         JPMostrar = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        jBNuevoPrestamo = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         scroll2 = new javax.swing.JScrollPane();
         Tabla2 = new javax.swing.JTable();
         jTBuscarLibro = new javax.swing.JTextField();
+        jSDia = new javax.swing.JSpinner();
+        jMonMes = new com.toedter.calendar.JMonthChooser();
+        jYAño = new com.toedter.calendar.JYearChooser();
         jPModificar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -69,9 +74,9 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         IdPrestamo = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        jTEstado = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        jTNrSocio = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         JPDevolver = new javax.swing.JPanel();
@@ -184,31 +189,29 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
 
         getContentPane().add(JpanelTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 720));
 
+        jTabbedPane2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTabbedPane2FocusGained(evt);
+            }
+        });
+
         JPMostrar.setBackground(new java.awt.Color(193, 120, 196));
         JPMostrar.setPreferredSize(new java.awt.Dimension(375, 637));
-        JPMostrar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Datos del prestamo");
-        JPMostrar.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 370, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("A continuacion podras Modificar los Datos");
-        JPMostrar.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 374, -1));
+        jLabel10.setText("A continuacion podras cargar un nuevo prestamo");
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel12.setText("Libro");
-        JPMostrar.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
-
-        jButton3.setText("ENVIAR");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jBNuevoPrestamo.setText("ENVIAR");
+        jBNuevoPrestamo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jBNuevoPrestamoActionPerformed(evt);
             }
         });
-        JPMostrar.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 620, 280, 35));
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 
@@ -227,8 +230,6 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
 
         jPanel1.add(scroll2, java.awt.BorderLayout.CENTER);
 
-        JPMostrar.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 201, 274, 397));
-
         jTBuscarLibro.setBackground(new java.awt.Color(255, 255, 255));
         jTBuscarLibro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTBuscarLibro.setText("Buscar...");
@@ -245,9 +246,53 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                 jTBuscarLibroKeyReleased(evt);
             }
         });
-        JPMostrar.add(jTBuscarLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 270, 30));
+
+        javax.swing.GroupLayout JPMostrarLayout = new javax.swing.GroupLayout(JPMostrar);
+        JPMostrar.setLayout(JPMostrarLayout);
+        JPMostrarLayout.setHorizontalGroup(
+            JPMostrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPMostrarLayout.createSequentialGroup()
+                .addGroup(JPMostrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(JPMostrarLayout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(JPMostrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBNuevoPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(JPMostrarLayout.createSequentialGroup()
+                                .addComponent(jSDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jMonMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jYAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTBuscarLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(1, 1, 1))
+        );
+        JPMostrarLayout.setVerticalGroup(
+            JPMostrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPMostrarLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel9)
+                .addGap(8, 8, 8)
+                .addComponent(jLabel10)
+                .addGap(30, 30, 30)
+                .addGroup(JPMostrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(JPMostrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jMonMes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jYAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addComponent(jTBuscarLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addComponent(jBNuevoPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         jTabbedPane2.addTab("Nuevo Prestamo", JPMostrar);
+        JPMostrar.getAccessibleContext().setAccessibleName("Nuevo Prestamo");
+        JPMostrar.getAccessibleContext().setAccessibleDescription("");
 
         jPModificar.setBackground(new java.awt.Color(193, 120, 196));
         jPModificar.setMinimumSize(new java.awt.Dimension(375, 615));
@@ -284,11 +329,13 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
 
         jTextField3.setEnabled(false);
 
-        jTextField5.setEnabled(false);
+        jTEstado.setEditable(false);
+        jTEstado.setEnabled(false);
 
         jTextField6.setEnabled(false);
 
-        jTextField7.setEnabled(false);
+        jTNrSocio.setEditable(false);
+        jTNrSocio.setEnabled(false);
 
         jButton2.setText("ENVIAR");
 
@@ -313,8 +360,8 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                     .addComponent(jLabel8)
                     .addComponent(jTextField6)
                     .addComponent(jTextField3)
-                    .addComponent(jTextField7)
-                    .addComponent(jTextField5)
+                    .addComponent(jTNrSocio)
+                    .addComponent(jTEstado)
                     .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
@@ -344,17 +391,19 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTNrSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
         );
 
         jTabbedPane2.addTab("Editar", jPModificar);
+        jPModificar.getAccessibleContext().setAccessibleName("Editar");
+        jPModificar.getAccessibleContext().setAccessibleDescription("");
 
         JPDevolver.setBackground(new java.awt.Color(193, 120, 196));
         JPDevolver.setPreferredSize(new java.awt.Dimension(375, 637));
@@ -458,6 +507,7 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         jTabbedPane2.addTab("Devolver", JPDevolver);
 
         getContentPane().add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, -1, 720));
+        jTabbedPane2.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -531,9 +581,9 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                     || String.valueOf(prod.getIsbn()).startsWith(jTBuscarLibro.getText())
                     || prod.getTipo().startsWith(jTBuscarLibro.getText())) {
                 if (prod.isEstado()) {
-                    modelo.addRow(new Object[]{prod.getTitulo(), prod.getAutor(), new ImageIcon("src/iconos/correcto.png")});
+                    modelo2.addRow(new Object[]{prod.getTitulo(), prod.getAutor(), new ImageIcon("src/iconos/correcto.png")});
                 } else {
-                    modelo.addRow(new Object[]{prod.getTitulo(), prod.getAutor(), new ImageIcon("src/iconos/incorrecto.png")});
+                    modelo2.addRow(new Object[]{prod.getTitulo(), prod.getAutor(), new ImageIcon("src/iconos/incorrecto.png")});
                 }
 
             }
@@ -541,20 +591,61 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jTBuscarLibroKeyReleased
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        Prestamo presta = new Prestamo();
-        Ejemplar ejemplar = new Ejemplar();
-        Libro libro = new Libro();
-        presta.setFechaInicio(Date.valueOf(LocalDate.now()));
-        presta.setFechaFin(null);
-        presta.setLector(login.getLector());
-        for (Ejemplar object : new EjemplarData().listarEjemplar()) {
-            
+    private void fechaActual() {
+        jSDia.setValue(LocalDate.now().getDayOfMonth());
+        jMonMes.setMonth(LocalDate.now().getMonthValue());
+        jYAño.setYear(LocalDate.now().getYear());
+    }
+
+    private void jBNuevoPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoPrestamoActionPerformed
+        if (Tabla2.isRowSelected(Tabla2.getSelectedRow())) {
+            jBNuevoPrestamo.setEnabled(true);
+            Prestamo presta = new Prestamo();
+            Ejemplar ejemplar = null;
+            Libro libro = new LibroData().buscarLibro(modelo2.getValueAt(Tabla2.getSelectedRow(), 0).toString());
+            LocalDate fecha = LocalDate.of(jYAño.getYear(), jMonMes.getMonth(), Integer.parseInt(jSDia.getValue().toString()));
+            presta.setFechaInicio(Date.valueOf(fecha));
+            presta.setFechaFin(null);
+            presta.setLector(login.getLector());
+            for (Ejemplar object : new EjemplarData().listarEjemplar()) {
+                if (object.getLibro().getIdLibro() == libro.getIdLibro() && object.getCantidadDeEjemplares() != 0 && object.isEstado()) {
+                    ejemplar = object;
+                }
+            }
+            if (ejemplar != null) {
+                presta.setEjemplar(ejemplar);
+            }
+            presta.setEstado(true);
+            new PrestamoData().guardarPrestamo(presta);
+            JOptionPane.showMessageDialog(null, "Recuerda que la fecha de devolucion es " + Date.valueOf(LocalDate.now().plusDays(7)));
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar un libro con ejemplares disponibles");
         }
-        presta.setEjemplar(ejemplar);
-        presta.setEstado(true);
-        new PrestamoData().guardarPrestamo(presta);
-    }//GEN-LAST:event_jButton3ActionPerformed
+
+    }//GEN-LAST:event_jBNuevoPrestamoActionPerformed
+
+    private void jTabbedPane2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPane2FocusGained
+        Prestamo prestamo =  new Prestamo();
+        if (jTabbedPane2.getTabComponentAt(jTabbedPane2.getSelectedIndex()).getName().equals("Nuevo Prestamo")) {
+            cargarTabla2();
+            fechaActual();
+        } else if (jTabbedPane2.getTabComponentAt(jTabbedPane2.getSelectedIndex()).getName().equals("Editar")) {
+            if (Tabla2.isRowSelected(Tabla2.getSelectedRow())) {
+                prestamo = new PrestamoData().buscarPrestamo(Integer.parseInt(modelo.getValueAt(Tabla.getSelectedRow(), 0).toString()));
+                IdPrestamo.setText(modelo.getValueAt(Tabla.getSelectedRow(), 0).toString());
+                IdPrestamo.setVisible(true);
+                
+                jTNrSocio.setText(String.valueOf(login.getLector().getNroSocio()));
+                String estado;
+                if(prestamo.isEstado()){
+                    estado ="Prestado";
+                }else{
+                    estado= "Devueto";
+                }
+                jTEstado.setText(estado);
+            }
+        }
+    }//GEN-LAST:event_jTabbedPane2FocusGained
 
     public void cargarComboBox() {
         LibroData libroData = new LibroData();
@@ -595,9 +686,9 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
     public void cargarTabla2() {
 
         Tabla2.setModel(modelo);
-        modelo.addColumn("Titulo");
-        modelo.addColumn("Autor");
-        modelo.addColumn("Disponibilidad");
+        modelo2.addColumn("Titulo");
+        modelo2.addColumn("Autor");
+        modelo2.addColumn("Disponibilidad");
 
         Tabla2
                 .setDefaultRenderer(Object.class,
@@ -642,13 +733,12 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
     private javax.swing.JTable Tabla;
     private javax.swing.JTable Tabla2;
     private javax.swing.JButton jBFiltrar;
+    private javax.swing.JButton jBNuevoPrestamo;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<Libro> jComboBox1;
     private javax.swing.JComboBox<Libro> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -666,10 +756,14 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private com.toedter.calendar.JMonthChooser jMonMes;
     private javax.swing.JPanel jPModificar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JSpinner jSDia;
     private javax.swing.JTextField jTBuscarLibro;
+    private javax.swing.JTextField jTEstado;
+    private javax.swing.JTextField jTNrSocio;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField11;
@@ -677,9 +771,8 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private com.toedter.calendar.JYearChooser jYAño;
     private javax.swing.JScrollPane scroll;
     private javax.swing.JScrollPane scroll2;
     // End of variables declaration//GEN-END:variables
