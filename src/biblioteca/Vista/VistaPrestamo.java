@@ -9,8 +9,13 @@ import biblioteca75.Login;
 import biblioteca75.Prestamo;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.*;
+import java.awt.Image;
+import java.sql.Date;
+import java.time.LocalDate;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -27,6 +32,7 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
 //        setSize(1100,720);
         Tabla.requestFocus();
         cargarTabla();
+        cargarTabla2();
         cargarComboBox();
 
     }
@@ -46,22 +52,12 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         JPMostrar = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        IdPrestamo = new javax.swing.JLabel();
-        jTEstadoM = new javax.swing.JTextField();
-        jTNSocioM = new javax.swing.JTextField();
-        jSDiaDevM = new javax.swing.JSpinner();
-        jMonMesDevM = new com.toedter.calendar.JMonthChooser();
-        jYAñoDevM = new com.toedter.calendar.JYearChooser();
-        jYAñoPresM = new com.toedter.calendar.JYearChooser();
-        jSDiaPresM = new javax.swing.JSpinner();
-        jMonPresM = new com.toedter.calendar.JMonthChooser();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jButton3 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        scroll2 = new javax.swing.JScrollPane();
+        Tabla2 = new javax.swing.JTable();
+        jTBuscarLibro = new javax.swing.JTextField();
         jPModificar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -71,7 +67,7 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        JlIDPrestamo = new javax.swing.JLabel();
+        IdPrestamo = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
@@ -202,47 +198,54 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         jLabel10.setText("A continuacion podras Modificar los Datos");
         JPMostrar.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 374, -1));
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel11.setText("ID Prestamo: ");
-        JPMostrar.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 111, -1, -1));
-
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel12.setText("Libro");
-        JPMostrar.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 156, -1, -1));
+        JPMostrar.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel13.setText("Fecha Prestamo");
-        JPMostrar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 243, -1, -1));
+        jButton3.setText("ENVIAR");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        JPMostrar.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 620, 280, 35));
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel14.setText("Fecha Devolucion");
-        JPMostrar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 330, -1, -1));
+        jPanel1.setLayout(new java.awt.BorderLayout());
 
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel15.setText("Nr Socio");
-        JPMostrar.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 417, -1, -1));
+        Tabla2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        scroll2.setViewportView(Tabla2);
 
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel16.setText("Estado");
-        JPMostrar.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 504, -1, -1));
+        jPanel1.add(scroll2, java.awt.BorderLayout.CENTER);
 
-        IdPrestamo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        IdPrestamo.setText("ID Prestamo: ");
-        JPMostrar.add(IdPrestamo, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 111, -1, -1));
+        JPMostrar.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 201, 274, 397));
 
-        jTEstadoM.setEnabled(false);
-        JPMostrar.add(jTEstadoM, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 547, 289, -1));
-
-        jTNSocioM.setEnabled(false);
-        JPMostrar.add(jTNSocioM, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 460, 289, -1));
-        JPMostrar.add(jSDiaDevM, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 380, -1, -1));
-        JPMostrar.add(jMonMesDevM, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, -1, -1));
-        JPMostrar.add(jYAñoDevM, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, -1, -1));
-        JPMostrar.add(jYAñoPresM, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, -1, -1));
-        JPMostrar.add(jSDiaPresM, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 290, -1, -1));
-        JPMostrar.add(jMonPresM, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, -1, -1));
-
-        JPMostrar.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 290, -1));
+        jTBuscarLibro.setBackground(new java.awt.Color(255, 255, 255));
+        jTBuscarLibro.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTBuscarLibro.setText("Buscar...");
+        jTBuscarLibro.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTBuscarLibroFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTBuscarLibroFocusLost(evt);
+            }
+        });
+        jTBuscarLibro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTBuscarLibroKeyReleased(evt);
+            }
+        });
+        JPMostrar.add(jTBuscarLibro, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 270, 30));
 
         jTabbedPane2.addTab("Nuevo Prestamo", JPMostrar);
 
@@ -276,8 +279,8 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel8.setText("Estado");
 
-        JlIDPrestamo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        JlIDPrestamo.setText("ID Prestamo: ");
+        IdPrestamo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        IdPrestamo.setText("ID Prestamo: ");
 
         jTextField3.setEnabled(false);
 
@@ -301,7 +304,7 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                     .addGroup(jPModificarLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
-                        .addComponent(JlIDPrestamo)
+                        .addComponent(IdPrestamo)
                         .addGap(10, 10, 10))
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
@@ -325,7 +328,7 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                 .addGap(31, 31, 31)
                 .addGroup(jPModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(JlIDPrestamo))
+                    .addComponent(IdPrestamo))
                 .addGap(20, 20, 20)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
@@ -505,15 +508,60 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField1FocusLost
 
     private void TablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablaMouseClicked
-         IdPrestamo.setText(modelo.getValueAt(Tabla.getSelectedRow(),0).toString());
+        IdPrestamo.setText(modelo.getValueAt(Tabla.getSelectedRow(), 0).toString());
     }//GEN-LAST:event_TablaMouseClicked
 
-    public void cargarComboBox(){
+    private void jTBuscarLibroFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTBuscarLibroFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTBuscarLibroFocusGained
+
+    private void jTBuscarLibroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTBuscarLibroFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTBuscarLibroFocusLost
+
+    private void jTBuscarLibroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTBuscarLibroKeyReleased
+        borrarFilas();
+        for (Libro prod : new LibroData().listarLibros()) {
+//            Ejemplar ejemplar = ejemplarData.buscarEjemplar(prod.getEjemplar().getCodigo());
+//            Libro libro = libroData.buscarLibro(String.valueOf(ejemplar.getCodigo()));
+            if (prod.getTitulo().startsWith(jTBuscarLibro.getText())
+                    || prod.getAutor().startsWith(jTBuscarLibro.getText())
+                    || String.valueOf(prod.getAnio()).startsWith(jTBuscarLibro.getText())
+                    || prod.getEditorial().startsWith(jTBuscarLibro.getText())
+                    || String.valueOf(prod.getIsbn()).startsWith(jTBuscarLibro.getText())
+                    || prod.getTipo().startsWith(jTBuscarLibro.getText())) {
+                if (prod.isEstado()) {
+                    modelo.addRow(new Object[]{prod.getTitulo(), prod.getAutor(), new ImageIcon("src/iconos/correcto.png")});
+                } else {
+                    modelo.addRow(new Object[]{prod.getTitulo(), prod.getAutor(), new ImageIcon("src/iconos/incorrecto.png")});
+                }
+
+            }
+
+        }
+    }//GEN-LAST:event_jTBuscarLibroKeyReleased
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Prestamo presta = new Prestamo();
+        Ejemplar ejemplar = new Ejemplar();
+        Libro libro = new Libro();
+        presta.setFechaInicio(Date.valueOf(LocalDate.now()));
+        presta.setFechaFin(null);
+        presta.setLector(login.getLector());
+        for (Ejemplar object : new EjemplarData().listarEjemplar()) {
+            
+        }
+        presta.setEjemplar(ejemplar);
+        presta.setEstado(true);
+        new PrestamoData().guardarPrestamo(presta);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    public void cargarComboBox() {
         LibroData libroData = new LibroData();
         DefaultComboBoxModel<Libro> mdlCombo = new DefaultComboBoxModel(libroData.listarLibros().toArray());
         jComboBox1.setModel(mdlCombo);
     }
-    
+
     public void cargarTabla() {
 
         Tabla.setModel(modelo);
@@ -522,7 +570,9 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         modelo.addColumn("Fecha de Prestamo");
         modelo.addColumn("Fecha de Devolucion");
 
-        Tabla.setDefaultRenderer(Object.class, new TableGradientCell());
+        Tabla
+                .setDefaultRenderer(Object.class,
+                        new TableGradientCell());
         jPModificar.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:30");
         JpanelTabla.putClientProperty(FlatClientProperties.STYLE, ""
@@ -542,6 +592,32 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
 
     }
 
+    public void cargarTabla2() {
+
+        Tabla2.setModel(modelo);
+        modelo.addColumn("Titulo");
+        modelo.addColumn("Autor");
+        modelo.addColumn("Disponibilidad");
+
+        Tabla2
+                .setDefaultRenderer(Object.class,
+                        new TableGradientCell());
+
+        jPanel1.putClientProperty(FlatClientProperties.STYLE, ""
+                + "border:1,1,1,1,$TableHeader.bottomSeparatorColor,,10");
+        Tabla2.getTableHeader().putClientProperty(FlatClientProperties.STYLE, ""
+                + "hoverBackground:null;"
+                + "pressedBackground:null;"
+                + "separatorColor:$TableHeader.background");
+//        Tabla.putClientProperty(FlatClientProperties.STYLE, ""
+//                + "foreground:#141026");
+        scroll2.putClientProperty(FlatClientProperties.STYLE, ""
+                + "border:3,0,3,0,$Table.background,10,10");
+        scroll2.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE, ""
+                + "hoverTrackColor:null");
+
+    }
+
     private void borrarFilas() {
         int f = Tabla.getRowCount() - 1;
         for (; f >= 0; f--) {
@@ -549,28 +625,30 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         }
     }
 
+    private void SetImageLabel(JLabel labelName, String root) {
+        ImageIcon image = new ImageIcon(root);
+        Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(), labelName.getHeight(), Image.SCALE_DEFAULT));
+        labelName.setIcon(icon);
+        this.repaint();
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel IdPrestamo;
     private javax.swing.JPanel JPDevolver;
     private javax.swing.JPanel JPMostrar;
-    private javax.swing.JLabel JlIDPrestamo;
     private javax.swing.JLabel JlIDPrestamo2;
     private javax.swing.JPanel JpanelTabla;
     private javax.swing.JTable Tabla;
+    private javax.swing.JTable Tabla2;
     private javax.swing.JButton jBFiltrar;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<Libro> jComboBox1;
-    private javax.swing.JComboBox<Libro> jComboBox2;
     private javax.swing.JComboBox<Libro> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -588,14 +666,10 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private com.toedter.calendar.JMonthChooser jMonMesDevM;
-    private com.toedter.calendar.JMonthChooser jMonPresM;
     private javax.swing.JPanel jPModificar;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JSpinner jSDiaDevM;
-    private javax.swing.JSpinner jSDiaPresM;
-    private javax.swing.JTextField jTEstadoM;
-    private javax.swing.JTextField jTNSocioM;
+    private javax.swing.JTextField jTBuscarLibro;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField11;
@@ -606,8 +680,7 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private com.toedter.calendar.JYearChooser jYAñoDevM;
-    private com.toedter.calendar.JYearChooser jYAñoPresM;
     private javax.swing.JScrollPane scroll;
+    private javax.swing.JScrollPane scroll2;
     // End of variables declaration//GEN-END:variables
 }
