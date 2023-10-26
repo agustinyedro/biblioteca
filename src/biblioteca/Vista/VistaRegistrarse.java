@@ -41,6 +41,7 @@ public class VistaRegistrarse extends javax.swing.JFrame {
         setSize(580, 395);
         setLocationRelativeTo(null);
         jPanel2.requestFocusInWindow();
+        
 
     }
 
@@ -301,6 +302,7 @@ public class VistaRegistrarse extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextContraActionPerformed
 
     private void jTextUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextUsuarioFocusLost
+        ValidacionDeUsuario();
         if (jTextUsuario.getText().isEmpty() || jTextUsuario.getText().equalsIgnoreCase("usuario")) {
             jTextUsuario.setText("Usuario");
         }
@@ -334,6 +336,12 @@ public class VistaRegistrarse extends javax.swing.JFrame {
         if (jTextContra2.getText().isEmpty() || jTextContra2.getText().equalsIgnoreCase("repetir contraseña")) {
             jTextContra2.setText("Repetir Contraseña");
         }
+        String contra1 = jTextContra.getText();
+        String contra2 = jTextContra2.getText();
+        boolean sonIguales = contra1.equals(contra2);
+        if (! sonIguales){
+            JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
+        }
     }//GEN-LAST:event_jTextContra2FocusLost
 
     private void jComboBoxPregMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxPregMouseClicked
@@ -359,6 +367,7 @@ public class VistaRegistrarse extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextNombreFocusGained
 
     private void jTextNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextNombreFocusLost
+        ValidacionDeNombre();
         if (jTextNombre.getText().isEmpty() || jTextNombre.getText().equalsIgnoreCase("nombre")) {
             jTextNombre.setText("Nombre");
         }
@@ -371,6 +380,7 @@ public class VistaRegistrarse extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextApellidoFocusGained
 
     private void jTextApellidoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextApellidoFocusLost
+        ValidacionDeApellido();
         if (jTextApellido.getText().isEmpty() || jTextApellido.getText().equalsIgnoreCase("apellido")) {
             jTextApellido.setText("Apellido");
         }
@@ -389,9 +399,9 @@ public class VistaRegistrarse extends javax.swing.JFrame {
         String email = jTextMail.getText();
         if (validarEmail(email)) {
             SetImageLabel(verificacion, "src/iconos/correcto.png");
-            
+
         } else {
-            
+
             SetImageLabel(verificacion, "src/iconos/incorrecto.png");
         }
         this.setVisible(true);
@@ -404,6 +414,7 @@ public class VistaRegistrarse extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextTelefonoFocusGained
 
     private void jTextTelefonoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextTelefonoFocusLost
+        ValidacionDeTelefono();
         if (jTextTelefono.getText().isEmpty() || jTextTelefono.getText().equalsIgnoreCase("teléfono")) {
             jTextTelefono.setText("Teléfono");
         }
@@ -422,81 +433,62 @@ public class VistaRegistrarse extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextDomicilioFocusLost
 
     private void jButtonRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarseActionPerformed
-        LectorData lectorData = new LectorData();
+        
+        if (jTextApellido.getText().isEmpty() || jTextContra.getText().isEmpty() || jTextContra2.getText().isEmpty()
+                || jTextDomicilio.getText().isEmpty() || jTextMail.getText().isEmpty() || jTextNombre.getText().isEmpty()
+                || jTextRespuesta.getText().isEmpty() || jTextTelefono.getText().isEmpty() || jTextUsuario.getText().isEmpty()) {
 
-        LoginData loginData = new LoginData();
+            JOptionPane.showMessageDialog(null, "Complete todos los campos.");
+            return;
+        } else {
+            String nombre = jTextNombre.getText();
+            String apellido = jTextApellido.getText();
+            String domicilio = jTextDomicilio.getText();
+            String mail = jTextMail.getText();
+            boolean estado = true;
+            int telefono = Integer.parseInt(jTextTelefono.getText());
 
-        String nombre = jTextNombre.getText();
-        String apellido = jTextApellido.getText();
-        String mail = jTextMail.getText();
-        int telefono = Integer.parseInt(jTextTelefono.getText());
-        String domicilio = jTextDomicilio.getText();
-        lectorData.listarLectores().forEach(lect -> {
-            if (lect.getNombre().equals(jTextNombre.getText()) && lect.getApellido().equals(jTextApellido.getText()) && lect.getTelefono() == (Integer.parseInt(jTextTelefono.getText()))) {
-                JOptionPane.showMessageDialog(null, "El lector ya está registrado.");
-                jTextNombre.setText("");
-                jTextApellido.setText("");
-                jTextMail.setText("");
-                jTextTelefono.setText("");
-                jTextDomicilio.setText("");
-            } else {
-                JOptionPane.showMessageDialog(null, "Lector registrado con éxito.");
-                Lector lector = new Lector(nombre, apellido, domicilio, mail, true, telefono);
-                lectorData.guardarLector(lector);
+            Lector lector = new Lector(nombre, apellido, domicilio, mail, estado, telefono);
 
+            LectorData lectorData = new LectorData();
+            lectorData.guardarLector(lector);
+
+            if (lector.getNroSocio() != 0) {
                 String usuario = jTextUsuario.getText();
                 String contrasenia = jTextContra.getText();
                 String pregunta = jComboBoxPreg.getSelectedItem().toString();
                 String respuesta = jTextRespuesta.getText();
 
                 Login login = new Login(usuario, contrasenia, lector, pregunta, respuesta);
-
+                LoginData loginData = new LoginData();
                 loginData.guardarLogin(login);
 
-                this.setVisible(false);
-                VistaLogin s = new VistaLogin();
-                s.setVisible(true);
+                jTextNombre.setText("");
+                jTextApellido.setText("");
+                jTextDomicilio.setText("");
+                jTextMail.setText("");
+                estado = false;
+                jTextTelefono.setText("");
 
             }
-        });
+        }
+
+        // Valores: nombre, apellido, domicilio, mail, estado, telefono
 
     }//GEN-LAST:event_jButtonRegistrarseActionPerformed
 
+    private boolean estadoLector;
+    public void actualizarEstadoLector(boolean nuevoEstado) {
+        estadoLector = nuevoEstado;
+    }
+    
     private void SetImageLabel(JLabel labelName, String root) {
         ImageIcon image = new ImageIcon(root);
         Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(), labelName.getHeight(), Image.SCALE_DEFAULT));
         labelName.setIcon(icon);
         this.repaint();
     }
-    
-    /*
-    import java.util.Scanner;
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Introduce un correo electrónico:");
-        String email = scanner.nextLine();
-
-        if (validateEmail(email)) {
-            System.out.println("El correo electrónico es válido.");
-        } else {
-            System.out.println("El correo electrónico no es válido.");
-        }
-
-        scanner.close();
-    }
-
-    public static boolean validateEmail(String email) {
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
-                            "[a-zA-Z0-9_+&*-]+)*@" +
-                            "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
-                            "A-Z]{2,7}$";
-                            
-        return email.matches(emailRegex);
-    }
-}
-     */
     public void cargarCombo() {
         DefaultComboBoxModel<String> mdlCombo = new DefaultComboBoxModel(preguntas().toArray());
         jComboBoxPreg.setModel(mdlCombo);
@@ -512,6 +504,7 @@ public class Main {
 
         return preguntas;
     }
+
     public static boolean validarEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."
                 + "[a-zA-Z0-9_+&*-]+)*@"
@@ -523,6 +516,119 @@ public class Main {
             return false;
         }
         return pat.matcher(email).matches();
+    }
+
+    public void ValidacionDeNombre() {
+
+        try {
+            validarNombre(jTextNombre.getText());
+            System.out.println("El nombre es válido: " + jTextNombre.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        }
+    }
+
+    public void validarNombre(String nombre) throws NumberFormatException {
+        // Verificar que el apellido no esté vacío
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new NumberFormatException("El nombre no puede estar vacío.");
+        }
+
+        // Verificar que el apellido contenga solo letras, espacios y apóstrofes
+        if (!nombre.matches("^[a-zA-Z\\s']+")) {
+            throw new NumberFormatException("El nombre contiene caracteres no permitidos.");
+        }
+
+        // Verificar que la longitud del apellido sea razonable (por ejemplo, entre 2 y 50 caracteres)
+        if (nombre.length() < 2 || nombre.length() > 50) {
+            throw new NumberFormatException("La longitud del nombre no es válida.");
+        }
+    }
+
+    public void ValidacionDeApellido() {
+
+        try {
+            validarNombre(jTextApellido.getText());
+            System.out.println("El apellido es válido: " + jTextApellido.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        }
+    }
+
+    public void validarApellido(String apellido) throws NumberFormatException {
+        // Verificar que el apellido no esté vacío
+        if (apellido == null || apellido.trim().isEmpty()) {
+            throw new NumberFormatException("El apellido no puede estar vacío.");
+        }
+
+        // Verificar que el apellido contenga solo letras, espacios y apóstrofes
+        if (!apellido.matches("^[a-zA-Z\\s']+")) {
+            throw new NumberFormatException("El apellido contiene caracteres no permitidos.");
+        }
+
+        // Verificar que la longitud del apellido sea razonable (por ejemplo, entre 2 y 50 caracteres)
+        if (apellido.length() < 2 || apellido.length() > 50) {
+            throw new NumberFormatException("La longitud del apellido no es válida.");
+        }
+    }
+
+    public void ValidacionDeTelefono() {
+
+        if (validarNumeroTelefono(jTextTelefono.getText())) {
+            System.out.println("El número de telefono es válido:" + jTextTelefono.getText());
+        } else {
+            JOptionPane.showMessageDialog(null, "Número de teléfono inválido: " + jTextTelefono.getText());
+
+        }
+
+    }
+
+    private static final String patron = "^01[0-9]{8}$";
+    private static final Pattern pattern = Pattern.compile(patron);
+
+    public static boolean validarNumeroTelefono(String numeroTelefono) {
+
+        if (numeroTelefono.isEmpty()) {
+            return false;
+        }
+        
+        Matcher matcher = pattern.matcher(numeroTelefono);
+        return matcher.matches();
+    }
+
+    public void ValidacionDeUsuario() {
+
+        try {
+            validarNombreUsuario(jTextUsuario.getText());
+        } catch (NombreUsuarioInvalidoException e) {
+
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+
+        }
+    }
+
+    public void validarNombreUsuario(String apellidoUsuario) throws NombreUsuarioInvalidoException {
+
+        if (apellidoUsuario == null || apellidoUsuario.trim().isEmpty()) {
+            throw new NombreUsuarioInvalidoException("El apellido de usuario no puede estar vacío.");
+        }
+
+        Pattern patron = Pattern.compile("^[a-zA-Z0-9_]+$");
+        Matcher matcher = patron.matcher(apellidoUsuario);
+        if (!apellidoUsuario.matches("^[a-zA-Z\\s']+")) {
+            throw new NombreUsuarioInvalidoException("El apellido contiene caracteres no permitidos.");
+        }
+
+        if (apellidoUsuario.length() < 4 || apellidoUsuario.length() > 20) {
+            throw new NombreUsuarioInvalidoException("La longitud del apellido de usuario no es válida.");
+        }
+    }
+
+    class NombreUsuarioInvalidoException extends Exception {
+
+        public NombreUsuarioInvalidoException(String mensaje) {
+            super(mensaje);
+        }
     }
 
 //    /**
@@ -589,5 +695,4 @@ public class Main {
     private javax.swing.JLabel verificacion;
     // End of variables declaration//GEN-END:variables
 
-    
 }

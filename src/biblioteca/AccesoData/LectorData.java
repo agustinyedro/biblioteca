@@ -20,6 +20,7 @@ public class LectorData {
 
     }
 
+    
     private boolean
             existeLector(Lector lector) throws SQLException {
 
@@ -30,7 +31,7 @@ public class LectorData {
             ps.setString(3, lector.getApellido());
             ps.setString(4, lector.getDomicilio());
             ps.setString(1, lector.getMail());
-            ps.setInt(3, lector.getTelefono());
+            ps.setLong(3, lector.getTelefono());
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     int count = rs.getInt(1);
@@ -40,17 +41,20 @@ public class LectorData {
         }
         return false;
     }
+
     
+
     public void guardarLector(Lector lector) {
 
         String sql = "INSERT INTO lector ( nombre, apellido, domicilio, mail, estado, telefono ) VALUES (?, ?, ?, ?,?)";
         try {
-            
+
             if (existeLector(lector)) {
                 JOptionPane.showMessageDialog(null, "El lector ya existe.");
                 return;
             }
-            
+            lector.setEstado(true);
+
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, lector.getNombre());
@@ -58,7 +62,7 @@ public class LectorData {
             ps.setString(3, lector.getDomicilio());
             ps.setString(4, lector.getMail());
             ps.setBoolean(5, lector.isEstado());
-            ps.setInt(6, lector.getTelefono());
+            ps.setLong(6, lector.getTelefono());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
 
@@ -86,7 +90,7 @@ public class LectorData {
             ps.setString(3, lector.getDomicilio());
             ps.setString(4, lector.getMail());
             ps.setBoolean(5, true);
-            ps.setInt(6, lector.getTelefono());
+            ps.setLong(6, lector.getTelefono());
             ps.setInt(7, lector.getNroSocio());
             int exito = ps.executeUpdate();
 
@@ -96,8 +100,7 @@ public class LectorData {
                 JOptionPane.showMessageDialog(null, "El lector no existe");
             }
 
-        } 
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla lector " + ex.getMessage());
         }
 
@@ -116,8 +119,7 @@ public class LectorData {
                 JOptionPane.showMessageDialog(null, " El Lector ha sido eliminado.");
             }
             ps.close();
-        } 
-        catch (SQLException e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Lector.");
         }
     }
@@ -132,18 +134,17 @@ public class LectorData {
             while (rs.next()) {
                 Lector lector = new Lector();
                 lector.setNroSocio(rs.getInt(1));
-                lector.setEstado( rs.getBoolean(6));
-                lector.setDomicilio( rs.getString(4));
+                lector.setEstado(rs.getBoolean(6));
+                lector.setDomicilio(rs.getString(4));
                 lector.setMail(rs.getString(5));
-                lector.setNombre( rs.getString(2));
+                lector.setNombre(rs.getString(2));
                 lector.setApellido(rs.getString(3));
-                lector.setTelefono( rs.getInt(7));
+                lector.setTelefono(rs.getInt(7));
                 lectores.add(lector);
             }
             ps.close();
 
-        } 
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Lectores " + ex.getMessage());
         }
         return lectores;
@@ -168,14 +169,12 @@ public class LectorData {
                 lector.setEstado(rs.getBoolean("estado"));
                 lector.setTelefono(rs.getInt("telefono"));
 
-            } 
-            else {
+            } else {
                 JOptionPane.showMessageDialog(null, "No existe el lector");
 
             }
             ps.close();
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Lector " + ex.getMessage());
 
         }
@@ -191,5 +190,4 @@ public class LectorData {
 ////        System.out.println(lectorData.buscarLector(31));
 ////        System.out.println(lectorData.listarLectores());
 //    }
-
 }

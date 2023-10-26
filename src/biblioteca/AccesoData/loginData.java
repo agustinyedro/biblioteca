@@ -12,41 +12,15 @@ public class LoginData {
     private Lector lector;
 
     public LoginData() {
-        connection = Conexion.getConexion();
+       connection = Conexion.getConexion();
         this.lector = new Lector();
         this.lectorData = new LectorData();
-    }
-
-    private boolean existeLogin(Login login) throws SQLException {
-
-        String sql = "SELECT COUNT(*) FROM lector WHERE idLogin = ? AND usuario = ? AND contraseña = ? AND pregunta = ? AND respuesta = ? ";
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setInt(1, login.getIdLogin());
-            ps.setString(2, login.getUsuario());
-            ps.setString(3, login.getContrasenia());
-            ps.setString(4, login.getPregunta());
-            ps.setString(1, login.getRespueta());
-
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    int count = rs.getInt(1);
-                    return count > 0;
-                }
-            }
-        }
-        return false;
     }
 
     public void guardarLogin(Login login) {
 
         String sql = "INSERT INTO login ( usuario, contraseña, idLector, pregunta, respuesta) VALUES (?, ?, ?, ?, ?)";
         try {
-
-            if (existeLogin(login)) {
-                JOptionPane.showMessageDialog(null, "El usuario ya existe.");
-                return;
-            }
-
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, login.getUsuario());
             ps.setString(2, login.getContrasenia());
@@ -139,7 +113,7 @@ public class LoginData {
 
         return login;
     }
-
+    
     public static void main(String[] args) {
         LoginData loginData = new LoginData();
 //        loginData.guardarLogin(new Login("grupo75", "grupo75", new Lector(1,"Juan", "Salta", "juanvolveporfavor@hotmail.com", true, 987123456), "grupo75", "grupo75"));
