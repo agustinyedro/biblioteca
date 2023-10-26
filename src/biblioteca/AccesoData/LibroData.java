@@ -243,7 +243,7 @@ public class LibroData {
 
         try {
             String filtro = "%" + buscado + "%";
-            String sql = "SELECT * FROM libro WHERE idLibro ? OR isbn LIKE ? OR titulo LIKE ? OR autor LIKE ? OR año LIKE ? OR tipo LIKE ? OR editorial LIKE ?";
+            String sql = "SELECT * FROM libro WHERE filter LIKE buscar";
             ps = connection.prepareStatement(sql);
             for (int i = 1; i <= 6; i++) {
                 ps.setString(i, filtro);

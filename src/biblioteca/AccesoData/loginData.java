@@ -113,12 +113,12 @@ public class LoginData {
 
         return login;
     }
-    
-    public static void main(String[] args) {
-        LoginData loginData = new LoginData();
-//        loginData.guardarLogin(new Login("grupo75", "grupo75", new Lector(1,"Juan", "Salta", "juanvolveporfavor@hotmail.com", true, 987123456), "grupo75", "grupo75"));
-//        loginData.modificarLogin(new Login(3,"grupo75", "grupo75", new Lector(1,"Juan", "Salta", "juanvolveporfavor@hotmail.com", true, 987123456), "grupo75", "grupo74"));
-        System.out.println(loginData.buscarLoginPorUsuario("grupo75"));
-    }
+//    
+//    public static void main(String[] args) {
+//        LoginData loginData = new LoginData();
+////        loginData.guardarLogin(new Login("grupo75", "grupo75", new Lector(1,"Juan", "Salta", "juanvolveporfavor@hotmail.com", true, 987123456), "grupo75", "grupo75"));
+////        loginData.modificarLogin(new Login(3,"grupo75", "grupo75", new Lector(1,"Juan", "Salta", "juanvolveporfavor@hotmail.com", true, 987123456), "grupo75", "grupo74"));
+//        System.out.println(loginData.buscarLoginPorUsuario("grupo75"));
+//    }
 
 }

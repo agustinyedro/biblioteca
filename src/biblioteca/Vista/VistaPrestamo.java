@@ -1,6 +1,7 @@
 package biblioteca.Vista;
 
 import biblioteca.AccesoData.EjemplarData;
+import biblioteca.AccesoData.LectorData;
 import biblioteca.AccesoData.LibroData;
 import biblioteca.AccesoData.PrestamoData;
 import biblioteca75.Ejemplar;
@@ -73,27 +74,28 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         IdPrestamo = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
         jTEstado = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
         jTNrSocio = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
+        jCBoxLibrosEditar = new javax.swing.JComboBox<>();
+        JBEditar = new javax.swing.JButton();
+        jSDia1 = new javax.swing.JSpinner();
+        jMonMes1 = new com.toedter.calendar.JMonthChooser();
+        jYAño1 = new com.toedter.calendar.JYearChooser();
+        jSDia2 = new javax.swing.JSpinner();
+        jMonMes2 = new com.toedter.calendar.JMonthChooser();
+        jYAño2 = new com.toedter.calendar.JYearChooser();
         JPDevolver = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
         JlIDPrestamo2 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        jCBoxPrestamo = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        jSDia3 = new javax.swing.JSpinner();
+        jMonMes3 = new com.toedter.calendar.JMonthChooser();
+        jYAño3 = new com.toedter.calendar.JYearChooser();
 
         setMinimumSize(new java.awt.Dimension(1210, 715));
         setName(""); // NOI18N
@@ -327,17 +329,18 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         IdPrestamo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         IdPrestamo.setText("ID Prestamo: ");
 
-        jTextField3.setEnabled(false);
-
         jTEstado.setEditable(false);
         jTEstado.setEnabled(false);
-
-        jTextField6.setEnabled(false);
 
         jTNrSocio.setEditable(false);
         jTNrSocio.setEnabled(false);
 
-        jButton2.setText("ENVIAR");
+        JBEditar.setText("EDITAR");
+        JBEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBEditarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPModificarLayout = new javax.swing.GroupLayout(jPModificar);
         jPModificar.setLayout(jPModificarLayout);
@@ -347,23 +350,34 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPModificarLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(jPModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPModificarLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
-                        .addComponent(IdPrestamo)
-                        .addGap(10, 10, 10))
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addComponent(jTextField6)
-                    .addComponent(jTextField3)
-                    .addComponent(jTNrSocio)
-                    .addComponent(jTEstado)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jSDia2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jMonMes2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jYAño2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPModificarLayout.createSequentialGroup()
+                        .addComponent(jSDia1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jMonMes1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jYAño1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPModificarLayout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                            .addComponent(IdPrestamo)
+                            .addGap(10, 10, 10))
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel7)
+                        .addComponent(jLabel8)
+                        .addComponent(jTNrSocio)
+                        .addComponent(jTEstado)
+                        .addComponent(jCBoxLibrosEditar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JBEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPModificarLayout.setVerticalGroup(
             jPModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -379,15 +393,23 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCBoxLibrosEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSDia1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jMonMes1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jYAño1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSDia2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jMonMes2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jYAño2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
@@ -396,8 +418,8 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
                 .addComponent(jTEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(JBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
         );
 
@@ -420,30 +442,20 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         jLabel20.setText("ID Prestamo: ");
 
         jLabel21.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel21.setText("Libro");
-
-        jLabel22.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel22.setText("Fecha Prestamo");
+        jLabel21.setText("Prestamo");
 
         jLabel23.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel23.setText("Fecha Devolucion");
 
-        jLabel24.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel24.setText("Nr Socio");
-
-        jLabel25.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel25.setText("Estado");
-
         JlIDPrestamo2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         JlIDPrestamo2.setText("ID Prestamo: ");
 
-        jTextField11.setEnabled(false);
-
-        jTextField12.setEnabled(false);
-
-        jTextField13.setEnabled(false);
-
-        jTextField14.setEnabled(false);
+        jButton1.setText("DEVOLVER");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout JPDevolverLayout = new javax.swing.GroupLayout(JPDevolver);
         JPDevolver.setLayout(JPDevolverLayout);
@@ -455,20 +467,20 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                 .addGap(29, 29, 29)
                 .addGroup(JPDevolverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(JPDevolverLayout.createSequentialGroup()
+                        .addComponent(jSDia3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jMonMes3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jYAño3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(JPDevolverLayout.createSequentialGroup()
                         .addComponent(jLabel20)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                         .addComponent(JlIDPrestamo2)
                         .addGap(10, 10, 10))
                     .addComponent(jLabel21)
-                    .addComponent(jLabel22)
                     .addComponent(jLabel23)
-                    .addComponent(jLabel24)
-                    .addComponent(jLabel25)
-                    .addComponent(jTextField13)
-                    .addComponent(jTextField11)
-                    .addComponent(jTextField14)
-                    .addComponent(jTextField12)
-                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jCBoxPrestamo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         JPDevolverLayout.setVerticalGroup(
             JPDevolverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -483,25 +495,19 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                     .addComponent(JlIDPrestamo2))
                 .addGap(20, 20, 20)
                 .addComponent(jLabel21)
-                .addGap(18, 18, 18)
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel22)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCBoxPrestamo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel23)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel24)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel25)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(112, 112, 112))
+                .addGap(27, 27, 27)
+                .addGroup(JPDevolverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(JPDevolverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSDia3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jMonMes3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jYAño3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(59, 59, 59)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         jTabbedPane2.addTab("Devolver", JPDevolver);
@@ -625,32 +631,93 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBNuevoPrestamoActionPerformed
 
     private void jTabbedPane2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPane2FocusGained
-        Prestamo prestamo =  new Prestamo();
+        Prestamo prestamo = new Prestamo();
         if (jTabbedPane2.getTabComponentAt(jTabbedPane2.getSelectedIndex()).getName().equals("Nuevo Prestamo")) {
             cargarTabla2();
             fechaActual();
         } else if (jTabbedPane2.getTabComponentAt(jTabbedPane2.getSelectedIndex()).getName().equals("Editar")) {
-            if (Tabla2.isRowSelected(Tabla2.getSelectedRow())) {
+            if (Tabla.isRowSelected(Tabla.getSelectedRow())) {
                 prestamo = new PrestamoData().buscarPrestamo(Integer.parseInt(modelo.getValueAt(Tabla.getSelectedRow(), 0).toString()));
                 IdPrestamo.setText(modelo.getValueAt(Tabla.getSelectedRow(), 0).toString());
                 IdPrestamo.setVisible(true);
-                
+                jCBoxLibrosEditar.setSelectedItem(new LibroData().buscarLibro(modelo.getValueAt(Tabla.getSelectedRow(), 1).toString()));
+                jSDia1.setValue(prestamo.getFechaInicio().toLocalDate().getDayOfMonth());
+                jMonMes1.setMonth(prestamo.getFechaInicio().toLocalDate().getMonthValue());
+                jYAño1.setYear(prestamo.getFechaInicio().toLocalDate().getYear());
+
+                jSDia2.setValue(prestamo.getFechaInicio().toLocalDate().plusDays(7).getDayOfMonth());
+                jMonMes2.setMonth(prestamo.getFechaInicio().toLocalDate().plusDays(7).getMonthValue());
+                jYAño2.setYear(prestamo.getFechaInicio().toLocalDate().plusDays(7).getYear());
+
+                jSDia2.setEnabled(false);
+                jMonMes2.setEnabled(false);
+                jYAño2.setEnabled(false);
                 jTNrSocio.setText(String.valueOf(login.getLector().getNroSocio()));
                 String estado;
-                if(prestamo.isEstado()){
-                    estado ="Prestado";
-                }else{
-                    estado= "Devueto";
+                if (prestamo.isEstado()) {
+                    estado = "Prestado";
+                } else if (prestamo.isEstado() && prestamo.getFechaFin() == null) {
+                    estado = "Plazo Vencido";
+                } else {
+                    estado = "Devuelto";
                 }
                 jTEstado.setText(estado);
+            } else {
+                JOptionPane.showMessageDialog(null, "Por Favor Elija algun prestamo para editar");
             }
+        } else {
+            cargarComboBoxPrestamos();
+
         }
     }//GEN-LAST:event_jTabbedPane2FocusGained
+
+    private void JBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEditarActionPerformed
+        Prestamo prestamo = new Prestamo();
+
+        if (Tabla.isRowSelected(Tabla.getSelectedRow())) {
+            prestamo.setIdPrestamo(Integer.parseInt(IdPrestamo.getText()));
+            prestamo.setFechaInicio(Date.valueOf(LocalDate.of(jYAño1.getYear(), jMonMes1.getMonth(), Integer.parseInt(jSDia1.getValue().toString()))));
+            prestamo.setFechaFin(Date.valueOf(LocalDate.of(jYAño2.getYear(), jMonMes2.getMonth(), Integer.parseInt(jSDia2.getValue().toString()))));
+            for (Ejemplar ejemplar : new EjemplarData().listarEjemplar()) {
+                Libro libro = (Libro) jCBoxLibrosEditar.getSelectedItem();
+                if (ejemplar.getLibro().getIdLibro() == libro.getIdLibro() && ejemplar.getCantidadDeEjemplares() != 0 && ejemplar.isEstado()) {
+                    prestamo.setEjemplar(ejemplar);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Debes seleccionar un libro con ejemplares disponibles");
+                }
+            }
+
+            prestamo.setLector(new LectorData().buscarLector(Integer.parseInt(jTNrSocio.getText())));
+            prestamo.setEstado(isIcon);
+            new PrestamoData().modificarPrestamo(prestamo);
+        } else {
+            JOptionPane.showMessageDialog(null, "Por Favor Elija algun prestamo para editar");
+        }
+
+
+    }//GEN-LAST:event_JBEditarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (!jCBoxPrestamo.getItemAt(jCBoxPrestamo.getSelectedIndex()).toString().isEmpty()) {
+            jSDia3.setValue(LocalDate.now().getDayOfMonth());
+            jMonMes3.setMonth(Integer.parseInt(LocalDate.now().getMonth().toString()));
+            jYAño3.setYear(LocalDate.now().getYear());
+            LocalDate fecha = LocalDate.of(jYAño3.getYear(), jMonMes3.getMonth(), Integer.parseInt(jSDia3.getValue().toString()));
+        }else{
+            JOptionPane.showMessageDialog(null, "Por Favor Elija algun prestamo para devolver");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void cargarComboBox() {
         LibroData libroData = new LibroData();
         DefaultComboBoxModel<Libro> mdlCombo = new DefaultComboBoxModel(libroData.listarLibros().toArray());
-        jComboBox1.setModel(mdlCombo);
+        jCBoxLibrosEditar.setModel(mdlCombo);
+    }
+
+    public void cargarComboBoxPrestamos() {
+        LibroData libroData = new LibroData();
+        DefaultComboBoxModel<Prestamo> mdlCombo = new DefaultComboBoxModel(new PrestamoData().obtenerPrestamos().toArray());
+        jCBoxPrestamo.setModel(mdlCombo);
     }
 
     public void cargarTabla() {
@@ -726,6 +793,7 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel IdPrestamo;
+    private javax.swing.JButton JBEditar;
     private javax.swing.JPanel JPDevolver;
     private javax.swing.JPanel JPMostrar;
     private javax.swing.JLabel JlIDPrestamo2;
@@ -734,9 +802,9 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
     private javax.swing.JTable Tabla2;
     private javax.swing.JButton jBFiltrar;
     private javax.swing.JButton jBNuevoPrestamo;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<Libro> jComboBox1;
-    private javax.swing.JComboBox<Libro> jComboBox3;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<Libro> jCBoxLibrosEditar;
+    private javax.swing.JComboBox<Prestamo> jCBoxPrestamo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel17;
@@ -745,10 +813,7 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -757,22 +822,25 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private com.toedter.calendar.JMonthChooser jMonMes;
+    private com.toedter.calendar.JMonthChooser jMonMes1;
+    private com.toedter.calendar.JMonthChooser jMonMes2;
+    private com.toedter.calendar.JMonthChooser jMonMes3;
     private javax.swing.JPanel jPModificar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSpinner jSDia;
+    private javax.swing.JSpinner jSDia1;
+    private javax.swing.JSpinner jSDia2;
+    private javax.swing.JSpinner jSDia3;
     private javax.swing.JTextField jTBuscarLibro;
     private javax.swing.JTextField jTEstado;
     private javax.swing.JTextField jTNrSocio;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField6;
     private com.toedter.calendar.JYearChooser jYAño;
+    private com.toedter.calendar.JYearChooser jYAño1;
+    private com.toedter.calendar.JYearChooser jYAño2;
+    private com.toedter.calendar.JYearChooser jYAño3;
     private javax.swing.JScrollPane scroll;
     private javax.swing.JScrollPane scroll2;
     // End of variables declaration//GEN-END:variables

@@ -41,7 +41,6 @@ public class VistaRegistrarse extends javax.swing.JFrame {
         setSize(580, 395);
         setLocationRelativeTo(null);
         jPanel2.requestFocusInWindow();
-        
 
     }
 
@@ -339,7 +338,7 @@ public class VistaRegistrarse extends javax.swing.JFrame {
         String contra1 = jTextContra.getText();
         String contra2 = jTextContra2.getText();
         boolean sonIguales = contra1.equals(contra2);
-        if (! sonIguales){
+        if (!sonIguales) {
             JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
         }
     }//GEN-LAST:event_jTextContra2FocusLost
@@ -433,7 +432,7 @@ public class VistaRegistrarse extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextDomicilioFocusLost
 
     private void jButtonRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarseActionPerformed
-        
+
         if (jTextApellido.getText().isEmpty() || jTextContra.getText().isEmpty() || jTextContra2.getText().isEmpty()
                 || jTextDomicilio.getText().isEmpty() || jTextMail.getText().isEmpty() || jTextNombre.getText().isEmpty()
                 || jTextRespuesta.getText().isEmpty() || jTextTelefono.getText().isEmpty() || jTextUsuario.getText().isEmpty()) {
@@ -449,7 +448,7 @@ public class VistaRegistrarse extends javax.swing.JFrame {
             int telefono = Integer.parseInt(jTextTelefono.getText());
 
             Lector lector = new Lector(nombre, apellido, domicilio, mail, estado, telefono);
-
+            System.out.println(lector);
             LectorData lectorData = new LectorData();
             lectorData.guardarLector(lector);
 
@@ -469,6 +468,9 @@ public class VistaRegistrarse extends javax.swing.JFrame {
                 jTextMail.setText("");
                 estado = false;
                 jTextTelefono.setText("");
+                
+                new VistaLogin().setVisible(true);
+                this.setVisible(false);
 
             }
         }
@@ -478,10 +480,11 @@ public class VistaRegistrarse extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonRegistrarseActionPerformed
 
     private boolean estadoLector;
+
     public void actualizarEstadoLector(boolean nuevoEstado) {
         estadoLector = nuevoEstado;
     }
-    
+
     private void SetImageLabel(JLabel labelName, String root) {
         ImageIcon image = new ImageIcon(root);
         Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(), labelName.getHeight(), Image.SCALE_DEFAULT));
@@ -577,13 +580,13 @@ public class VistaRegistrarse extends javax.swing.JFrame {
         if (validarNumeroTelefono(jTextTelefono.getText())) {
             System.out.println("El número de telefono es válido:" + jTextTelefono.getText());
         } else {
-            JOptionPane.showMessageDialog(null, "Número de teléfono inválido: " + jTextTelefono.getText());
+            JOptionPane.showMessageDialog(null, "Número de teléfono inválido: " + jTextTelefono.getText() + " Formtato : 00-00000-00000");
 
         }
 
     }
 
-    private static final String patron = "^01[0-9]{8}$";
+    private static final String patron = "^(0[1-9]|[1-8][0-9])\\d{10}$";
     private static final Pattern pattern = Pattern.compile(patron);
 
     public static boolean validarNumeroTelefono(String numeroTelefono) {
@@ -591,7 +594,7 @@ public class VistaRegistrarse extends javax.swing.JFrame {
         if (numeroTelefono.isEmpty()) {
             return false;
         }
-        
+
         Matcher matcher = pattern.matcher(numeroTelefono);
         return matcher.matches();
     }

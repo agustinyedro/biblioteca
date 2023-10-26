@@ -20,7 +20,6 @@ public class LectorData {
 
     }
 
-    
     private boolean
             existeLector(Lector lector) throws SQLException {
 
@@ -30,8 +29,8 @@ public class LectorData {
             ps.setString(2, lector.getNombre());
             ps.setString(3, lector.getApellido());
             ps.setString(4, lector.getDomicilio());
-            ps.setString(1, lector.getMail());
-            ps.setLong(3, lector.getTelefono());
+            ps.setString(5, lector.getMail());
+            ps.setLong(6, lector.getTelefono());
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     int count = rs.getInt(1);
@@ -42,27 +41,25 @@ public class LectorData {
         return false;
     }
 
-    
-
     public void guardarLector(Lector lector) {
 
-        String sql = "INSERT INTO lector ( nombre, apellido, domicilio, mail, estado, telefono ) VALUES (?, ?, ?, ?,?)";
+        String sql = "INSERT INTO lector ( nombre, apellido, domicilio, mail, estado, telefono ) VALUES (?, ?, ?, ?, ?, ?)";
         try {
 
             if (existeLector(lector)) {
                 JOptionPane.showMessageDialog(null, "El lector ya existe.");
                 return;
             }
-            lector.setEstado(true);
 
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
+            
             ps.setString(1, lector.getNombre());
             ps.setString(2, lector.getApellido());
             ps.setString(3, lector.getDomicilio());
             ps.setString(4, lector.getMail());
             ps.setBoolean(5, lector.isEstado());
-            ps.setLong(6, lector.getTelefono());
+            ps.setInt(6, lector.getTelefono());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
 
@@ -90,7 +87,7 @@ public class LectorData {
             ps.setString(3, lector.getDomicilio());
             ps.setString(4, lector.getMail());
             ps.setBoolean(5, true);
-            ps.setLong(6, lector.getTelefono());
+            ps.setInt(6, lector.getTelefono());
             ps.setInt(7, lector.getNroSocio());
             int exito = ps.executeUpdate();
 
@@ -182,12 +179,12 @@ public class LectorData {
         return lector;
     }
 
-//    public static void main(String[] args) {
-//        LectorData lectorData = new LectorData();
-///        lectorData.guardarLector(new Lector("Juan", "Salta", "juanteextrañamos@hotmail.com", true, 123456789));
-////        lectorData.modificarLector(new Lector(1,"Juan", "Salta", "juanvolveporfavor@hotmail.com", true, 987123456));
-////        lectorData.eliminarLector(31);
-////        System.out.println(lectorData.buscarLector(31));
-////        System.out.println(lectorData.listarLectores());
-//    }
+    public static void main(String[] args) {
+        LectorData lectorData = new LectorData();
+        lectorData.guardarLector(new Lector("Juan","desaparecido", "Salta", "juanteextrañamos@hotmail.com", false, 123456789));
+//        lectorData.modificarLector(new Lector(1,"Juan", "Salta", "juanvolveporfavor@hotmail.com", true, 987123456));
+//        lectorData.eliminarLector(31);
+//        System.out.println(lectorData.buscarLector(31));
+//        System.out.println(lectorData.listarLectores());
+    }
 }
