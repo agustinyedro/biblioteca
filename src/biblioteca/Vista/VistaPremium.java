@@ -22,9 +22,11 @@ public class VistaPremium extends javax.swing.JFrame {
      * Creates new form VistaPremium
      */
     public VistaPremium() {
+        setUndecorated(rootPaneCheckingEnabled);
         initComponents();
         redondearPaneles();
         SetImageLabel(jLabel30, "src/iconos/Recurso 1-8.png");
+        setLocationRelativeTo(null);
     }
 
     public void redondearPaneles() {

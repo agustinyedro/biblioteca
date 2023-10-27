@@ -61,7 +61,6 @@ public final class VistaLibro extends javax.swing.JInternalFrame {
 
         cargarTabla();
         this.add(scrollPane);
-        
 
     }
 
@@ -396,7 +395,7 @@ public final class VistaLibro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextAutorFocusLost
 
     private void jTable1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTable1FocusGained
-       //  TablaSeleccion();
+        //  TablaSeleccion();
 
     }//GEN-LAST:event_jTable1FocusGained
 
@@ -454,7 +453,7 @@ public final class VistaLibro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBAgregarMouseClicked
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-         TablaSeleccion();
+        TablaSeleccion();
     }//GEN-LAST:event_jTable1MouseClicked
 
 
@@ -491,26 +490,24 @@ public final class VistaLibro extends javax.swing.JInternalFrame {
         modelo.addColumn("Año");
         modelo.addColumn("Género");
         modelo.addColumn("Editorial");
+
         
-        jTable1
-                .setDefaultRenderer(Object.class,
-                        new TableGradientCell());
-//        jPModificar.putClientProperty(FlatClientProperties.STYLE, ""
-//                + "arc:30");
+        jTable1.setDefaultRenderer(Object.class,
+                new TableGradientCell());
+
         jPanel1.putClientProperty(FlatClientProperties.STYLE, ""
-                + "arc:30");
-//        jPanel3.putClientProperty(FlatClientProperties.STYLE, ""
-//                + "border:1,1,1,1,$TableHeader.bottomSeparatorColor,,10");
+                + "border:1,1,1,1,$TableHeader.bottomSeparatorColor,,10");
         jTable1.getTableHeader().putClientProperty(FlatClientProperties.STYLE, ""
                 + "hoverBackground:null;"
                 + "pressedBackground:null;"
                 + "separatorColor:$TableHeader.background");
-//        Tabla.putClientProperty(FlatClientProperties.STYLE, ""
-//                + "foreground:#141026");
+        jTable1.putClientProperty(FlatClientProperties.STYLE, ""
+                + "foreground:#141026");
         jScrollPane1.putClientProperty(FlatClientProperties.STYLE, ""
                 + "border:3,0,3,0,$Table.background,10,10");
         jScrollPane1.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE, ""
                 + "hoverTrackColor:null");
+
     }
 
     private void borrarFilas() {
@@ -529,11 +526,13 @@ public final class VistaLibro extends javax.swing.JInternalFrame {
                 new String[]{"Suscribir", "Cancelar"},
                 "Suscribir");
         if (respuesta == JOptionPane.YES_OPTION) {
-
-            JOptionPane.showMessageDialog(this, "Gracias por suscribirte al plan Premium.", "¡Felicidades!", JOptionPane.INFORMATION_MESSAGE);
+            //this.setVisible(false);
+            VistaPremium p = new VistaPremium();
+            p.setVisible(true);
+            //JOptionPane.showMessageDialog(this, "Gracias por suscribirte al plan Premium.", "¡Felicidades!", JOptionPane.INFORMATION_MESSAGE);
         } else {
-
-            JOptionPane.showMessageDialog(this, "Has cancelado la suscripción.", "Cancelado", JOptionPane.INFORMATION_MESSAGE);
+            return;
+            //JOptionPane.showMessageDialog(this, "Has cancelado la suscripción.", "Cancelado", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -541,8 +540,6 @@ public final class VistaLibro extends javax.swing.JInternalFrame {
     public void TablaSeleccion() {
         // Agregar un ListSelectionListener para manejar la selección de filas
 
-        
-        
         jTable1.getSelectionModel().addListSelectionListener((ListSelectionEvent e) -> {
             // if (!e.getValueIsAdjusting()) { // Evita eventos duplicados
             EjemplarData ejemplar = new EjemplarData();
@@ -558,16 +555,16 @@ public final class VistaLibro extends javax.swing.JInternalFrame {
                     }
                 }
                 if (ejem != null) {
-                if (ejem.isEstado()){
-                    SetImageLabel(verificacion, "src/iconos/correcto.png");
-                    System.out.println("Correcto");
-                }
+                    if (ejem.isEstado()) {
+                        SetImageLabel(verificacion, "src/iconos/correcto.png");
+                        System.out.println("Correcto");
+                    }
                 } else {
                     SetImageLabel(verificacion, "src/iconos/incorrecto.png");
                     System.out.println("Funcionaaaaaaa");
-                            
+
                 }
-            } 
+            }
             //}
         });
 
