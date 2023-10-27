@@ -1131,22 +1131,26 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
 //                    modelo2.addRow(new Object[]{prod.getTitulo(), prod.getAutor(), new ImageIcon("src/iconos/incorrecto.png")});
 //                }
                 if (!jTBuscarLibro.getText().isEmpty()) {
-                    for (Ejemplar ejem : new  EjemplarData().listarEjemplar()) {
-                        if(ejem.getLibro().getIdLibro()== prod.getIdLibro()){
-                            ejemplar= ejem;
+                    Tabla2.getColumnModel().getColumn(2).setCellRenderer(new TableGradientCell());
+                    for (Ejemplar ejem : new EjemplarData().listarEjemplar()) {
+                        if (ejem.getLibro().getIdLibro() == prod.getIdLibro()) {
+                            ejemplar = ejem;
                         }
                     }
-                    Tabla2.getColumnModel().getColumn(2).setCellRenderer(new TableGradientCell());
-                   if(prod.isEstado()&& ejemplar.isEstado() && ejemplar.getCantidadDeEjemplares()!=0 && ejemplar!=null){
-                    modelo2.addRow(new Object[]{prod.getTitulo(), prod.getAutor(), loadImage("src/iconos/correcto.png")});
-                   }else{
-                    modelo2.addRow(new Object[]{prod.getTitulo(), prod.getAutor(), loadImage("src/iconos/incorrecto.png")});
-                   }
+                    if (ejemplar != null) {
+                        if (prod.isEstado() && ejemplar.isEstado() && ejemplar.getCantidadDeEjemplares() != 0 || ejemplar != null) {
+                            modelo2.addRow(new Object[]{prod.getTitulo(), prod.getAutor(), loadImage("src/iconos/correcto.png")});
+                        }
+
+                    } else {
+                        modelo2.addRow(new Object[]{prod.getTitulo(), prod.getAutor(), loadImage("src/iconos/incorrecto.png")});
+                    }
                 }
-                
-                if(ejemplar!=null){
-                    
-                }
+
+//                if (ejemplar == null) {
+//                    modelo2.addRow(new Object[]{prod.getTitulo(), prod.getAutor(), loadImage("src/iconos/incorrecto.png")});
+//
+//                }
 
             }
 
@@ -1162,36 +1166,35 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
 
     private void jBNuevoPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoPrestamoActionPerformed
 
-       
 //            System.out.println("hoal " + Tabla2.isRowSelected(Tabla2.getSelectedRow()));
-            Prestamo presta = new Prestamo();
-            Ejemplar ejemplar = null;
-            System.out.println(Tabla2.getSelectedRow());
-            new LibroData().listarLibros().forEach(lib -> {
-                if (lib.getTitulo().equals(modelo2.getValueAt(Tabla2.getSelectedRow(), 0).toString())) {
-                    new EjemplarData().listarEjemplar().forEach(action -> {
-                        if (action.getLibro().getIdLibro() == lib.getIdLibro() && action.getCantidadDeEjemplares() != 0 && action.isEstado()) {
-                            System.out.println(lib);
-                            presta.setEjemplar(action);
-                        }
-                    });
-                }
-            });
-
-            ejemplar = presta.getEjemplar();
-            LocalDate fecha = LocalDate.of(jYAño.getYear(), jMonMes.getMonth(), Integer.parseInt(jSDia.getValue().toString()));
-            presta.setFechaInicio(Date.valueOf(fecha));
-            presta.setFechaFin(null);
-            presta.setLector(login.getLector());
-            if (ejemplar != null) {
-                presta.setEjemplar(ejemplar);
-            }else{
-            JOptionPane.showMessageDialog(null, "Debes seleccionar un libro con ejemplares disponibles");
+        Prestamo presta = new Prestamo();
+        Ejemplar ejemplar = null;
+        System.out.println(Tabla2.getSelectedRow());
+        new LibroData().listarLibros().forEach(lib -> {
+            if (lib.getTitulo().equals(modelo2.getValueAt(Tabla2.getSelectedRow(), 0).toString())) {
+                new EjemplarData().listarEjemplar().forEach(action -> {
+                    if (action.getLibro().getIdLibro() == lib.getIdLibro() && action.getCantidadDeEjemplares() != 0 && action.isEstado()) {
+                        System.out.println(lib);
+                        presta.setEjemplar(action);
+                    }
+                });
             }
-            presta.setEstado(true);
-            new PrestamoData().guardarPrestamo(presta);
-            JOptionPane.showMessageDialog(null, "Recuerda que la fecha de devolucion es " + Date.valueOf(LocalDate.now().plusDays(7)));
-        
+        });
+
+        ejemplar = presta.getEjemplar();
+        LocalDate fecha = LocalDate.of(jYAño.getYear(), jMonMes.getMonth(), Integer.parseInt(jSDia.getValue().toString()));
+        presta.setFechaInicio(Date.valueOf(fecha));
+        presta.setFechaFin(null);
+        presta.setLector(login.getLector());
+        if (ejemplar != null) {
+            presta.setEjemplar(ejemplar);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar un libro con ejemplares disponibles");
+        }
+        presta.setEstado(true);
+        new PrestamoData().guardarPrestamo(presta);
+        JOptionPane.showMessageDialog(null, "Recuerda que la fecha de devolucion es " + Date.valueOf(LocalDate.now().plusDays(7)));
+
     }//GEN-LAST:event_jBNuevoPrestamoActionPerformed
 
     private void jTabbedPane2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPane2FocusGained
@@ -1224,7 +1227,7 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_JBEditarActionPerformed
 
-     public static Image loadImage(String path) {
+    public static Image loadImage(String path) {
         try {
             return ImageIO.read(new File(path));
         } catch (IOException e) {
@@ -1321,7 +1324,7 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
     private void Tabla2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla2MouseClicked
         if (Tabla2.isRowSelected(Tabla2.getSelectedRow())) {
 //            System.out.println(Tabla2.getSelectedRow());
-jBNuevoPrestamo.setEnabled(true);
+            jBNuevoPrestamo.setEnabled(true);
 
         }
     }//GEN-LAST:event_Tabla2MouseClicked
