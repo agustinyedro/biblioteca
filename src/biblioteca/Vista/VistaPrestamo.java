@@ -11,9 +11,18 @@ import biblioteca75.Prestamo;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.*;
 import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -26,8 +35,26 @@ import javax.swing.text.TabableView;
 
 public class VistaPrestamo extends javax.swing.JInternalFrame {
 
-    DefaultTableModel modelo = new DefaultTableModel();
-    DefaultTableModel modelo2 = new DefaultTableModel();
+    private DefaultTableModel modelo = new DefaultTableModel() {
+        public boolean isCellEditable(int fila, int columna) {
+            for (int i = 0; i < Tabla.getColumnCount(); i++) {
+                for (int j = 0; j < Tabla.getRowCount(); j++) {
+                    return false;
+                }
+            }
+            return false;
+        }
+    };
+    private DefaultTableModel modelo2 = new DefaultTableModel() {
+        public boolean isCellEditable(int fila, int columna) {
+            for (int i = 0; i < Tabla2.getColumnCount(); i++) {
+                for (int j = 0; j < Tabla2.getRowCount(); j++) {
+                    return false;
+                }
+            }
+            return false;
+        }
+    };
     Login login = new Login();
 
     public VistaPrestamo() {
@@ -35,7 +62,10 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
 //        setSize(1100,720);
         Tabla.requestFocus();
         cargarTabla();
+        fechaActual();
+        cargarTabla2();
         cargarComboBox();
+//        cargarComboBoxPrestamos();
         IdPrestamo.setVisible(false);
         jBNuevoPrestamo.setEnabled(false);
 
@@ -96,6 +126,58 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         jSDia3 = new javax.swing.JSpinner();
         jMonMes3 = new com.toedter.calendar.JMonthChooser();
         jYAño3 = new com.toedter.calendar.JYearChooser();
+        jInternalFrame1 = new javax.swing.JInternalFrame();
+        JpanelTabla1 = new javax.swing.JPanel();
+        jTextField2 = new javax.swing.JTextField();
+        jBFiltrar1 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        scroll1 = new javax.swing.JScrollPane();
+        Tabla1 = new javax.swing.JTable();
+        jLabel22 = new javax.swing.JLabel();
+        jTabbedPane3 = new javax.swing.JTabbedPane();
+        JPMostrar1 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jBNuevoPrestamo1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        scroll3 = new javax.swing.JScrollPane();
+        Tabla3 = new javax.swing.JTable();
+        jTBuscarLibro1 = new javax.swing.JTextField();
+        jSDia4 = new javax.swing.JSpinner();
+        jMonMes4 = new com.toedter.calendar.JMonthChooser();
+        jYAño4 = new com.toedter.calendar.JYearChooser();
+        jPModificar1 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        IdPrestamo1 = new javax.swing.JLabel();
+        jTEstado1 = new javax.swing.JTextField();
+        jTNrSocio1 = new javax.swing.JTextField();
+        jCBoxLibrosEditar1 = new javax.swing.JComboBox<>();
+        JBEditar1 = new javax.swing.JButton();
+        jSDia5 = new javax.swing.JSpinner();
+        jMonMes5 = new com.toedter.calendar.JMonthChooser();
+        jYAño5 = new com.toedter.calendar.JYearChooser();
+        jSDia6 = new javax.swing.JSpinner();
+        jMonMes6 = new com.toedter.calendar.JMonthChooser();
+        jYAño6 = new com.toedter.calendar.JYearChooser();
+        JPDevolver1 = new javax.swing.JPanel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        JlIDPrestamo3 = new javax.swing.JLabel();
+        jCBoxPrestamo1 = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
+        jSDia7 = new javax.swing.JSpinner();
+        jMonMes7 = new com.toedter.calendar.JMonthChooser();
+        jYAño7 = new com.toedter.calendar.JYearChooser();
 
         setMinimumSize(new java.awt.Dimension(1210, 715));
         setName(""); // NOI18N
@@ -195,6 +277,14 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTabbedPane2FocusGained(evt);
             }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTabbedPane2FocusLost(evt);
+            }
+        });
+        jTabbedPane2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane2MouseClicked(evt);
+            }
         });
 
         JPMostrar.setBackground(new java.awt.Color(193, 120, 196));
@@ -228,6 +318,16 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        Tabla2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Tabla2FocusLost(evt);
+            }
+        });
+        Tabla2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Tabla2MouseClicked(evt);
+            }
+        });
         scroll2.setViewportView(Tabla2);
 
         jPanel1.add(scroll2, java.awt.BorderLayout.CENTER);
@@ -470,11 +570,11 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                         .addComponent(jSDia3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
                         .addComponent(jMonMes3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                         .addComponent(jYAño3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(JPDevolverLayout.createSequentialGroup()
                         .addComponent(jLabel20)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                         .addComponent(JlIDPrestamo2)
                         .addGap(10, 10, 10))
                     .addComponent(jLabel21)
@@ -515,6 +615,438 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         getContentPane().add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, -1, 720));
         jTabbedPane2.getAccessibleContext().setAccessibleName("");
 
+        jInternalFrame1.setMinimumSize(new java.awt.Dimension(1210, 715));
+        jInternalFrame1.setName(""); // NOI18N
+        jInternalFrame1.setPreferredSize(new java.awt.Dimension(1210, 720));
+        jInternalFrame1.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        JpanelTabla1.setBackground(new java.awt.Color(193, 120, 196));
+
+        jTextField2.setBackground(new java.awt.Color(255, 255, 255));
+        jTextField2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTextField2.setText("Buscar...");
+        jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField2FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField2FocusLost(evt);
+            }
+        });
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField2KeyReleased(evt);
+            }
+        });
+
+        jBFiltrar1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jBFiltrar1.setText("Filtrar");
+
+        jPanel4.setLayout(new java.awt.BorderLayout());
+
+        Tabla1.setBackground(new java.awt.Color(255, 255, 255));
+        Tabla1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "null", "null", "Title 3", "Title 4"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        Tabla1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Tabla1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Tabla1MouseClicked(evt);
+            }
+        });
+        scroll1.setViewportView(Tabla1);
+
+        jPanel4.add(scroll1, java.awt.BorderLayout.CENTER);
+
+        jLabel22.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setText("PRESTAMOS");
+
+        javax.swing.GroupLayout JpanelTabla1Layout = new javax.swing.GroupLayout(JpanelTabla1);
+        JpanelTabla1.setLayout(JpanelTabla1Layout);
+        JpanelTabla1Layout.setHorizontalGroup(
+            JpanelTabla1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JpanelTabla1Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(JpanelTabla1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(JpanelTabla1Layout.createSequentialGroup()
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jBFiltrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 742, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(38, Short.MAX_VALUE))
+            .addComponent(jLabel22, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        JpanelTabla1Layout.setVerticalGroup(
+            JpanelTabla1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JpanelTabla1Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel22)
+                .addGap(46, 46, 46)
+                .addGroup(JpanelTabla1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBFiltrar1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jInternalFrame1.getContentPane().add(JpanelTabla1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 720));
+
+        jTabbedPane3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTabbedPane3FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTabbedPane3FocusLost(evt);
+            }
+        });
+        jTabbedPane3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane3MouseClicked(evt);
+            }
+        });
+
+        JPMostrar1.setBackground(new java.awt.Color(193, 120, 196));
+        JPMostrar1.setPreferredSize(new java.awt.Dimension(375, 637));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("Datos del prestamo");
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("A continuacion podras cargar un nuevo prestamo");
+
+        jBNuevoPrestamo1.setText("ENVIAR");
+        jBNuevoPrestamo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBNuevoPrestamo1ActionPerformed(evt);
+            }
+        });
+
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        Tabla3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        Tabla3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                Tabla3FocusLost(evt);
+            }
+        });
+        Tabla3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Tabla3MouseClicked(evt);
+            }
+        });
+        scroll3.setViewportView(Tabla3);
+
+        jPanel2.add(scroll3, java.awt.BorderLayout.CENTER);
+
+        jTBuscarLibro1.setBackground(new java.awt.Color(255, 255, 255));
+        jTBuscarLibro1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jTBuscarLibro1.setText("Buscar...");
+        jTBuscarLibro1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTBuscarLibro1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTBuscarLibro1FocusLost(evt);
+            }
+        });
+        jTBuscarLibro1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTBuscarLibro1KeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout JPMostrar1Layout = new javax.swing.GroupLayout(JPMostrar1);
+        JPMostrar1.setLayout(JPMostrar1Layout);
+        JPMostrar1Layout.setHorizontalGroup(
+            JPMostrar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPMostrar1Layout.createSequentialGroup()
+                .addGroup(JPMostrar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(JPMostrar1Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(JPMostrar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBNuevoPrestamo1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(JPMostrar1Layout.createSequentialGroup()
+                                .addComponent(jSDia4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jMonMes4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jYAño4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTBuscarLibro1, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(1, 1, 1))
+        );
+        JPMostrar1Layout.setVerticalGroup(
+            JPMostrar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPMostrar1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel11)
+                .addGap(8, 8, 8)
+                .addComponent(jLabel12)
+                .addGap(30, 30, 30)
+                .addGroup(JPMostrar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(JPMostrar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSDia4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jMonMes4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jYAño4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addComponent(jTBuscarLibro1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
+                .addComponent(jBNuevoPrestamo1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jTabbedPane3.addTab("Nuevo Prestamo", JPMostrar1);
+
+        jPModificar1.setBackground(new java.awt.Color(193, 120, 196));
+        jPModificar1.setMinimumSize(new java.awt.Dimension(375, 615));
+
+        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel13.setText("Datos del prestamo");
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel14.setText("A continuacion podras Modificar los Datos");
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel15.setText("ID Prestamo: ");
+
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel16.setText("Libro");
+
+        jLabel24.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel24.setText("Fecha Prestamo");
+
+        jLabel25.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel25.setText("Fecha Devolucion");
+
+        jLabel26.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel26.setText("Nr Socio");
+
+        jLabel27.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel27.setText("Estado");
+
+        IdPrestamo1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        IdPrestamo1.setText("ID Prestamo: ");
+
+        jTEstado1.setEditable(false);
+        jTEstado1.setEnabled(false);
+
+        jTNrSocio1.setEditable(false);
+        jTNrSocio1.setEnabled(false);
+
+        JBEditar1.setText("EDITAR");
+        JBEditar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBEditar1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPModificar1Layout = new javax.swing.GroupLayout(jPModificar1);
+        jPModificar1.setLayout(jPModificar1Layout);
+        jPModificar1Layout.setHorizontalGroup(
+            jPModificar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPModificar1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(jPModificar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPModificar1Layout.createSequentialGroup()
+                        .addComponent(jSDia6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jMonMes6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jYAño6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPModificar1Layout.createSequentialGroup()
+                        .addComponent(jSDia5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jMonMes5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jYAño5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPModificar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPModificar1Layout.createSequentialGroup()
+                            .addComponent(jLabel15)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                            .addComponent(IdPrestamo1)
+                            .addGap(10, 10, 10))
+                        .addComponent(jLabel16)
+                        .addComponent(jLabel24)
+                        .addComponent(jLabel25)
+                        .addComponent(jLabel26)
+                        .addComponent(jLabel27)
+                        .addComponent(jTNrSocio1)
+                        .addComponent(jTEstado1)
+                        .addComponent(jCBoxLibrosEditar1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JBEditar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+        jPModificar1Layout.setVerticalGroup(
+            jPModificar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPModificar1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel13)
+                .addGap(8, 8, 8)
+                .addComponent(jLabel14)
+                .addGap(31, 31, 31)
+                .addGroup(jPModificar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(IdPrestamo1))
+                .addGap(20, 20, 20)
+                .addComponent(jLabel16)
+                .addGap(18, 18, 18)
+                .addComponent(jCBoxLibrosEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel24)
+                .addGap(18, 18, 18)
+                .addGroup(jPModificar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPModificar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSDia5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jMonMes5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jYAño5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel25)
+                .addGap(18, 18, 18)
+                .addGroup(jPModificar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPModificar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSDia6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jMonMes6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jYAño6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel26)
+                .addGap(18, 18, 18)
+                .addComponent(jTNrSocio1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel27)
+                .addGap(18, 18, 18)
+                .addComponent(jTEstado1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addComponent(JBEditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37))
+        );
+
+        jTabbedPane3.addTab("Editar", jPModificar1);
+
+        JPDevolver1.setBackground(new java.awt.Color(193, 120, 196));
+        JPDevolver1.setPreferredSize(new java.awt.Dimension(375, 637));
+
+        jLabel28.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel28.setText("Datos del prestamo");
+
+        jLabel29.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel29.setText("A continuacion podras Modificar los Datos");
+
+        jLabel30.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel30.setText("ID Prestamo: ");
+
+        jLabel31.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel31.setText("Prestamo");
+
+        jLabel32.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel32.setText("Fecha Devolucion");
+
+        JlIDPrestamo3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        JlIDPrestamo3.setText("ID Prestamo: ");
+
+        jButton2.setText("DEVOLVER");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout JPDevolver1Layout = new javax.swing.GroupLayout(JPDevolver1);
+        JPDevolver1.setLayout(JPDevolver1Layout);
+        JPDevolver1Layout.setHorizontalGroup(
+            JPDevolver1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(JPDevolver1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(JPDevolver1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(JPDevolver1Layout.createSequentialGroup()
+                        .addComponent(jSDia7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jMonMes7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addComponent(jYAño7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(JPDevolver1Layout.createSequentialGroup()
+                        .addComponent(jLabel30)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                        .addComponent(JlIDPrestamo3)
+                        .addGap(10, 10, 10))
+                    .addComponent(jLabel31)
+                    .addComponent(jLabel32)
+                    .addComponent(jCBoxPrestamo1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        JPDevolver1Layout.setVerticalGroup(
+            JPDevolver1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JPDevolver1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel28)
+                .addGap(8, 8, 8)
+                .addComponent(jLabel29)
+                .addGap(31, 31, 31)
+                .addGroup(JPDevolver1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel30)
+                    .addComponent(JlIDPrestamo3))
+                .addGap(20, 20, 20)
+                .addComponent(jLabel31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCBoxPrestamo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel32)
+                .addGap(27, 27, 27)
+                .addGroup(JPDevolver1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(JPDevolver1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jSDia7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jMonMes7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jYAño7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(59, 59, 59)
+                .addComponent(jButton2)
+                .addContainerGap())
+        );
+
+        jTabbedPane3.addTab("Devolver", JPDevolver1);
+
+        jInternalFrame1.getContentPane().add(jTabbedPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, -1, 720));
+
+        getContentPane().add(jInternalFrame1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -535,8 +1067,9 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         login = getLogin();
         for (Prestamo prod : prestamoData.obtenerPrestamos()) {
             Ejemplar ejemplar = ejemplarData.buscarEjemplar(prod.getEjemplar().getCodigo());
-            Libro libro = libroData.buscarLibro(String.valueOf(ejemplar.getCodigo()));
-            if ((libro.getTitulo().toLowerCase().startsWith(jTextField1.getText()) || prod.getFechaFin().toString().toLowerCase().startsWith(jTextField1.getText()) || prod.getFechaInicio().toString().toLowerCase().startsWith(jTextField1.getText())) && prod.getLector().getNroSocio() == login.getLector().getNroSocio()) {
+            Libro libro = libroData.buscarLibro(String.valueOf(ejemplar.getLibro().getIdLibro()));
+            System.out.println(libro);
+            if ((libro.getTitulo().toLowerCase().contains(jTextField1.getText()) || libro.getTitulo().toLowerCase().startsWith(jTextField1.getText()) || prod.getFechaFin().toString().toLowerCase().startsWith(jTextField1.getText()) || prod.getFechaInicio().toString().toLowerCase().startsWith(jTextField1.getText())) && prod.getLector().getNroSocio() == login.getLector().getNroSocio()) {
                 if (!jTextField1.getText().isEmpty()) {
                     modelo.addRow(new Object[]{prod.getIdPrestamo(), libro.getTitulo(), prod.getFechaInicio(), prod.getFechaFin()});
                     siHay = true;
@@ -568,28 +1101,51 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_TablaMouseClicked
 
     private void jTBuscarLibroFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTBuscarLibroFocusGained
-        // TODO add your handling code here:
+        if (jTBuscarLibro.getText().equalsIgnoreCase("Buscar...")) {
+            jTBuscarLibro.setText("");
+
+        }
     }//GEN-LAST:event_jTBuscarLibroFocusGained
 
     private void jTBuscarLibroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTBuscarLibroFocusLost
-        // TODO add your handling code here:
+        if (jTBuscarLibro.getText().isEmpty() || jTBuscarLibro.getText().equalsIgnoreCase("Buscar...")) {
+            jTBuscarLibro.setText("Buscar...");
+
+        }
     }//GEN-LAST:event_jTBuscarLibroFocusLost
 
     private void jTBuscarLibroKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTBuscarLibroKeyReleased
-        borrarFilas();
+        borrarFilas2();
         for (Libro prod : new LibroData().listarLibros()) {
-//            Ejemplar ejemplar = ejemplarData.buscarEjemplar(prod.getEjemplar().getCodigo());
+            Ejemplar ejemplar = null;
 //            Libro libro = libroData.buscarLibro(String.valueOf(ejemplar.getCodigo()));
-            if (prod.getTitulo().startsWith(jTBuscarLibro.getText())
-                    || prod.getAutor().startsWith(jTBuscarLibro.getText())
-                    || String.valueOf(prod.getAnio()).startsWith(jTBuscarLibro.getText())
-                    || prod.getEditorial().startsWith(jTBuscarLibro.getText())
-                    || String.valueOf(prod.getIsbn()).startsWith(jTBuscarLibro.getText())
-                    || prod.getTipo().startsWith(jTBuscarLibro.getText())) {
-                if (prod.isEstado()) {
-                    modelo2.addRow(new Object[]{prod.getTitulo(), prod.getAutor(), new ImageIcon("src/iconos/correcto.png")});
-                } else {
-                    modelo2.addRow(new Object[]{prod.getTitulo(), prod.getAutor(), new ImageIcon("src/iconos/incorrecto.png")});
+            if (prod.getTitulo().toLowerCase().contains(jTBuscarLibro.getText())
+                    || prod.getAutor().toLowerCase().contains(jTBuscarLibro.getText())
+                    || String.valueOf(prod.getAnio()).toLowerCase().contains(jTBuscarLibro.getText())
+                    || prod.getEditorial().toLowerCase().contains(jTBuscarLibro.getText())
+                    || String.valueOf(prod.getIsbn()).toLowerCase().contains(jTBuscarLibro.getText())
+                    || prod.getTipo().toLowerCase().contains(jTBuscarLibro.getText())) {
+//                if (prod.isEstado()) {
+//                    modelo2.addRow(new Object[]{prod.getTitulo(), prod.getAutor(), new ImageIcon("src/iconos/correcto.png")});
+//                } else {
+//                    modelo2.addRow(new Object[]{prod.getTitulo(), prod.getAutor(), new ImageIcon("src/iconos/incorrecto.png")});
+//                }
+                if (!jTBuscarLibro.getText().isEmpty()) {
+                    for (Ejemplar ejem : new  EjemplarData().listarEjemplar()) {
+                        if(ejem.getLibro().getIdLibro()== prod.getIdLibro()){
+                            ejemplar= ejem;
+                        }
+                    }
+                    Tabla2.getColumnModel().getColumn(2).setCellRenderer(new TableGradientCell());
+                   if(prod.isEstado()&& ejemplar.isEstado() && ejemplar.getCantidadDeEjemplares()!=0 && ejemplar!=null){
+                    modelo2.addRow(new Object[]{prod.getTitulo(), prod.getAutor(), loadImage("src/iconos/correcto.png")});
+                   }else{
+                    modelo2.addRow(new Object[]{prod.getTitulo(), prod.getAutor(), loadImage("src/iconos/incorrecto.png")});
+                   }
+                }
+                
+                if(ejemplar!=null){
+                    
                 }
 
             }
@@ -598,77 +1154,48 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTBuscarLibroKeyReleased
 
     private void fechaActual() {
+
         jSDia.setValue(LocalDate.now().getDayOfMonth());
         jMonMes.setMonth(LocalDate.now().getMonthValue());
         jYAño.setYear(LocalDate.now().getYear());
     }
 
     private void jBNuevoPrestamoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoPrestamoActionPerformed
-        if (Tabla2.isRowSelected(Tabla2.getSelectedRow())) {
-            jBNuevoPrestamo.setEnabled(true);
+
+       
+//            System.out.println("hoal " + Tabla2.isRowSelected(Tabla2.getSelectedRow()));
             Prestamo presta = new Prestamo();
             Ejemplar ejemplar = null;
-            Libro libro = new LibroData().buscarLibro(modelo2.getValueAt(Tabla2.getSelectedRow(), 0).toString());
+            System.out.println(Tabla2.getSelectedRow());
+            new LibroData().listarLibros().forEach(lib -> {
+                if (lib.getTitulo().equals(modelo2.getValueAt(Tabla2.getSelectedRow(), 0).toString())) {
+                    new EjemplarData().listarEjemplar().forEach(action -> {
+                        if (action.getLibro().getIdLibro() == lib.getIdLibro() && action.getCantidadDeEjemplares() != 0 && action.isEstado()) {
+                            System.out.println(lib);
+                            presta.setEjemplar(action);
+                        }
+                    });
+                }
+            });
+
+            ejemplar = presta.getEjemplar();
             LocalDate fecha = LocalDate.of(jYAño.getYear(), jMonMes.getMonth(), Integer.parseInt(jSDia.getValue().toString()));
             presta.setFechaInicio(Date.valueOf(fecha));
             presta.setFechaFin(null);
             presta.setLector(login.getLector());
-            for (Ejemplar object : new EjemplarData().listarEjemplar()) {
-                if (object.getLibro().getIdLibro() == libro.getIdLibro() && object.getCantidadDeEjemplares() != 0 && object.isEstado()) {
-                    ejemplar = object;
-                }
-            }
             if (ejemplar != null) {
                 presta.setEjemplar(ejemplar);
+            }else{
+            JOptionPane.showMessageDialog(null, "Debes seleccionar un libro con ejemplares disponibles");
             }
             presta.setEstado(true);
             new PrestamoData().guardarPrestamo(presta);
             JOptionPane.showMessageDialog(null, "Recuerda que la fecha de devolucion es " + Date.valueOf(LocalDate.now().plusDays(7)));
-        } else {
-            JOptionPane.showMessageDialog(null, "Debes seleccionar un libro con ejemplares disponibles");
-        }
-
+        
     }//GEN-LAST:event_jBNuevoPrestamoActionPerformed
 
     private void jTabbedPane2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPane2FocusGained
-        Prestamo prestamo = new Prestamo();
-        if (jTabbedPane2.getTabComponentAt(jTabbedPane2.getSelectedIndex()).getName().equals("Nuevo Prestamo")) {
-            cargarTabla2();
-            fechaActual();
-        } else if (jTabbedPane2.getTabComponentAt(jTabbedPane2.getSelectedIndex()).getName().equals("Editar")) {
-            if (Tabla.isRowSelected(Tabla.getSelectedRow())) {
-                prestamo = new PrestamoData().buscarPrestamo(Integer.parseInt(modelo.getValueAt(Tabla.getSelectedRow(), 0).toString()));
-                IdPrestamo.setText(modelo.getValueAt(Tabla.getSelectedRow(), 0).toString());
-                IdPrestamo.setVisible(true);
-                jCBoxLibrosEditar.setSelectedItem(new LibroData().buscarLibro(modelo.getValueAt(Tabla.getSelectedRow(), 1).toString()));
-                jSDia1.setValue(prestamo.getFechaInicio().toLocalDate().getDayOfMonth());
-                jMonMes1.setMonth(prestamo.getFechaInicio().toLocalDate().getMonthValue());
-                jYAño1.setYear(prestamo.getFechaInicio().toLocalDate().getYear());
 
-                jSDia2.setValue(prestamo.getFechaInicio().toLocalDate().plusDays(7).getDayOfMonth());
-                jMonMes2.setMonth(prestamo.getFechaInicio().toLocalDate().plusDays(7).getMonthValue());
-                jYAño2.setYear(prestamo.getFechaInicio().toLocalDate().plusDays(7).getYear());
-
-                jSDia2.setEnabled(false);
-                jMonMes2.setEnabled(false);
-                jYAño2.setEnabled(false);
-                jTNrSocio.setText(String.valueOf(login.getLector().getNroSocio()));
-                String estado;
-                if (prestamo.isEstado()) {
-                    estado = "Prestado";
-                } else if (prestamo.isEstado() && prestamo.getFechaFin() == null) {
-                    estado = "Plazo Vencido";
-                } else {
-                    estado = "Devuelto";
-                }
-                jTEstado.setText(estado);
-            } else {
-                JOptionPane.showMessageDialog(null, "Por Favor Elija algun prestamo para editar");
-            }
-        } else {
-            cargarComboBoxPrestamos();
-
-        }
     }//GEN-LAST:event_jTabbedPane2FocusGained
 
     private void JBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEditarActionPerformed
@@ -697,16 +1224,171 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_JBEditarActionPerformed
 
+     public static Image loadImage(String path) {
+        try {
+            return ImageIO.read(new File(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (!jCBoxPrestamo.getItemAt(jCBoxPrestamo.getSelectedIndex()).toString().isEmpty()) {
             jSDia3.setValue(LocalDate.now().getDayOfMonth());
             jMonMes3.setMonth(Integer.parseInt(LocalDate.now().getMonth().toString()));
             jYAño3.setYear(LocalDate.now().getYear());
             LocalDate fecha = LocalDate.of(jYAño3.getYear(), jMonMes3.getMonth(), Integer.parseInt(jSDia3.getValue().toString()));
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Por Favor Elija algun prestamo para devolver");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTabbedPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane2MouseClicked
+        Prestamo prestamo = null;
+        switch (jTabbedPane2.getSelectedIndex()) {
+            case 0:
+//                Tabla2.addMouseListener(new MouseAdapter() {
+//                    @Override
+//                    public void mouseClicked(MouseEvent e) {
+//                        if (Tabla2.isRowSelected(Tabla2.getSelectedRow())) {
+//                            jBNuevoPrestamo.setEnabled(true);
+//                        } else {
+//                            jBNuevoPrestamo.setEnabled(false);
+//                        }
+//                    }
+//                });
+////                if (Tabla2.isRowSelected(Tabla2.getSelectedRow())) {
+////                    jBNuevoPrestamo.setEnabled(true);
+////                }
+                break;
+            case 1:
+                if (Tabla.isRowSelected(Tabla.getSelectedRow())) {
+                    prestamo = new PrestamoData().buscarPrestamo(Integer.parseInt(modelo.getValueAt(Tabla.getSelectedRow(), 0).toString()));
+                    IdPrestamo.setText(modelo.getValueAt(Tabla.getSelectedRow(), 0).toString());
+                    IdPrestamo.setVisible(true);
+                    jCBoxLibrosEditar.setSelectedItem(new LibroData().buscarLibro(modelo.getValueAt(Tabla.getSelectedRow(), 1).toString()));
+                    jSDia1.setValue(prestamo.getFechaInicio().toLocalDate().getDayOfMonth());
+                    jMonMes1.setMonth(prestamo.getFechaInicio().toLocalDate().getMonthValue());
+                    jYAño1.setYear(prestamo.getFechaInicio().toLocalDate().getYear());
+
+                    jSDia2.setValue(prestamo.getFechaInicio().toLocalDate().plusDays(7).getDayOfMonth());
+                    jMonMes2.setMonth(prestamo.getFechaInicio().toLocalDate().plusDays(7).getMonthValue());
+                    jYAño2.setYear(prestamo.getFechaInicio().toLocalDate().plusDays(7).getYear());
+
+                    jSDia2.setEnabled(false);
+                    jMonMes2.setEnabled(false);
+                    jYAño2.setEnabled(false);
+                    jTNrSocio.setText(String.valueOf(login.getLector().getNroSocio()));
+                    String estado;
+                    if (prestamo.isEstado()) {
+                        estado = "Prestado";
+                    } else if (prestamo.isEstado() && prestamo.getFechaFin() == null) {
+                        estado = "Plazo Vencido";
+                    } else {
+                        estado = "Devuelto";
+                    }
+                    jTEstado.setText(estado);
+                    if (prestamo != null) {
+                        jBNuevoPrestamo.setEnabled(true);
+                    }
+                }
+//            else {
+//                JOptionPane.showMessageDialog(null, "Por Favor Elija algun prestamo para editar");
+//            }
+                break;
+            case 2:
+                cargarComboBoxPrestamos();
+                jSDia3.setValue(prestamo.getFechaInicio().toLocalDate().getDayOfMonth());
+                jMonMes3.setMonth(prestamo.getFechaInicio().toLocalDate().getMonthValue());
+                jYAño3.setYear(prestamo.getFechaInicio().toLocalDate().getYear());
+                break;
+            default:
+                break;
+        }
+
+
+    }//GEN-LAST:event_jTabbedPane2MouseClicked
+
+    private void jTabbedPane2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPane2FocusLost
+        IdPrestamo.setVisible(false);
+        jSDia1.setValue("");
+        jSDia2.setValue("");
+        jTNrSocio.setText("");
+        jTEstado.setText("");
+        jBNuevoPrestamo.setEnabled(false);
+    }//GEN-LAST:event_jTabbedPane2FocusLost
+
+    private void Tabla2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla2MouseClicked
+        if (Tabla2.isRowSelected(Tabla2.getSelectedRow())) {
+//            System.out.println(Tabla2.getSelectedRow());
+jBNuevoPrestamo.setEnabled(true);
+
+        }
+    }//GEN-LAST:event_Tabla2MouseClicked
+
+    private void Tabla2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Tabla2FocusLost
+
+    }//GEN-LAST:event_Tabla2FocusLost
+
+    private void jTextField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2FocusGained
+
+    private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2FocusLost
+
+    private void jTextField2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2KeyReleased
+
+    private void Tabla1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Tabla1MouseClicked
+
+    private void jBNuevoPrestamo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBNuevoPrestamo1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBNuevoPrestamo1ActionPerformed
+
+    private void Tabla3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_Tabla3FocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Tabla3FocusLost
+
+    private void Tabla3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla3MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Tabla3MouseClicked
+
+    private void jTBuscarLibro1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTBuscarLibro1FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTBuscarLibro1FocusGained
+
+    private void jTBuscarLibro1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTBuscarLibro1FocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTBuscarLibro1FocusLost
+
+    private void jTBuscarLibro1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTBuscarLibro1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTBuscarLibro1KeyReleased
+
+    private void JBEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEditar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JBEditar1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTabbedPane3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPane3FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTabbedPane3FocusGained
+
+    private void jTabbedPane3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTabbedPane3FocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTabbedPane3FocusLost
+
+    private void jTabbedPane3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane3MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTabbedPane3MouseClicked
 
     public void cargarComboBox() {
         LibroData libroData = new LibroData();
@@ -716,7 +1398,7 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
 
     public void cargarComboBoxPrestamos() {
         LibroData libroData = new LibroData();
-        DefaultComboBoxModel<Prestamo> mdlCombo = new DefaultComboBoxModel(new PrestamoData().obtenerPrestamos().toArray());
+        DefaultComboBoxModel<Prestamo> mdlCombo = new DefaultComboBoxModel(new PrestamoData().obtenerPrestamosPorLector(login.getLector().getNroSocio()).toArray());
         jCBoxPrestamo.setModel(mdlCombo);
     }
 
@@ -728,9 +1410,8 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         modelo.addColumn("Fecha de Prestamo");
         modelo.addColumn("Fecha de Devolucion");
 
-        Tabla
-                .setDefaultRenderer(Object.class,
-                        new TableGradientCell());
+        Tabla.setDefaultRenderer(Object.class,
+                new TableGradientCell());
         jPModificar.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:30");
         JpanelTabla.putClientProperty(FlatClientProperties.STYLE, ""
@@ -741,8 +1422,8 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                 + "hoverBackground:null;"
                 + "pressedBackground:null;"
                 + "separatorColor:$TableHeader.background");
-//        Tabla.putClientProperty(FlatClientProperties.STYLE, ""
-//                + "foreground:#141026");
+        Tabla.putClientProperty(FlatClientProperties.STYLE, ""
+                + "foreground:#141026");
         scroll.putClientProperty(FlatClientProperties.STYLE, ""
                 + "border:3,0,3,0,$Table.background,10,10");
         scroll.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE, ""
@@ -752,14 +1433,13 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
 
     public void cargarTabla2() {
 
-        Tabla2.setModel(modelo);
+        Tabla2.setModel(modelo2);
         modelo2.addColumn("Titulo");
         modelo2.addColumn("Autor");
         modelo2.addColumn("Disponibilidad");
 
-        Tabla2
-                .setDefaultRenderer(Object.class,
-                        new TableGradientCell());
+        Tabla2.setDefaultRenderer(Object.class,
+                new TableGradientCell());
 
         jPanel1.putClientProperty(FlatClientProperties.STYLE, ""
                 + "border:1,1,1,1,$TableHeader.bottomSeparatorColor,,10");
@@ -767,8 +1447,8 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                 + "hoverBackground:null;"
                 + "pressedBackground:null;"
                 + "separatorColor:$TableHeader.background");
-//        Tabla.putClientProperty(FlatClientProperties.STYLE, ""
-//                + "foreground:#141026");
+        Tabla2.putClientProperty(FlatClientProperties.STYLE, ""
+                + "foreground:#141026");
         scroll2.putClientProperty(FlatClientProperties.STYLE, ""
                 + "border:3,0,3,0,$Table.background,10,10");
         scroll2.getVerticalScrollBar().putClientProperty(FlatClientProperties.STYLE, ""
@@ -783,6 +1463,13 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         }
     }
 
+    private void borrarFilas2() {
+        int f = Tabla2.getRowCount() - 1;
+        for (; f >= 0; f--) {
+            modelo2.removeRow(f);
+        }
+    }
+
     private void SetImageLabel(JLabel labelName, String root) {
         ImageIcon image = new ImageIcon(root);
         Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(), labelName.getHeight(), Image.SCALE_DEFAULT));
@@ -793,28 +1480,58 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel IdPrestamo;
+    private javax.swing.JLabel IdPrestamo1;
     private javax.swing.JButton JBEditar;
+    private javax.swing.JButton JBEditar1;
     private javax.swing.JPanel JPDevolver;
+    private javax.swing.JPanel JPDevolver1;
     private javax.swing.JPanel JPMostrar;
+    private javax.swing.JPanel JPMostrar1;
     private javax.swing.JLabel JlIDPrestamo2;
+    private javax.swing.JLabel JlIDPrestamo3;
     private javax.swing.JPanel JpanelTabla;
+    private javax.swing.JPanel JpanelTabla1;
     private javax.swing.JTable Tabla;
+    private javax.swing.JTable Tabla1;
     private javax.swing.JTable Tabla2;
+    private javax.swing.JTable Tabla3;
     private javax.swing.JButton jBFiltrar;
+    private javax.swing.JButton jBFiltrar1;
     private javax.swing.JButton jBNuevoPrestamo;
+    private javax.swing.JButton jBNuevoPrestamo1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<Libro> jCBoxLibrosEditar;
+    private javax.swing.JComboBox<Libro> jCBoxLibrosEditar1;
     private javax.swing.JComboBox<Prestamo> jCBoxPrestamo;
+    private javax.swing.JComboBox<Prestamo> jCBoxPrestamo1;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -825,23 +1542,45 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
     private com.toedter.calendar.JMonthChooser jMonMes1;
     private com.toedter.calendar.JMonthChooser jMonMes2;
     private com.toedter.calendar.JMonthChooser jMonMes3;
+    private com.toedter.calendar.JMonthChooser jMonMes4;
+    private com.toedter.calendar.JMonthChooser jMonMes5;
+    private com.toedter.calendar.JMonthChooser jMonMes6;
+    private com.toedter.calendar.JMonthChooser jMonMes7;
     private javax.swing.JPanel jPModificar;
+    private javax.swing.JPanel jPModificar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JSpinner jSDia;
     private javax.swing.JSpinner jSDia1;
     private javax.swing.JSpinner jSDia2;
     private javax.swing.JSpinner jSDia3;
+    private javax.swing.JSpinner jSDia4;
+    private javax.swing.JSpinner jSDia5;
+    private javax.swing.JSpinner jSDia6;
+    private javax.swing.JSpinner jSDia7;
     private javax.swing.JTextField jTBuscarLibro;
+    private javax.swing.JTextField jTBuscarLibro1;
     private javax.swing.JTextField jTEstado;
+    private javax.swing.JTextField jTEstado1;
     private javax.swing.JTextField jTNrSocio;
+    private javax.swing.JTextField jTNrSocio1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private com.toedter.calendar.JYearChooser jYAño;
     private com.toedter.calendar.JYearChooser jYAño1;
     private com.toedter.calendar.JYearChooser jYAño2;
     private com.toedter.calendar.JYearChooser jYAño3;
+    private com.toedter.calendar.JYearChooser jYAño4;
+    private com.toedter.calendar.JYearChooser jYAño5;
+    private com.toedter.calendar.JYearChooser jYAño6;
+    private com.toedter.calendar.JYearChooser jYAño7;
     private javax.swing.JScrollPane scroll;
+    private javax.swing.JScrollPane scroll1;
     private javax.swing.JScrollPane scroll2;
+    private javax.swing.JScrollPane scroll3;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,18 +5,20 @@ import java.awt.Component;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
-
 public class TableGradientCell extends DefaultTableCellRenderer {
 
     public TableGradientCell() {
-        this(Color.decode("#009FFF"), Color.decode("#ec2F4B"));
+        this(Color.decode("#5F0A87"), Color.decode("#A4508B"));
     }
 
     public TableGradientCell(Color color1, Color color2) {
@@ -41,9 +43,20 @@ public class TableGradientCell extends DefaultTableCellRenderer {
         this.setHorizontalAlignment(SwingConstants.CENTER);
         this.isSelected = isSelected;
         this.row = row;
+        
+        if (column == 2 && value instanceof Image) {
+        Image image = (Image) value;
+        ImageIcon icon = new ImageIcon(image.getScaledInstance(20, 20, Image.SCALE_SMOOTH)); // Ajusta el tamaño de la imagen
+        setIcon(icon);
+        setText(""); // Limpiar el texto en la celda
+    } else {
+        // Si no estamos en la columna 2 o el valor no es una imagen, asegúrate de no mostrar el icono
+        setIcon(null);
+        setText(value == null ? "" : value.toString());
+    }
+
         return com;
     }
-    
     
 
     @Override
@@ -53,7 +66,7 @@ public class TableGradientCell extends DefaultTableCellRenderer {
             g2.setPaint(new GradientPaint(x, 0, color1, width, 0, color2));
             g2.fill(new Rectangle2D.Double(0, 0, getWidth(), getHeight()));
         } else if (row % 2 == 0) {
-            g2.setPaint(new GradientPaint(x, 0, Color.decode("#62337D"), width, 0, Color.decode("#434343")));
+            g2.setPaint(new GradientPaint(x, 0, Color.decode("#FFA69E"), width, 0, Color.decode("#861657")));
             g2.fill(new Rectangle2D.Double(0, 0, getWidth(), getHeight()));
         }
         g2.dispose();
