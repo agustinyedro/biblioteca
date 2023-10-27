@@ -2,6 +2,7 @@
 package biblioteca.Vista;
 
 import static biblioteca.Vista.VistaRegistrarse.validarEmail;
+import com.formdev.flatlaf.FlatClientProperties;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -22,6 +23,8 @@ public class VistaPerfil extends javax.swing.JInternalFrame {
        // SetImageLabel(jLPersonita,"src/iconos/woman.png");
         setSize(1100,670);
         cargarComboBox();
+        jPanel1.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:60");
         
         
         
