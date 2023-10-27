@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package biblioteca.Vista;
 
 //import biblioteca75.Login;
@@ -13,6 +10,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 //import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -29,7 +27,9 @@ public class MenuTest extends javax.swing.JFrame {
         setTitle("ALERLO");
         //Icono
         setIconImage(new ImageIcon(getClass().getResource("/iconos/icono75.png")).getImage());
-//        this.setIconImage(Toolkit.getDefaultToolkit().getImage("src/iconos/Recurso 15.svg"));
+//    
+this.setIconImage(Toolkit.getDefaultToolkit().getImage("src/iconos/Recurso 15.svg"));
+   setLocationRelativeTo(null);
     }
 
     /**
@@ -39,27 +39,23 @@ public class MenuTest extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        VistaLogin = new javax.swing.JButton();
-        VistaRegistrarse = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        VistaIngreso = new javax.swing.JButton();
         VistaRecuperarContraseña = new javax.swing.JButton();
         PantallaInicio = new javax.swing.JButton();
-        VistaIngreso = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        VistaRegistrarse = new javax.swing.JButton();
+        VistaLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(148, 201, 151));
         setIconImages(null);
 
-        VistaLogin.setText("VistaLogin");
-        VistaLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VistaLoginActionPerformed(evt);
-            }
-        });
+        jPanel1.setBackground(new java.awt.Color(178, 135, 163));
 
-        VistaRegistrarse.setText("VistaRegistrarse");
-        VistaRegistrarse.addActionListener(new java.awt.event.ActionListener() {
+        VistaIngreso.setText("VistaIngreso");
+        VistaIngreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VistaRegistrarseActionPerformed(evt);
+                VistaIngresoActionPerformed(evt);
             }
         });
 
@@ -77,51 +73,63 @@ public class MenuTest extends javax.swing.JFrame {
             }
         });
 
-        VistaIngreso.setText("VistaIngreso");
-        VistaIngreso.addActionListener(new java.awt.event.ActionListener() {
+        VistaRegistrarse.setText("VistaRegistrarse");
+        VistaRegistrarse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VistaIngresoActionPerformed(evt);
+                VistaRegistrarseActionPerformed(evt);
             }
         });
 
-        jTextField1.setText("                     VistaInicio");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        VistaLogin.setText("VistaLogin");
+        VistaLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                VistaLoginActionPerformed(evt);
             }
         });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 245, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(VistaIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                        .addComponent(PantallaInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(VistaRecuperarContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(VistaRegistrarse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(VistaLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addContainerGap()))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 499, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(VistaLogin)
+                    .addGap(18, 18, 18)
+                    .addComponent(VistaRegistrarse)
+                    .addGap(18, 18, 18)
+                    .addComponent(PantallaInicio)
+                    .addGap(18, 18, 18)
+                    .addComponent(VistaRecuperarContraseña)
+                    .addGap(18, 18, 18)
+                    .addComponent(VistaIngreso)
+                    .addContainerGap(291, Short.MAX_VALUE)))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(VistaIngreso, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                    .addComponent(PantallaInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(VistaRecuperarContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(VistaRegistrarse, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(VistaLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(VistaLogin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(VistaRegistrarse)
-                .addGap(18, 18, 18)
-                .addComponent(PantallaInicio)
-                .addGap(18, 18, 18)
-                .addComponent(VistaRecuperarContraseña)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(VistaIngreso)
-                .addContainerGap(244, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -153,11 +161,6 @@ public class MenuTest extends javax.swing.JFrame {
         r.setVisible(true);
     }//GEN-LAST:event_VistaIngresoActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        VistaInicio r =new VistaInicio();
-        r.setVisible(true);
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -173,6 +176,10 @@ public class MenuTest extends javax.swing.JFrame {
             }
         });
     }
+    
+    
+    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton PantallaInicio;
@@ -180,6 +187,6 @@ public class MenuTest extends javax.swing.JFrame {
     private javax.swing.JButton VistaLogin;
     private javax.swing.JButton VistaRecuperarContraseña;
     private javax.swing.JButton VistaRegistrarse;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
