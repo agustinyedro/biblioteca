@@ -104,7 +104,7 @@ public class Prestamo {
 
     @Override
     public String toString() {
-        return  idPrestamo + ejemplar.getLibro().getTitulo();
+        return  idPrestamo + ", "+ejemplar.getLibro().getTitulo();
     }
     
 }
