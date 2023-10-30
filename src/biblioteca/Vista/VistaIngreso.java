@@ -351,8 +351,7 @@ public class VistaIngreso extends javax.swing.JFrame {
         jLNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLNombre.setForeground(new java.awt.Color(255, 255, 255));
         jLNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLNombre.setText("jLabel1");
-        MenuAmpliado.add(jLNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 70, -1));
+        MenuAmpliado.add(jLNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 70, 30));
 
         getContentPane().add(MenuAmpliado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 720));
 
@@ -377,7 +376,7 @@ public class VistaIngreso extends javax.swing.JFrame {
             jPLibros1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPLibros1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLibros1, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE))
+                .addComponent(jLibros1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPLibros1Layout.setVerticalGroup(
             jPLibros1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -399,7 +398,7 @@ public class VistaIngreso extends javax.swing.JFrame {
             jPPrestamos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPrestamos1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLprestamos1, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE))
+                .addComponent(jLprestamos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPPrestamos1Layout.setVerticalGroup(
             jPPrestamos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -421,7 +420,7 @@ public class VistaIngreso extends javax.swing.JFrame {
             JPInicio1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPInicio1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JLperfil3, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE))
+                .addComponent(JLperfil3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         JPInicio1Layout.setVerticalGroup(
             JPInicio1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -454,7 +453,7 @@ public class VistaIngreso extends javax.swing.JFrame {
             jPLogout1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPLogout1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLogout1, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE))
+                .addComponent(jLogout1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPLogout1Layout.setVerticalGroup(
             jPLogout1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

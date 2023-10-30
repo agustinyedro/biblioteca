@@ -61,6 +61,8 @@ public final class VistaLibro extends javax.swing.JInternalFrame {
 
         cargarTabla();
         this.add(scrollPane);
+        jPanel1.putClientProperty(FlatClientProperties.STYLE, ""
+                + "arc:60");
 
     }
 
@@ -173,7 +175,7 @@ public final class VistaLibro extends javax.swing.JInternalFrame {
             }
         });
 
-        jBAgregar.setText("Agregar");
+        jBAgregar.setText("Nuevo Préstamo");
         jBAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jBAgregarMouseClicked(evt);
@@ -232,8 +234,9 @@ public final class VistaLibro extends javax.swing.JInternalFrame {
                         .addComponent(verificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(408, 408, 408)
                         .addComponent(jBReservar)
-                        .addGap(26, 26, 26)
-                        .addComponent(jBAgregar))
+                        .addGap(18, 18, 18)
+                        .addComponent(jBAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1)
                         .addGap(34, 34, 34)))
