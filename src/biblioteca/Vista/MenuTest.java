@@ -1,4 +1,3 @@
-
 package biblioteca.Vista;
 
 //import biblioteca75.Login;
@@ -27,9 +26,7 @@ public class MenuTest extends javax.swing.JFrame {
         setTitle("ALERLO");
         //Icono
         setIconImage(new ImageIcon(getClass().getResource("/iconos/iconoApp2.png")).getImage());
-//    
-this.setIconImage(Toolkit.getDefaultToolkit().getImage("src/iconos/Recurso 15.svg"));
-   setLocationRelativeTo(null);
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -136,7 +133,7 @@ this.setIconImage(Toolkit.getDefaultToolkit().getImage("src/iconos/Recurso 15.sv
     }// </editor-fold>//GEN-END:initComponents
 
     private void VistaLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VistaLoginActionPerformed
-        
+
         VistaLogin p = new VistaLogin();
         p.setVisible(true);
     }//GEN-LAST:event_VistaLoginActionPerformed
@@ -165,10 +162,10 @@ this.setIconImage(Toolkit.getDefaultToolkit().getImage("src/iconos/Recurso 15.sv
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
+
         FlatSolarizedLightIJTheme.registerCustomDefaultsSource("style");
         FlatSolarizedLightIJTheme.setup();
-        
+
 //        FlatMacDarkLaf.setup();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -176,9 +173,6 @@ this.setIconImage(Toolkit.getDefaultToolkit().getImage("src/iconos/Recurso 15.sv
             }
         });
     }
-    
-    
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

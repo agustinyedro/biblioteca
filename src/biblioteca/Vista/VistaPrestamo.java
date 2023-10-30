@@ -78,7 +78,7 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
     public void spinerLimite() {
         jSDia.setModel(new SpinnerNumberModel(LocalDate.now().getDayOfMonth(), 0, 31, 1));
 
-        jSDia3.setModel(new SpinnerNumberModel(0, 0, 31, 1));
+        jSDia3.setModel(new SpinnerNumberModel(LocalDate.now().getDayOfMonth(), 0, 31, 1));
     }
 
     @SuppressWarnings("unchecked")
@@ -373,7 +373,7 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         jLabel5.setText("Fecha Prestamo");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel6.setText("Fecha Devolucion");
+        jLabel6.setText("Fecha a Devolver");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel7.setText("Nr Socio");

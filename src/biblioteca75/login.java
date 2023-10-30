@@ -1,20 +1,20 @@
 package biblioteca75;
 
-
 public class Login {
-    
-    
+
+    private String nombreImg;
     private int idLogin;
     private String usuario;
     private String contrasenia;
-   private Lector lector;
+    private Lector lector;
     private String pregunta;
     private String respueta;
 
     public Login() {
     }
 
-    public Login(int idLogin, String usuario, String contrasenia, Lector lector, String pregunta, String respueta) {
+    public Login(String nombreImg, int idLogin, String usuario, String contrasenia, Lector lector, String pregunta, String respueta) {
+        this.nombreImg = nombreImg;
         this.idLogin = idLogin;
         this.usuario = usuario;
         this.contrasenia = contrasenia;
@@ -23,12 +23,21 @@ public class Login {
         this.respueta = respueta;
     }
 
-    public Login(String usuario, String contrasenia, Lector lector, String pregunta, String respueta) {
+    public Login(String nombreImg, String usuario, String contrasenia, Lector lector, String pregunta, String respueta) {
+        this.nombreImg = nombreImg;
         this.usuario = usuario;
         this.contrasenia = contrasenia;
         this.lector = lector;
         this.pregunta = pregunta;
         this.respueta = respueta;
+    }
+
+    public String getNombreImg() {
+        return nombreImg;
+    }
+
+    public void setNombreImg(String nombreImg) {
+        this.nombreImg = nombreImg;
     }
 
     public int getIdLogin() {
@@ -84,5 +93,4 @@ public class Login {
         return "login{" + "idLogin=" + idLogin + ", usuario=" + usuario + ", contrasenia=" + contrasenia + ", lector=" + lector + ", pregunta=" + pregunta + ", respueta=" + respueta + '}';
     }
 
-    
 }

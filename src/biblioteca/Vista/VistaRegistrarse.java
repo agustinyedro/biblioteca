@@ -460,7 +460,7 @@ public class VistaRegistrarse extends javax.swing.JFrame {
                 String pregunta = jComboBoxPreg.getSelectedItem().toString();
                 String respuesta = jTextRespuesta.getText();
 
-                Login login = new Login(usuario, contrasenia, lector, pregunta, respuesta);
+                Login login = new Login("imagen6.png",usuario, contrasenia, lector, pregunta, respuesta);
                 LoginData loginData = new LoginData();
                 loginData.guardarLogin(login);
 

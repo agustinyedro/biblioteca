@@ -31,7 +31,7 @@ public class VistaIngreso extends javax.swing.JFrame {
         login = new Login();
         initComponents();
         jPanel1.setVisible(false);
-//        SetImageLabel(jLlibrito1, "src/iconos/Sunday Lounge.jpg");
+        SetImageLabel(jLlibrito1, "src/iconos/"+login.getRespueta()+".jpg");
         panelesRedondos();
 //        asociarPaneles();
         MenuAmpliado.setVisible(false);
