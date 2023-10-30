@@ -379,11 +379,10 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="jLabel1"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="110" y="70" width="70" height="-1"/>
+              <AbsoluteConstraints x="110" y="40" width="70" height="30"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -425,7 +424,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLibros1" pref="54" max="32767" attributes="0"/>
+                      <Component id="jLibros1" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -467,7 +466,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLprestamos1" pref="54" max="32767" attributes="0"/>
+                      <Component id="jLprestamos1" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -509,7 +508,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="JLperfil3" pref="54" max="32767" attributes="0"/>
+                      <Component id="JLperfil3" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -551,7 +550,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLogout1" pref="54" max="32767" attributes="0"/>
+                      <Component id="jLogout1" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
