@@ -33,6 +33,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.TabableView;
+import org.mariadb.jdbc.plugin.codec.LocalDateCodec;
 
 public class VistaPrestamo extends javax.swing.JInternalFrame {
 
@@ -601,7 +602,7 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         for (Prestamo prod : prestamoData.obtenerPrestamos()) {
             Ejemplar ejemplar = ejemplarData.buscarEjemplar(prod.getEjemplar().getCodigo());
             Libro libro = libroData.buscarLibro(String.valueOf(ejemplar.getLibro().getIdLibro()));
-            System.out.println(libro);
+//            System.out.println(libro);
             if ((libro.getTitulo().toLowerCase().contains(jTextField1.getText()) || libro.getTitulo().toLowerCase().startsWith(jTextField1.getText()) || prod.getFechaFin().toString().toLowerCase().startsWith(jTextField1.getText()) || prod.getFechaInicio().toString().toLowerCase().startsWith(jTextField1.getText())) && prod.getLector().getNroSocio() == login.getLector().getNroSocio()) {
                 if (!jTextField1.getText().isEmpty()) {
                     modelo.addRow(new Object[]{prod.getIdPrestamo(), libro.getTitulo(), prod.getFechaInicio(), prod.getFechaFin()});
@@ -730,12 +731,12 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
 //            System.out.println("hoal " + Tabla2.isRowSelected(Tabla2.getSelectedRow()));
         Prestamo presta = new Prestamo();
         Ejemplar ejemplar = null;
-        System.out.println(Tabla2.getSelectedRow());
+//        System.out.println(Tabla2.getSelectedRow());
         new LibroData().listarLibros().forEach(lib -> {
             if (lib.getTitulo().equals(modelo2.getValueAt(Tabla2.getSelectedRow(), 0).toString())) {
                 new EjemplarData().listarEjemplar().forEach(action -> {
                     if (action.getLibro().getIdLibro() == lib.getIdLibro() && action.getCantidadDeEjemplares() != 0 && action.isEstado()) {
-                        System.out.println(lib);
+//                        System.out.println(lib);
                         presta.setEjemplar(action);
                     }
                 });
@@ -829,10 +830,25 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                 break;
             case 1:
                 if (Tabla.isRowSelected(Tabla.getSelectedRow())) {
+                    IdPrestamo.setVisible(true);
+                    jCBoxLibrosEditar.setEnabled(true);
+                    jSDia1.setEnabled(true);
+                    jMonMes1.setEnabled(true);
+                    jYAño1.setEnabled(true);
+
                     prestamo = new PrestamoData().buscarPrestamo(Integer.parseInt(modelo.getValueAt(Tabla.getSelectedRow(), 0).toString()));
                     IdPrestamo.setText(modelo.getValueAt(Tabla.getSelectedRow(), 0).toString());
                     IdPrestamo.setVisible(true);
-                    jCBoxLibrosEditar.setSelectedItem(new LibroData().buscarLibro(modelo.getValueAt(Tabla.getSelectedRow(), 1).toString()));
+
+                    Ejemplar ejemplar = new EjemplarData().buscarEjemplar(prestamo.getEjemplar().getCodigo());
+
+                    new LibroData().listarLibros().forEach(action -> {
+
+                        if (action.getIdLibro() == ejemplar.getLibro().getIdLibro()) {
+//                            System.out.println(action);
+                            jCBoxLibrosEditar.setSelectedItem(action);
+                        }
+                    });
                     jSDia1.setModel(new SpinnerNumberModel(prestamo.getFechaInicio().toLocalDate().getDayOfMonth(), 0, 31, 1));
                     jMonMes1.setMonth(prestamo.getFechaInicio().toLocalDate().getMonthValue());
                     jYAño1.setYear(prestamo.getFechaInicio().toLocalDate().getYear());
@@ -840,9 +856,6 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                     jMonMes2.setMonth(prestamo.getFechaInicio().toLocalDate().plusDays(7).getMonthValue());
                     jYAño2.setYear(prestamo.getFechaInicio().toLocalDate().plusDays(7).getYear());
 
-                    jSDia2.setEnabled(false);
-                    jMonMes2.setEnabled(false);
-                    jYAño2.setEnabled(false);
                     jTNrSocio.setText(String.valueOf(login.getLector().getNroSocio()));
                     String estado;
                     if (prestamo.isEstado()) {
@@ -854,12 +867,22 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                     }
                     jTEstado.setText(estado);
                     if (prestamo != null) {
-                        jBNuevoPrestamo.setEnabled(true);
+                        JBEditar.setEnabled(true);
                     }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Por Favor Elija algun prestamo para editar");
+                    IdPrestamo.setVisible(false);
+                    jCBoxLibrosEditar.setEnabled(false);
+                    jTNrSocio.setEnabled(false);
+                    jSDia1.setEnabled(false);
+                    jMonMes1.setEnabled(false);
+                    jYAño1.setEnabled(false);
+                    jSDia2.setEnabled(false);
+                    jMonMes2.setEnabled(false);
+                    jYAño2.setEnabled(false);
+                    jTEstado.setEnabled(false);
+                    JBEditar.setEnabled(false);
                 }
-//            else {
-//                JOptionPane.showMessageDialog(null, "Por Favor Elija algun prestamo para editar");
-//            }
                 break;
             case 2:
                 cargarComboBoxPrestamos();
@@ -906,8 +929,11 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         }
 
         if (prestamo != null) {
-            jSDia2.setModel(new SpinnerNumberModel(prestamo.getFechaInicio().toLocalDate().plusDays(7).getDayOfMonth(), 0, 31, 1));
-            
+            int dia = (int) jSDia1.getValue();
+            LocalDate fecha = LocalDate.of(jYAño.getYear(), jMonMes.getMonth(), dia);
+//            System.out.println(fecha);
+            jSDia2.setModel(new SpinnerNumberModel(fecha.plusDays(7).getDayOfMonth(), 0, 31, 1));
+
         }
 
     }//GEN-LAST:event_jSDia1StateChanged
