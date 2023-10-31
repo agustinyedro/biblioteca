@@ -7,6 +7,8 @@ package biblioteca.Vista;
 import biblioteca.AccesoData.*;
 import biblioteca75.*;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -16,11 +18,12 @@ import javax.swing.DefaultComboBoxModel;
  * @author USURIO
  */
 public class VistaRecuperarContraseña extends javax.swing.JFrame {
-    
+
     private Lector lector;
     private LectorData lectorData;
     private LoginData loginData;
     private boolean pregunta = true;
+    private boolean login = false;
 
     /**
      * Creates new form VistaRecuperarContraseña
@@ -412,7 +415,7 @@ public class VistaRecuperarContraseña extends javax.swing.JFrame {
         Login usuario = loginData.buscarLoginPorUsuario(jTxtUsuario.getText());
         if (pregunta) {
             loginData = new LoginData();
-            
+
             try {
                 //                usuario = loginData.buscarLoginPorUsuario(jTxtUsuario.getText());
 
@@ -430,9 +433,8 @@ public class VistaRecuperarContraseña extends javax.swing.JFrame {
                     jSUsuario.setVisible(false);
                     jSRespuesta.setVisible(pregunta);
                     jButton1.setText("crear");
-                }
-                else{
-                    
+                } else {
+
                     JtErrorPregunta.setText("La pregunta o la respuesta no coiciden");
                     JtErrorPregunta.setForeground(Color.red);
                     JtErrorPregunta.setVisible(true);
@@ -441,9 +443,8 @@ public class VistaRecuperarContraseña extends javax.swing.JFrame {
                     jSUsuario.setBackground(Color.red);
                     jSUsuario.setForeground(Color.red);
                 }
-                
-            } 
-            catch (NullPointerException e) {
+
+            } catch (NullPointerException e) {
                 //                jLerror.setForeground(Color.red);
                 //                jLerror.setText("*Usuario y/o contraseña incorrecto");
                 //                jLerror.setVisible(true);
@@ -452,12 +453,38 @@ public class VistaRecuperarContraseña extends javax.swing.JFrame {
                 //                jSeparator2.setForeground(Color.red);
                 //                jSeparator2.setBackground(Color.red);
 
-            } 
-            finally {
+            } finally {
                 panelRound1.requestFocus();
             }
-        } 
-        else {
+        } else if (login == true) {
+            if (String.valueOf(jPasswordField1.getPassword()).equalsIgnoreCase(String.valueOf(jPasswordField2.getPassword()))) {
+                lectorData = new LectorData();
+                lector = lectorData.buscarLector(usuario.getLector().getNroSocio());
+                usuario.setLector(lector);
+                usuario.setPregunta(usuario.getPregunta());
+                usuario.setRespueta(usuario.getRespueta());
+                usuario.setIdLogin(usuario.getIdLogin());
+                usuario.setUsuario(usuario.getUsuario());
+                usuario.setContrasenia(String.valueOf(jPasswordField1.getPassword()));
+                loginData.modificarLogin(usuario);
+                this.setVisible(false);
+                this.setLocationRelativeTo(null);
+                jLabel4.addMouseListener(new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                      new VistaRecuperarContraseña().setVisible(false);
+                    }
+                });
+            } else {
+                passwoe1.setText("Las contraseñas no coiciden");
+                passwoe1.setForeground(Color.red);
+                jSeparator1.setForeground(Color.RED);
+                jSeparator1.setBackground(Color.RED);
+                jSeparator2.setForeground(Color.RED);
+                jSeparator2.setBackground(Color.RED);
+            }
+
+        } else {
             if (String.valueOf(jPasswordField1.getPassword()).equalsIgnoreCase(String.valueOf(jPasswordField2.getPassword()))) {
                 lectorData = new LectorData();
                 lector = lectorData.buscarLector(usuario.getLector().getNroSocio());
@@ -471,8 +498,7 @@ public class VistaRecuperarContraseña extends javax.swing.JFrame {
                 this.setVisible(false);
                 VistaLogin s = new VistaLogin();
                 s.setVisible(true);
-            }
-            else {
+            } else {
                 passwoe1.setText("Las contraseñas no coiciden");
                 passwoe1.setForeground(Color.red);
                 jSeparator1.setForeground(Color.RED);
@@ -520,19 +546,28 @@ public class VistaRecuperarContraseña extends javax.swing.JFrame {
 
     public List<String> preguntas() {
         List<String> prefuntas = new ArrayList<>();
-        
+
         prefuntas.add("¿Como se llamaba tu primer pareja?");
         prefuntas.add("¿Como se llamaba tu primer mascota?");
         prefuntas.add("¿Cual es tu lugar favorito?");
         prefuntas.add("¿Cual es tu juego favorito?");
-        
+
         return prefuntas;
     }
-    
+
     public void cargarCombo() {
         DefaultComboBoxModel<String> mdlCombo = new DefaultComboBoxModel(preguntas().toArray());
         jComboBox1.setModel(mdlCombo);
     }
+
+    public boolean isLogin() {
+        return login;
+    }
+
+    public void setLogin(boolean login) {
+        this.login = login;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JtErrorPregunta;

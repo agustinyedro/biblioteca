@@ -53,6 +53,7 @@ public class TableGradientCell extends DefaultTableCellRenderer {
         // Si no estamos en la columna 2 o el valor no es una imagen, asegúrate de no mostrar el icono
         setIcon(null);
         setText(value == null ? "" : value.toString());
+            setForeground(new Color(20,16,38));
     }
 
         return com;

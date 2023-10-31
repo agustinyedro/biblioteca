@@ -61,7 +61,7 @@ public class LoginData {
 
     public void modificarLogin(Login login) {
 
-        String sql = "UPDATE login SET usuario = ? , contraseña = ? , idLector=?, pregunta=? , respuesta = ? nombreImg WHERE idLogin = ?";
+        String sql = "UPDATE login SET usuario = ? , contraseña = ? , idLector=?, pregunta=? , respuesta = ?, nombreImg =? WHERE idLogin = ?";
         PreparedStatement ps = null;
 
         try {

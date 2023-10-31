@@ -266,7 +266,7 @@ public class VistaLogin extends javax.swing.JFrame {
                 VistaIngreso menu = new VistaIngreso(usuario);
 
                 PantallaDeInicio p = new PantallaDeInicio();
-                p.setVisible(false);
+                p.dispose();
                 menu.setLogin(usuario);
                 menu.setVisible(true);
                 this.setVisible(false);

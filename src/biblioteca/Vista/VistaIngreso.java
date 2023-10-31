@@ -26,6 +26,7 @@ public class VistaIngreso extends javax.swing.JFrame {
 
     private Login login;
     private int tamañoDeEscritorio;
+    private boolean perfil = false;
 
     public VistaIngreso(Login login) {
         this.login = login;
@@ -37,6 +38,14 @@ public class VistaIngreso extends javax.swing.JFrame {
         MenuAmpliado.setVisible(false);
         jPanel1.setBackground(new Color(0, 0, 0, 0));
         setLocationRelativeTo(null);
+    }
+
+    public boolean isPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(boolean perfil) {
+        this.perfil = perfil;
     }
 
     public JPanel[] paneles() {
@@ -81,7 +90,7 @@ public class VistaIngreso extends javax.swing.JFrame {
                 + "arc:30;");
     }
 
-    private void SetImageLabel(JLabel labelName, String root) {
+    public void SetImageLabel(JLabel labelName, String root) {
         ImageIcon image = new ImageIcon(root);
         Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(), labelName.getHeight(), Image.SCALE_DEFAULT));
         labelName.setIcon(icon);
@@ -92,7 +101,7 @@ public class VistaIngreso extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jImg = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         MenuAmpliado = new javax.swing.JPanel();
         jLlibrito = new javax.swing.JLabel();
@@ -104,6 +113,8 @@ public class VistaIngreso extends javax.swing.JFrame {
         jLprestamos = new javax.swing.JLabel();
         jPLibros = new javax.swing.JPanel();
         jLibros = new javax.swing.JLabel();
+        jPPremium = new javax.swing.JPanel();
+        jLPremium = new javax.swing.JLabel();
         jPLogout = new javax.swing.JPanel();
         jLogout = new javax.swing.JLabel();
         jLNombre = new javax.swing.JLabel();
@@ -115,13 +126,15 @@ public class VistaIngreso extends javax.swing.JFrame {
         jLprestamos1 = new javax.swing.JLabel();
         JPInicio1 = new javax.swing.JPanel();
         JLperfil3 = new javax.swing.JLabel();
+        jPPremium1 = new javax.swing.JPanel();
+        jLPremium1 = new javax.swing.JLabel();
         jPLogout1 = new javax.swing.JPanel();
         jLogout1 = new javax.swing.JLabel();
         JPPerfil1 = new javax.swing.JPanel();
         JLperfil2 = new javax.swing.JLabel();
         escritorio = new javax.swing.JDesktopPane();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 204, 204));
         setForeground(new java.awt.Color(255, 204, 255));
         setMinimumSize(new java.awt.Dimension(1290, 760));
@@ -132,7 +145,7 @@ public class VistaIngreso extends javax.swing.JFrame {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 50, 50));
+        getContentPane().add(jImg, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 50, 50));
 
         jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -314,6 +327,44 @@ public class VistaIngreso extends javax.swing.JFrame {
 
         MenuAmpliado.add(jPLibros, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 420, 270, 43));
 
+        jPPremium.setBackground(new java.awt.Color(98, 51, 125));
+
+        jLPremium.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jLPremium.setForeground(new java.awt.Color(255, 255, 255));
+        jLPremium.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/diamante182.png"))); // NOI18N
+        jLPremium.setText("Premium");
+        jLPremium.setFocusCycleRoot(true);
+        jLPremium.setIconTextGap(50);
+        jLPremium.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLPremiumMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLPremiumMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLPremiumMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPPremiumLayout = new javax.swing.GroupLayout(jPPremium);
+        jPPremium.setLayout(jPPremiumLayout);
+        jPPremiumLayout.setHorizontalGroup(
+            jPPremiumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPremiumLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLPremium, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
+        );
+        jPPremiumLayout.setVerticalGroup(
+            jPPremiumLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPremiumLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLPremium, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        MenuAmpliado.add(jPPremium, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 610, 270, 43));
+
         jPLogout.setBackground(new java.awt.Color(98, 51, 125));
 
         jLogout.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
@@ -434,6 +485,39 @@ public class VistaIngreso extends javax.swing.JFrame {
 
         MenuAcotado.add(JPInicio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 60, 43));
 
+        jPPremium1.setBackground(new java.awt.Color(98, 51, 125));
+
+        jLPremium1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        jLPremium1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/diamante182.png"))); // NOI18N
+        jLPremium1.setFocusCycleRoot(true);
+        jLPremium1.setIconTextGap(50);
+        jLPremium1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLPremium1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLPremium1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jLPremium1MouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPPremium1Layout = new javax.swing.GroupLayout(jPPremium1);
+        jPPremium1.setLayout(jPPremium1Layout);
+        jPPremium1Layout.setHorizontalGroup(
+            jPPremium1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPPremium1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLPremium1, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE))
+        );
+        jPPremium1Layout.setVerticalGroup(
+            jPPremium1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLPremium1, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+        );
+
+        MenuAcotado.add(jPPremium1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 610, 60, 43));
+
         jPLogout1.setBackground(new java.awt.Color(98, 51, 125));
 
         jLogout1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
@@ -528,27 +612,46 @@ public class VistaIngreso extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         jLNombre.setText(login.getLector().getNombre());
         if (login.getNombreImg() == null) {
-            SetImageLabel(jLabel1, "src/iconos/perfil/imagen6.png");
+            SetImageLabel(jImg, "src/iconos/perfil/imagen6.png");
         } else {
-            SetImageLabel(jLabel1, "src/iconos/perfil/" + login.getNombreImg());
+            SetImageLabel(jImg, "src/iconos/perfil/" + login.getNombreImg());
 
         }
 
-        escritorio.removeAll();
-        escritorio.repaint();
-        VistaInicio materiaView = new VistaInicio();
-        Dimension descot = escritorio.getSize();
-        materiaView.setSize(descot);
-        materiaView.setVisible(true);
-        BasicInternalFrameUI internalFrameUI = (BasicInternalFrameUI) materiaView.getUI();
-        internalFrameUI.setNorthPane(null);
-        materiaView.setBorder(null);
-        materiaView.setBackground(new Color(0, 0, 0, 0));
-        achicarMenu();
-        materiaView.requestFocus();
-        escritorio.add(materiaView);
-        escritorio.moveToFront(materiaView);
-        darleColorPanel(JPInicio, JPInicio1);
+        if (perfil == false) {
+            escritorio.removeAll();
+            escritorio.repaint();
+            VistaInicio materiaView = new VistaInicio();
+            Dimension descot = escritorio.getSize();
+            materiaView.setSize(descot);
+            materiaView.setVisible(true);
+            BasicInternalFrameUI internalFrameUI = (BasicInternalFrameUI) materiaView.getUI();
+            internalFrameUI.setNorthPane(null);
+            materiaView.setBorder(null);
+            materiaView.setBackground(new Color(0, 0, 0, 0));
+            achicarMenu();
+            materiaView.requestFocus();
+            escritorio.add(materiaView);
+            escritorio.moveToFront(materiaView);
+            darleColorPanel(JPInicio, JPInicio1);
+        } else {
+            escritorio.removeAll();
+            escritorio.repaint();
+            VistaPerfil materiaView = new VistaPerfil(login);
+            Dimension descot = escritorio.getSize();
+            materiaView.setSize(descot);
+            materiaView.setVisible(true);
+            BasicInternalFrameUI internalFrameUI = (BasicInternalFrameUI) materiaView.getUI();
+            internalFrameUI.setNorthPane(null);
+            materiaView.setBorder(null);
+            materiaView.setBackground(new Color(0, 0, 0, 0));
+            achicarMenu();
+//        materiaView.setLogin(login);
+            escritorio.add(materiaView);
+            escritorio.moveToFront(materiaView);
+            darleColorPanel(JPPerfil, JPPerfil1);
+        }
+
 
     }//GEN-LAST:event_formWindowOpened
 
@@ -708,6 +811,30 @@ public class VistaIngreso extends javax.swing.JFrame {
         materiaView.setLogin(login);
     }//GEN-LAST:event_jLibrosMouseClicked
 
+    private void jLPremiumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLPremiumMouseClicked
+        new VistaPremium().setVisible(true);
+    }//GEN-LAST:event_jLPremiumMouseClicked
+
+    private void jLPremiumMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLPremiumMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLPremiumMouseEntered
+
+    private void jLPremiumMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLPremiumMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLPremiumMouseExited
+
+    private void jLPremium1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLPremium1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLPremium1MouseClicked
+
+    private void jLPremium1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLPremium1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLPremium1MouseEntered
+
+    private void jLPremium1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLPremium1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLPremium1MouseExited
+
     public void achicarMenu() {
         Timer timer = new Timer(280, new ActionListener() { // 1000 ms = 1 segundo
             @Override
@@ -793,6 +920,14 @@ public class VistaIngreso extends javax.swing.JFrame {
         this.login = login;
     }
 
+    public JLabel getjLabel1() {
+        return jImg;
+    }
+
+    public void setjLabel1(JLabel jLabel1) {
+        this.jImg = jLabel1;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLInicio;
@@ -806,8 +941,10 @@ public class VistaIngreso extends javax.swing.JFrame {
     private javax.swing.JPanel MenuAcotado;
     private javax.swing.JPanel MenuAmpliado;
     private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JLabel jImg;
     private javax.swing.JLabel jLNombre;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLPremium;
+    private javax.swing.JLabel jLPremium1;
     private javax.swing.JLabel jLibros;
     private javax.swing.JLabel jLibros1;
     private javax.swing.JLabel jLlibrito;
@@ -820,6 +957,8 @@ public class VistaIngreso extends javax.swing.JFrame {
     private javax.swing.JPanel jPLibros1;
     private javax.swing.JPanel jPLogout;
     private javax.swing.JPanel jPLogout1;
+    private javax.swing.JPanel jPPremium;
+    private javax.swing.JPanel jPPremium1;
     private javax.swing.JPanel jPPrestamos;
     private javax.swing.JPanel jPPrestamos1;
     private javax.swing.JPanel jPanel1;

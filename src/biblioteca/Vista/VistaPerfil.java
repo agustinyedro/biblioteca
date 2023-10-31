@@ -33,6 +33,7 @@ public class VistaPerfil extends javax.swing.JInternalFrame {
         this.login = login;
         cargarComboBox();
         cargarImagenComboBox();
+        jSDia.setForeground(new Color(20, 16, 38));
         jPanel1.putClientProperty(FlatClientProperties.STYLE, ""
                 + "arc:60");
         jPanel2.putClientProperty(FlatClientProperties.STYLE, ""
@@ -40,7 +41,7 @@ public class VistaPerfil extends javax.swing.JInternalFrame {
         selector.putClientProperty(FlatClientProperties.STYLE, ""
                 + "buttonBackground:null");
         login = this.getLogin();
-         System.out.println(login);
+//        System.out.println(login);
         cargarLogin();
 
     }
@@ -54,13 +55,18 @@ public class VistaPerfil extends javax.swing.JInternalFrame {
 
     public void cargarLogin() {
 //        login = this.getLogin();
-       
+
         Lector lector = new LectorData().buscarLector(login.getLector().getNroSocio());
         jTNombre.setText(lector.getNombre());
         jTapellido.setText(lector.getApellido());
         jTMail.setText(lector.getMail());
         jTusuario.setText(login.getUsuario());
         jTcel.setText(String.valueOf(lector.getTelefono()));
+        for (int i = 0; i < 6; i++) {
+            if (login.getNombreImg().equals("imagen" + (i + 1) + ".png")) {
+                selector.setSelectedIndex(i);
+            }
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -68,204 +74,55 @@ public class VistaPerfil extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTNombre = new javax.swing.JTextField();
-        jTMail = new javax.swing.JTextField();
-        jTusuario = new javax.swing.JTextField();
-        jTcel = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLCumpleanios = new javax.swing.JLabel();
-        jCgenero = new javax.swing.JComboBox<>();
-        jLNombre = new javax.swing.JLabel();
-        jLemail = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        selector = new javax.swing.JComboBox<>();
+        jBImg1 = new javax.swing.JButton();
+        jBCambiarContraseña = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         jLusuario = new javax.swing.JLabel();
-        jLTel = new javax.swing.JLabel();
-        jLgenero = new javax.swing.JLabel();
-        jYAño = new com.toedter.calendar.JYearChooser();
         jMonMes = new com.toedter.calendar.JMonthChooser();
+        jCgenero = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jTMail = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jTusuario = new javax.swing.JTextField();
+        jLNombre = new javax.swing.JLabel();
+        jLgenero = new javax.swing.JLabel();
+        jTapellido = new javax.swing.JTextField();
         jSDia = new javax.swing.JSpinner();
+        jLemail = new javax.swing.JLabel();
+        jTNombre = new javax.swing.JTextField();
         jBEditar = new javax.swing.JButton();
         verificacion = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTapellido = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jBImg1 = new javax.swing.JButton();
-        selector = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        jLTel = new javax.swing.JLabel();
+        jTcel = new javax.swing.JTextField();
+        jLCumpleanios = new javax.swing.JLabel();
+        jYAño = new com.toedter.calendar.JYearChooser();
+        JBPremium = new javax.swing.JButton();
+
+        setMaximumSize(new java.awt.Dimension(1065, 720));
+        setMinimumSize(new java.awt.Dimension(1065, 720));
+        setPreferredSize(new java.awt.Dimension(1065, 720));
+        try {
+            setSelected(true);
+        } catch (java.beans.PropertyVetoException e1) {
+            e1.printStackTrace();
+        }
 
         jPanel1.setBackground(new java.awt.Color(146, 81, 184));
         jPanel1.setForeground(new java.awt.Color(0, 0, 0));
-
-        jTNombre.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jTNombreFocusGained(evt);
-            }
-        });
-
-        jTMail.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                jTMailFocusLost(evt);
-            }
-        });
-        jTMail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTMailActionPerformed(evt);
-            }
-        });
-
-        jTcel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTcelActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Editar Perfil");
-
-        jLCumpleanios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLCumpleanios.setForeground(new java.awt.Color(51, 51, 51));
-        jLCumpleanios.setText("Cumpleaños");
-
-        jLNombre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLNombre.setForeground(new java.awt.Color(51, 51, 51));
-        jLNombre.setText("Nombre");
-        jLNombre.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLNombreMouseClicked(evt);
-            }
-        });
-
-        jLemail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLemail.setForeground(new java.awt.Color(51, 51, 51));
-        jLemail.setText("Email");
-
-        jLusuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLusuario.setForeground(new java.awt.Color(51, 51, 51));
-        jLusuario.setText("Usuario");
-
-        jLTel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLTel.setForeground(new java.awt.Color(51, 51, 51));
-        jLTel.setText("N° de Telefono");
-
-        jLgenero.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLgenero.setForeground(new java.awt.Color(51, 51, 51));
-        jLgenero.setText("Genero");
-
-        jBEditar.setText("Editar");
-        jBEditar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jBEditarMouseClicked(evt);
-            }
-        });
-        jBEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEditarActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("Apellido");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLNombre, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLemail, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLusuario, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLCumpleanios, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLgenero, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(26, 26, 26))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLTel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jTNombre)
-                            .addComponent(jTapellido, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTMail)
-                            .addComponent(jTusuario)
-                            .addComponent(jTcel)
-                            .addComponent(jCgenero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jBEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(323, 323, 323))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(311, 311, 311)
-                                .addComponent(verificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jSDia, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jMonMes, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jYAño, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLNombre)
-                    .addComponent(jTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(verificacion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLemail)))
-                .addGap(13, 13, 13)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLusuario))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLTel))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jYAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jMonMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jSDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLCumpleanios)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCgenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLgenero))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBEditar)
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
-
-        jPanel2.setBackground(new java.awt.Color(146, 81, 184));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Seleccionar un Imagen");
         jLabel3.setToolTipText("");
+
+        selector.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectorActionPerformed(evt);
+            }
+        });
 
         jBImg1.setText("Cambiar la imagen");
         jBImg1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -279,83 +136,291 @@ public class VistaPerfil extends javax.swing.JInternalFrame {
             }
         });
 
-        selector.addActionListener(new java.awt.event.ActionListener() {
+        jBCambiarContraseña.setText("Cambiar tu contraseña");
+        jBCambiarContraseña.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBCambiarContraseñaMouseClicked(evt);
+            }
+        });
+        jBCambiarContraseña.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectorActionPerformed(evt);
+                jBCambiarContraseñaActionPerformed(evt);
             }
         });
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        jPanel2.setBackground(new java.awt.Color(20, 16, 38));
+
+        jLusuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLusuario.setForeground(new java.awt.Color(204, 204, 204));
+        jLusuario.setText("Usuario");
+
+        jMonMes.setForeground(new java.awt.Color(20, 16, 38));
+
+        jCgenero.setForeground(new java.awt.Color(20, 16, 38));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel2.setText("Apellido");
+
+        jTMail.setForeground(new java.awt.Color(20, 16, 38));
+        jTMail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTMailFocusLost(evt);
             }
         });
+        jTMail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTMailActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Editar tu Perfil");
+
+        jTusuario.setForeground(new java.awt.Color(20, 16, 38));
+
+        jLNombre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLNombre.setForeground(new java.awt.Color(204, 204, 204));
+        jLNombre.setText("Nombre");
+        jLNombre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLNombreMouseClicked(evt);
+            }
+        });
+
+        jLgenero.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLgenero.setForeground(new java.awt.Color(204, 204, 204));
+        jLgenero.setText("Genero");
+
+        jTapellido.setForeground(new java.awt.Color(20, 16, 38));
+        jTapellido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTapellidoActionPerformed(evt);
+            }
+        });
+
+        jLemail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLemail.setForeground(new java.awt.Color(204, 204, 204));
+        jLemail.setText("Email");
+
+        jTNombre.setForeground(new java.awt.Color(20, 16, 38));
+        jTNombre.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTNombreFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTNombreFocusLost(evt);
+            }
+        });
+
+        jBEditar.setText("Editar");
+        jBEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBEditarMouseClicked(evt);
+            }
+        });
+        jBEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEditarActionPerformed(evt);
+            }
+        });
+
+        jLTel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLTel.setForeground(new java.awt.Color(204, 204, 204));
+        jLTel.setText("N° de Telefono");
+
+        jTcel.setForeground(new java.awt.Color(20, 16, 38));
+        jTcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTcelActionPerformed(evt);
+            }
+        });
+
+        jLCumpleanios.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLCumpleanios.setForeground(new java.awt.Color(204, 204, 204));
+        jLCumpleanios.setText("Cumpleaños");
+
+        jYAño.setForeground(new java.awt.Color(20, 16, 38));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(selector, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jBImg1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(83, 83, 83))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(117, 117, 117))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLCumpleanios)
+                    .addComponent(jLNombre)
+                    .addComponent(jLabel2)
+                    .addComponent(jLemail)
+                    .addComponent(jLusuario)
+                    .addComponent(jLTel)
+                    .addComponent(jLgenero))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCgenero, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jTMail)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(verificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTusuario)
+                            .addComponent(jTapellido)
+                            .addComponent(jTNombre)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jSDia, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)
+                                .addComponent(jMonMes, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jYAño, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTcel, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(26, 26, 26)))
+                .addGap(49, 49, 49))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel1)
+                .addGap(41, 41, 41)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLNombre)
+                    .addComponent(jTNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTapellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
+                                .addComponent(jTMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLemail)
+                            .addComponent(verificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jTusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLusuario))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLTel))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jMonMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jSDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jYAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLCumpleanios))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jCgenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLgenero))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(jBEditar)
+                .addGap(54, 54, 54))
+        );
+
+        JBPremium.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/diamente18.png"))); // NOI18N
+        JBPremium.setText("Hazte Premium");
+        JBPremium.setIconTextGap(5);
+        JBPremium.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JBPremiumMouseClicked(evt);
+            }
+        });
+        JBPremium.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBPremiumActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(120, 120, 120)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selector, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBImg1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBCambiarContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JBPremium))
+                .addGap(2, 2, 2))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(49, 49, 49))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
                 .addComponent(jLabel3)
-                .addGap(27, 27, 27)
+                .addGap(28, 28, 28)
                 .addComponent(selector, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
+                .addGap(29, 29, 29)
                 .addComponent(jBImg1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(16, 16, 16))
+                .addGap(18, 18, 18)
+                .addComponent(jBCambiarContraseña)
+                .addGap(18, 18, 18)
+                .addComponent(JBPremium)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public Login getLogin() {
-        return login;
-    }
+    private void jBImg1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBImg1ActionPerformed
 
-    public void setLogin(Login login) {
-        this.login = login;
-    }
-    private void jTcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTcelActionPerformed
+        ImageIcon imagenSeleccionada = (ImageIcon) selector.getSelectedItem();
 
-    }//GEN-LAST:event_jTcelActionPerformed
+        // Obtén el nombre de la imagen seleccionada
+        String nombreImagen = getNombreImagen(imagenSeleccionada);
 
-    private void jLNombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLNombreMouseClicked
+        login.setNombreImg(nombreImagen);
+        new LoginData().modificarLogin(login);
 
+        VistaIngreso p = new VistaIngreso(login);
+        p.dispose();
+        p.setPerfil(true);
+        p.setVisible(true);
+    }//GEN-LAST:event_jBImg1ActionPerformed
 
-    }//GEN-LAST:event_jLNombreMouseClicked
+    private void jBImg1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBImg1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBImg1MouseClicked
+
+    private void selectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectorActionPerformed
+
+        ImageIcon imagenSeleccionada = (ImageIcon) selector.getSelectedItem();
+
+        // Obtén el nombre de la imagen seleccionada
+        String nombreImagen = getNombreImagen(imagenSeleccionada);
+
+        // Realiza la acción deseada con el nombre de la imagen
+    }//GEN-LAST:event_selectorActionPerformed
 
     private void jBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEditarActionPerformed
         if (jTapellido.getText().isEmpty() || jTMail.getText().isEmpty() || jTMail.getText().isEmpty()
@@ -368,9 +433,19 @@ public class VistaPerfil extends javax.swing.JInternalFrame {
         ValidacionDeNombre();
         ValidacionDeTelefono();
         ValidacionDeUsuario();
-
-
     }//GEN-LAST:event_jBEditarActionPerformed
+
+    private void jBEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBEditarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBEditarMouseClicked
+
+    private void jLNombreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLNombreMouseClicked
+
+    }//GEN-LAST:event_jLNombreMouseClicked
+
+    private void jTcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTcelActionPerformed
+
+    }//GEN-LAST:event_jTcelActionPerformed
 
     private void jTMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTMailActionPerformed
 
@@ -388,44 +463,53 @@ public class VistaPerfil extends javax.swing.JInternalFrame {
         this.setVisible(true);
     }//GEN-LAST:event_jTMailFocusLost
 
-    private void jBEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBEditarMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBEditarMouseClicked
-
-    private void jBImg1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBImg1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBImg1MouseClicked
-
-    private void jBImg1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBImg1ActionPerformed
-
-        new LoginData().modificarLogin(login);
-    }//GEN-LAST:event_jBImg1ActionPerformed
-
-    private void selectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectorActionPerformed
-
-        ImageIcon imagenSeleccionada = (ImageIcon) selector.getSelectedItem();
-
-        // Obtén el nombre de la imagen seleccionada
-        String nombreImagen = getNombreImagen(imagenSeleccionada);
-        System.out.println(nombreImagen);
-
-        // Realiza la acción deseada con el nombre de la imagen
-    }//GEN-LAST:event_selectorActionPerformed
-
     private void jTNombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTNombreFocusGained
         jTNombre.setText("");
     }//GEN-LAST:event_jTNombreFocusGained
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        cargarLogin();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jBCambiarContraseñaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBCambiarContraseñaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBCambiarContraseñaMouseClicked
 
+    private void jBCambiarContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCambiarContraseñaActionPerformed
+        VistaRecuperarContraseña p = new VistaRecuperarContraseña();
+        p.setLogin(true);
+        p.setVisible(true);
+    }//GEN-LAST:event_jBCambiarContraseñaActionPerformed
+
+    private void jTapellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTapellidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTapellidoActionPerformed
+
+    private void JBPremiumMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBPremiumMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JBPremiumMouseClicked
+
+    private void JBPremiumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBPremiumActionPerformed
+        new VistaPremium().setVisible(true);
+    }//GEN-LAST:event_JBPremiumActionPerformed
+
+    private void jTNombreFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTNombreFocusLost
+        if (jTNombre.getText().isEmpty()) {
+            Lector lector = new LectorData().buscarLector(login.getLector().getNroSocio());
+            jTNombre.setText(lector.getNombre());
+        }
+    }//GEN-LAST:event_jTNombreFocusLost
+
+    public Login getLogin() {
+        return login;
+    }
+
+    public void setLogin(Login login) {
+        this.login = login;
+    }
 //    private void SetImageLabel(JLabel labelName, String root) {
 //        ImageIcon image = new ImageIcon(root);
 //        Icon icon = new ImageIcon(image.getImage().getScaledInstance(labelName.getWidth(), labelName.getHeight(), Image.SCALE_DEFAULT));
 //        labelName.setIcon(icon);
 //        this.repaint();
 //    }
+
     public void ValidacionDeNombre() {
 
         try {
@@ -632,9 +716,10 @@ public class VistaPerfil extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBPremium;
+    private javax.swing.JButton jBCambiarContraseña;
     private javax.swing.JButton jBEditar;
     private javax.swing.JButton jBImg1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jCgenero;
     private javax.swing.JLabel jLCumpleanios;
     private javax.swing.JLabel jLNombre;
