@@ -90,7 +90,9 @@ public class Login {
 
     @Override
     public String toString() {
-        return "login{" + "idLogin=" + idLogin + ", usuario=" + usuario + ", contrasenia=" + contrasenia + ", lector=" + lector + ", pregunta=" + pregunta + ", respueta=" + respueta + '}';
+        return "Login{" + "nombreImg=" + nombreImg + ", idLogin=" + idLogin + ", usuario=" + usuario + ", contrasenia=" + contrasenia + ", lector=" + lector + ", pregunta=" + pregunta + ", respueta=" + respueta + '}';
     }
+
+    
 
 }

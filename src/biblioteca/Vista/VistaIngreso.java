@@ -27,15 +27,16 @@ public class VistaIngreso extends javax.swing.JFrame {
     private Login login;
     private int tamañoDeEscritorio;
 
-    public VistaIngreso() {
-        login = new Login();
+    public VistaIngreso(Login login) {
+        this.login = login;
         initComponents();
+//        SetImageLabel(jLabel1, "src/iconos/perfil/imagen6.png");
         jPanel1.setVisible(false);
-        SetImageLabel(jLlibrito1, "src/iconos/"+login.getRespueta()+".jpg");
         panelesRedondos();
 //        asociarPaneles();
         MenuAmpliado.setVisible(false);
         jPanel1.setBackground(new Color(0, 0, 0, 0));
+        setLocationRelativeTo(null);
     }
 
     public JPanel[] paneles() {
@@ -91,6 +92,7 @@ public class VistaIngreso extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         MenuAmpliado = new javax.swing.JPanel();
         jLlibrito = new javax.swing.JLabel();
@@ -106,6 +108,7 @@ public class VistaIngreso extends javax.swing.JFrame {
         jLogout = new javax.swing.JLabel();
         jLNombre = new javax.swing.JLabel();
         MenuAcotado = new javax.swing.JPanel();
+        jLlibrito1 = new javax.swing.JLabel();
         jPLibros1 = new javax.swing.JPanel();
         jLibros1 = new javax.swing.JLabel();
         jPPrestamos1 = new javax.swing.JPanel();
@@ -116,7 +119,6 @@ public class VistaIngreso extends javax.swing.JFrame {
         jLogout1 = new javax.swing.JLabel();
         JPPerfil1 = new javax.swing.JPanel();
         JLperfil2 = new javax.swing.JLabel();
-        jLlibrito1 = new javax.swing.JLabel();
         escritorio = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -130,6 +132,7 @@ public class VistaIngreso extends javax.swing.JFrame {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 50, 50));
 
         jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -155,7 +158,8 @@ public class VistaIngreso extends javax.swing.JFrame {
         MenuAmpliado.setName(""); // NOI18N
         MenuAmpliado.setVerifyInputWhenFocusTarget(false);
         MenuAmpliado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        MenuAmpliado.add(jLlibrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 60, 60));
+        MenuAmpliado.add(jLlibrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 60, 60, 60));
+        jLlibrito.getAccessibleContext().setAccessibleDescription("");
 
         JPInicio.setBackground(new java.awt.Color(98, 51, 125));
 
@@ -351,7 +355,7 @@ public class VistaIngreso extends javax.swing.JFrame {
         jLNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLNombre.setForeground(new java.awt.Color(255, 255, 255));
         jLNombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        MenuAmpliado.add(jLNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 70, 30));
+        MenuAmpliado.add(jLNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 190, 150));
 
         getContentPane().add(MenuAmpliado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 720));
 
@@ -362,6 +366,7 @@ public class VistaIngreso extends javax.swing.JFrame {
             }
         });
         MenuAcotado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        MenuAcotado.add(jLlibrito1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 60, 60));
 
         jPLibros1.setBackground(new java.awt.Color(98, 51, 125));
 
@@ -484,7 +489,6 @@ public class VistaIngreso extends javax.swing.JFrame {
         );
 
         MenuAcotado.add(JPPerfil1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 60, 43));
-        MenuAcotado.add(jLlibrito1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 60, 60));
 
         getContentPane().add(MenuAcotado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 65, 720));
 
@@ -522,8 +526,30 @@ public class VistaIngreso extends javax.swing.JFrame {
     }//GEN-LAST:event_jLogoutMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        Date date = new Date();
         jLNombre.setText(login.getLector().getNombre());
+        if (login.getNombreImg() == null) {
+            SetImageLabel(jLabel1, "src/iconos/perfil/imagen6.png");
+        } else {
+            SetImageLabel(jLabel1, "src/iconos/perfil/" + login.getNombreImg());
+
+        }
+
+        escritorio.removeAll();
+        escritorio.repaint();
+        VistaInicio materiaView = new VistaInicio();
+        Dimension descot = escritorio.getSize();
+        materiaView.setSize(descot);
+        materiaView.setVisible(true);
+        BasicInternalFrameUI internalFrameUI = (BasicInternalFrameUI) materiaView.getUI();
+        internalFrameUI.setNorthPane(null);
+        materiaView.setBorder(null);
+        materiaView.setBackground(new Color(0, 0, 0, 0));
+        achicarMenu();
+        materiaView.requestFocus();
+        escritorio.add(materiaView);
+        escritorio.moveToFront(materiaView);
+        darleColorPanel(JPInicio, JPInicio1);
+
     }//GEN-LAST:event_formWindowOpened
 
     private void jLogout1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLogout1MouseClicked
@@ -558,7 +584,7 @@ public class VistaIngreso extends javax.swing.JFrame {
     private void JLperfilMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLperfilMouseClicked
         escritorio.removeAll();
         escritorio.repaint();
-        VistaPerfil materiaView = new VistaPerfil();
+        VistaPerfil materiaView = new VistaPerfil(login);
         Dimension descot = escritorio.getSize();
         materiaView.setSize(descot);
         materiaView.setVisible(true);
@@ -567,6 +593,7 @@ public class VistaIngreso extends javax.swing.JFrame {
         materiaView.setBorder(null);
         materiaView.setBackground(new Color(0, 0, 0, 0));
         achicarMenu();
+//        materiaView.setLogin(login);
         escritorio.add(materiaView);
         escritorio.moveToFront(materiaView);
         darleColorPanel(JPPerfil, JPPerfil1);
@@ -588,7 +615,7 @@ public class VistaIngreso extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel1MouseExited
 
     private void jLogoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLogoutMouseExited
-        jPLogout.setBackground(new Color(98,51,125));
+        jPLogout.setBackground(new Color(98, 51, 125));
     }//GEN-LAST:event_jLogoutMouseExited
 
     private void jLogoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLogoutMouseEntered
@@ -617,7 +644,7 @@ public class VistaIngreso extends javax.swing.JFrame {
     }//GEN-LAST:event_jLibrosMouseEntered
 
     private void jLibrosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLibrosMouseExited
-        jPLibros.setBackground(new Color(98,51,125));
+        jPLibros.setBackground(new Color(98, 51, 125));
     }//GEN-LAST:event_jLibrosMouseExited
 
     private void jLprestamosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLprestamosMouseEntered
@@ -625,7 +652,7 @@ public class VistaIngreso extends javax.swing.JFrame {
     }//GEN-LAST:event_jLprestamosMouseEntered
 
     private void jLprestamosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLprestamosMouseExited
-        jPPrestamos.setBackground(new Color(98,51,125));
+        jPPrestamos.setBackground(new Color(98, 51, 125));
     }//GEN-LAST:event_jLprestamosMouseExited
 
     private void JLperfilMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLperfilMouseEntered
@@ -633,7 +660,7 @@ public class VistaIngreso extends javax.swing.JFrame {
     }//GEN-LAST:event_JLperfilMouseEntered
 
     private void JLperfilMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLperfilMouseExited
-        JPPerfil.setBackground(new Color(98,51,125));
+        JPPerfil.setBackground(new Color(98, 51, 125));
     }//GEN-LAST:event_JLperfilMouseExited
 
     private void JLInicioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLInicioMouseEntered
@@ -641,13 +668,13 @@ public class VistaIngreso extends javax.swing.JFrame {
     }//GEN-LAST:event_JLInicioMouseEntered
 
     private void JLInicioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLInicioMouseExited
-        JPInicio.setBackground(new Color(98,51,125));
+        JPInicio.setBackground(new Color(98, 51, 125));
     }//GEN-LAST:event_JLInicioMouseExited
 
     private void jLprestamosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLprestamosMouseClicked
         escritorio.removeAll();
         escritorio.repaint();
-        VistaPrestamo materiaView = new VistaPrestamo();
+        VistaPrestamo materiaView = new VistaPrestamo(login);
         Dimension descot = escritorio.getSize();
         materiaView.setSize(descot);
         materiaView.setVisible(true);
@@ -656,14 +683,14 @@ public class VistaIngreso extends javax.swing.JFrame {
         materiaView.setBorder(null);
         materiaView.setBackground(new Color(0, 0, 0, 0));
         achicarMenu();
-        materiaView.setLogin(login);
+//        materiaView.setLogin(login);
         escritorio.add(materiaView);
         escritorio.moveToFront(materiaView);
         darleColorPanel(jPPrestamos, jPPrestamos1);
     }//GEN-LAST:event_jLprestamosMouseClicked
 
     private void jLibrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLibrosMouseClicked
-       escritorio.removeAll();
+        escritorio.removeAll();
         escritorio.repaint();
         VistaLibro materiaView = new VistaLibro();
         Dimension descot = escritorio.getSize();
@@ -677,7 +704,7 @@ public class VistaIngreso extends javax.swing.JFrame {
         escritorio.add(materiaView);
         escritorio.moveToFront(materiaView);
         darleColorPanel(jPLibros1, jPLibros1);
-        
+
         materiaView.setLogin(login);
     }//GEN-LAST:event_jLibrosMouseClicked
 
@@ -732,7 +759,7 @@ public class VistaIngreso extends javax.swing.JFrame {
     private void darleColorPanel(JPanel panel, JPanel panel2) {
         for (JPanel p : paneles()) {
             if (p != panel && p != panel2) {
-                p.setBackground(new Color(98,51,125));
+                p.setBackground(new Color(98, 51, 125));
             } else {
                 panel.setBackground(new Color(111, 58, 141));
                 panel2.setBackground(new Color(111, 58, 141));
@@ -744,10 +771,10 @@ public class VistaIngreso extends javax.swing.JFrame {
         return login;
     }
 
-    public void IngresoPrestamo(){
+    public void IngresoPrestamo() {
         escritorio.removeAll();
         escritorio.repaint();
-        VistaPrestamo materiaView = new VistaPrestamo();
+        VistaPrestamo materiaView = new VistaPrestamo(login);
         Dimension descot = escritorio.getSize();
         materiaView.setSize(descot);
         materiaView.setVisible(true);
@@ -756,12 +783,12 @@ public class VistaIngreso extends javax.swing.JFrame {
         materiaView.setBorder(null);
         materiaView.setBackground(new Color(0, 0, 0, 0));
         achicarMenu();
-        materiaView.setLogin(login);
+//        materiaView.setLogin(login);
         escritorio.add(materiaView);
         escritorio.moveToFront(materiaView);
         darleColorPanel(jPPrestamos, jPPrestamos1);
     }
-    
+
     public void setLogin(Login login) {
         this.login = login;
     }
@@ -780,6 +807,7 @@ public class VistaIngreso extends javax.swing.JFrame {
     private javax.swing.JPanel MenuAmpliado;
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JLabel jLNombre;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLibros;
     private javax.swing.JLabel jLibros1;
     private javax.swing.JLabel jLlibrito;

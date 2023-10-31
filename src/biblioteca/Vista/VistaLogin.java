@@ -263,9 +263,12 @@ public class VistaLogin extends javax.swing.JFrame {
         try {
             Login usuario = loginData.buscarLoginPorUsuario(jTxUsuario.getText());
             if (jTxUsuario.getText().equals(usuario.getUsuario()) && String.valueOf(jPasswordField1.getPassword()).equals(usuario.getContrasenia())) {
-                VistaIngreso menu = new VistaIngreso();
-                menu.setVisible(true);
+                VistaIngreso menu = new VistaIngreso(usuario);
+
+                PantallaDeInicio p = new PantallaDeInicio();
+                p.setVisible(false);
                 menu.setLogin(usuario);
+                menu.setVisible(true);
                 this.setVisible(false);
             }
 //            if (jTxtUsuario.getText().isEmpty()) {
@@ -290,10 +293,12 @@ public class VistaLogin extends javax.swing.JFrame {
             jSeparator1.setBackground(Color.red);
             jSeparator2.setForeground(Color.red);
             jSeparator2.setBackground(Color.red);
-
-        } finally {
             panelRound1.requestFocus();
-        }
+
+        } 
+//        finally {
+//            panelRound1.requestFocus();
+//        }
     }//GEN-LAST:event_BtnIngresarActionPerformed
 
     private void BtnIngresar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIngresar1ActionPerformed

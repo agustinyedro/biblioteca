@@ -57,28 +57,24 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
             return false;
         }
     };
-    Login login = new Login();
+    private Login login;
 
-    public VistaPrestamo() {
+    public VistaPrestamo(Login login) {
         initComponents();
-//        setSize(1100,720);
-        Tabla.requestFocus();
-//        fechaActual();
-        JPMostrar.requestFocus();
         spinerLimite();
         cargarTabla();
         cargarTabla2();
         cargarComboBox();
-//        cargarComboBoxPrestamos();
         IdPrestamo.setVisible(false);
         jBNuevoPrestamo.setEnabled(false);
+        jBDevolver.setEnabled(false);
+        JlIDPrestamo2.setVisible(false);
+        this.login =login;
 
     }
 
     public void spinerLimite() {
-        jSDia.setModel(new SpinnerNumberModel(LocalDate.now().getDayOfMonth(), 0, 31, 1));
-
-        jSDia3.setModel(new SpinnerNumberModel(LocalDate.now().getDayOfMonth(), 0, 31, 1));
+        jSDia.setModel(new SpinnerNumberModel(LocalDate.now().getDayOfMonth(), 1, 31, 1));
     }
 
     @SuppressWarnings("unchecked")
@@ -132,7 +128,7 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         jLabel23 = new javax.swing.JLabel();
         JlIDPrestamo2 = new javax.swing.JLabel();
         jCBoxPrestamo = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        jBDevolver = new javax.swing.JButton();
         jSDia3 = new javax.swing.JSpinner();
         jMonMes3 = new com.toedter.calendar.JMonthChooser();
         jYAño3 = new com.toedter.calendar.JYearChooser();
@@ -140,6 +136,23 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         setMinimumSize(new java.awt.Dimension(1210, 715));
         setName(""); // NOI18N
         setPreferredSize(new java.awt.Dimension(1210, 720));
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         JpanelTabla.setBackground(new java.awt.Color(193, 120, 196));
@@ -352,6 +365,7 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         JPMostrar.getAccessibleContext().setAccessibleDescription("");
 
         jPModificar.setBackground(new java.awt.Color(193, 120, 196));
+        jPModificar.setMaximumSize(new java.awt.Dimension(375, 615));
         jPModificar.setMinimumSize(new java.awt.Dimension(375, 615));
         jPModificar.setPreferredSize(new java.awt.Dimension(375, 615));
 
@@ -430,20 +444,22 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jYAño1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPModificarLayout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
-                            .addComponent(IdPrestamo)
-                            .addGap(10, 10, 10))
-                        .addComponent(jLabel4)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel6)
-                        .addComponent(jLabel7)
-                        .addComponent(jLabel8)
                         .addComponent(jTNrSocio)
                         .addComponent(jTEstado)
-                        .addComponent(jCBoxLibrosEditar, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(JBEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jCBoxLibrosEditar, 0, 311, Short.MAX_VALUE)
+                        .addComponent(JBEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPModificarLayout.createSequentialGroup()
+                            .addGroup(jPModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel8))
+                            .addGap(132, 132, 132))
+                        .addGroup(jPModificarLayout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(IdPrestamo)))))
         );
         jPModificarLayout.setVerticalGroup(
             jPModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -452,7 +468,7 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                 .addComponent(jLabel1)
                 .addGap(8, 8, 8)
                 .addComponent(jLabel2)
-                .addGap(31, 31, 31)
+                .addGap(28, 28, 28)
                 .addGroup(jPModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(IdPrestamo))
@@ -484,7 +500,7 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                 .addComponent(jLabel8)
                 .addGap(18, 18, 18)
                 .addComponent(jTEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(JBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
         );
@@ -494,6 +510,8 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         jPModificar.getAccessibleContext().setAccessibleDescription("");
 
         JPDevolver.setBackground(new java.awt.Color(193, 120, 196));
+        JPDevolver.setMaximumSize(new java.awt.Dimension(375, 615));
+        JPDevolver.setMinimumSize(new java.awt.Dimension(375, 615));
         JPDevolver.setPreferredSize(new java.awt.Dimension(375, 637));
 
         jLabel18.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -516,10 +534,10 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         JlIDPrestamo2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         JlIDPrestamo2.setText("ID Prestamo: ");
 
-        jButton1.setText("DEVOLVER");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBDevolver.setText("DEVOLVER");
+        jBDevolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBDevolverActionPerformed(evt);
             }
         });
 
@@ -546,7 +564,7 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                     .addComponent(jLabel21)
                     .addComponent(jLabel23)
                     .addComponent(jCBoxPrestamo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jBDevolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         JPDevolverLayout.setVerticalGroup(
             JPDevolverLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -572,7 +590,7 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                         .addComponent(jMonMes3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jYAño3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(59, 59, 59)
-                .addComponent(jButton1)
+                .addComponent(jBDevolver)
                 .addContainerGap())
         );
 
@@ -599,11 +617,12 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
         LibroData libroData = new LibroData();
         boolean siHay = false;
         login = getLogin();
+
         for (Prestamo prod : prestamoData.obtenerPrestamos()) {
             Ejemplar ejemplar = ejemplarData.buscarEjemplar(prod.getEjemplar().getCodigo());
             Libro libro = libroData.buscarLibro(String.valueOf(ejemplar.getLibro().getIdLibro()));
 //            System.out.println(libro);
-            if ((libro.getTitulo().toLowerCase().contains(jTextField1.getText()) || libro.getTitulo().toLowerCase().startsWith(jTextField1.getText()) || prod.getFechaFin().toString().toLowerCase().startsWith(jTextField1.getText()) || prod.getFechaInicio().toString().toLowerCase().startsWith(jTextField1.getText())) && prod.getLector().getNroSocio() == login.getLector().getNroSocio()) {
+            if ((libro.getTitulo().toLowerCase().contains(jTextField1.getText()) || prod.getFechaFin().toString().toLowerCase().contains(jTextField1.getText()) || prod.getFechaInicio().toString().toLowerCase().contains(jTextField1.getText())) && prod.getLector().getNroSocio() == login.getLector().getNroSocio()) {
                 if (!jTextField1.getText().isEmpty()) {
                     modelo.addRow(new Object[]{prod.getIdPrestamo(), libro.getTitulo(), prod.getFechaInicio(), prod.getFechaFin()});
                     siHay = true;
@@ -638,11 +657,11 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
             IdPrestamo.setText(modelo.getValueAt(Tabla.getSelectedRow(), 0).toString());
             IdPrestamo.setVisible(true);
             jCBoxLibrosEditar.setSelectedItem(new LibroData().buscarLibro(modelo.getValueAt(Tabla.getSelectedRow(), 1).toString()));
-            jSDia1.setModel(new SpinnerNumberModel(prestamo.getFechaInicio().toLocalDate().getDayOfMonth(), 0, 31, 1));
+            jSDia1.setModel(new SpinnerNumberModel(prestamo.getFechaInicio().toLocalDate().getDayOfMonth(), 1, 31, 1));
 
             jMonMes1.setMonth(prestamo.getFechaInicio().toLocalDate().getMonthValue());
             jYAño1.setYear(prestamo.getFechaInicio().toLocalDate().getYear());
-            jSDia2.setModel(new SpinnerNumberModel(prestamo.getFechaInicio().toLocalDate().plusDays(7).getDayOfMonth(), 0, 31, 1));
+            jSDia2.setModel(new SpinnerNumberModel(prestamo.getFechaInicio().toLocalDate().plusDays(7).getDayOfMonth(), 1, 31, 1));
 
             jMonMes2.setMonth(prestamo.getFechaInicio().toLocalDate().plusDays(7).getMonthValue());
             jYAño2.setYear(prestamo.getFechaInicio().toLocalDate().plusDays(7).getYear());
@@ -799,16 +818,15 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
             return null;
         }
     }
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jBDevolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDevolverActionPerformed
         if (!jCBoxPrestamo.getItemAt(jCBoxPrestamo.getSelectedIndex()).toString().isEmpty()) {
-            jSDia3.setValue(LocalDate.now().getDayOfMonth());
-            jMonMes3.setMonth(Integer.parseInt(LocalDate.now().getMonth().toString()));
-            jYAño3.setYear(LocalDate.now().getYear());
-            LocalDate fecha = LocalDate.of(jYAño3.getYear(), jMonMes3.getMonth(), Integer.parseInt(jSDia3.getValue().toString()));
+            Prestamo prestamo = (Prestamo)jCBoxPrestamo.getSelectedItem();
+            Date fecha = Date.valueOf(LocalDate.of(jYAño3.getYear(), jMonMes3.getMonth(), Integer.parseInt(jSDia3.getValue().toString())));
+            new PrestamoData().devolverPrestamo(prestamo.getIdPrestamo(),fecha);
         } else {
             JOptionPane.showMessageDialog(null, "Por Favor Elija algun prestamo para devolver");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jBDevolverActionPerformed
 
     private void jTabbedPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane2MouseClicked
         Prestamo prestamo = null;
@@ -845,11 +863,11 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                     new LibroData().listarLibros().forEach(action -> {
 
                         if (action.getIdLibro() == ejemplar.getLibro().getIdLibro()) {
-//                            System.out.println(action);
+                            System.out.println(action);
                             jCBoxLibrosEditar.setSelectedItem(action);
                         }
                     });
-                    jSDia1.setModel(new SpinnerNumberModel(prestamo.getFechaInicio().toLocalDate().getDayOfMonth(), 0, 31, 1));
+                    jSDia1.setModel(new SpinnerNumberModel(prestamo.getFechaInicio().toLocalDate().getDayOfMonth(), 1, 31, 1));
                     jMonMes1.setMonth(prestamo.getFechaInicio().toLocalDate().getMonthValue());
                     jYAño1.setYear(prestamo.getFechaInicio().toLocalDate().getYear());
 
@@ -885,10 +903,22 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
                 }
                 break;
             case 2:
-                cargarComboBoxPrestamos();
-                jSDia3.setValue(prestamo.getFechaInicio().toLocalDate().getDayOfMonth());
-                jMonMes3.setMonth(prestamo.getFechaInicio().toLocalDate().getMonthValue());
-                jYAño3.setYear(prestamo.getFechaInicio().toLocalDate().getYear());
+
+                if (Tabla.isRowSelected(Tabla.getSelectedRow())) {
+                    JlIDPrestamo2.setVisible(true);
+                    jCBoxPrestamo.setEnabled(true);
+                    cargarComboBoxPrestamos();
+                    prestamo = new PrestamoData().buscarPrestamo(Integer.parseInt(modelo.getValueAt(Tabla.getSelectedRow(), 0).toString()));
+                    JlIDPrestamo2.setText(String.valueOf(prestamo.getIdPrestamo()));
+                    jCBoxPrestamo.setSelectedItem(prestamo);
+                    jSDia3.setModel(new SpinnerNumberModel(LocalDate.now().getDayOfMonth(), 1, 31, 1));
+                    jMonMes3.setMonth(prestamo.getFechaInicio().toLocalDate().getMonthValue());
+                    jYAño3.setYear(prestamo.getFechaInicio().toLocalDate().getYear());
+                    jBDevolver.setEnabled(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Por Favor Elija algun prestamo para editar");
+                }
+
                 break;
             default:
                 break;
@@ -932,11 +962,34 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
             int dia = (int) jSDia1.getValue();
             LocalDate fecha = LocalDate.of(jYAño.getYear(), jMonMes.getMonth(), dia);
 //            System.out.println(fecha);
-            jSDia2.setModel(new SpinnerNumberModel(fecha.plusDays(7).getDayOfMonth(), 0, 31, 1));
+            jSDia2.setModel(new SpinnerNumberModel(fecha.plusDays(7).getDayOfMonth(), 1, 31, 1));
 
         }
 
     }//GEN-LAST:event_jSDia1StateChanged
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        borrarFilas();
+        PrestamoData prestamoData = new PrestamoData();
+        EjemplarData ejemplarData = new EjemplarData();
+        LibroData libroData = new LibroData();
+        boolean siHay = false;
+        login = getLogin();
+
+        for (Prestamo prod : prestamoData.obtenerPrestamos()) {
+            Ejemplar ejemplar = ejemplarData.buscarEjemplar(prod.getEjemplar().getCodigo());
+            Libro libro = libroData.buscarLibro(String.valueOf(ejemplar.getLibro().getIdLibro()));
+//            System.out.println(libro);
+            if (prod.getLector().getNroSocio() == login.getLector().getNroSocio()) {
+                if (jTextField1.getText().isEmpty()||jTextField1.getText().equals("Buscar...")) {
+                    modelo.addRow(new Object[]{prod.getIdPrestamo(), libro.getTitulo(), prod.getFechaInicio(), prod.getFechaFin()});
+                    
+                }
+
+            }
+
+        }
+    }//GEN-LAST:event_formInternalFrameOpened
 
     public void cargarComboBox() {
         LibroData libroData = new LibroData();
@@ -1035,9 +1088,9 @@ public class VistaPrestamo extends javax.swing.JInternalFrame {
     private javax.swing.JPanel JpanelTabla;
     private javax.swing.JTable Tabla;
     private javax.swing.JTable Tabla2;
+    private javax.swing.JButton jBDevolver;
     private javax.swing.JButton jBFiltrar;
     private javax.swing.JButton jBNuevoPrestamo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<Libro> jCBoxLibrosEditar;
     private javax.swing.JComboBox<Prestamo> jCBoxPrestamo;
     private javax.swing.JLabel jLabel1;

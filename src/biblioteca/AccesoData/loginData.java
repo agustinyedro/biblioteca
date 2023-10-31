@@ -61,7 +61,7 @@ public class LoginData {
 
     public void modificarLogin(Login login) {
 
-        String sql = "UPDATE login SET usuario = ? , contraseña = ? , idLector=?, pregunta=? , respuesta = ? WHERE idLogin = ?";
+        String sql = "UPDATE login SET usuario = ? , contraseña = ? , idLector=?, pregunta=? , respuesta = ? nombreImg WHERE idLogin = ?";
         PreparedStatement ps = null;
 
         try {
@@ -71,7 +71,8 @@ public class LoginData {
             ps.setInt(3, login.getLector().getNroSocio());
             ps.setString(4, login.getPregunta());
             ps.setString(5, login.getRespueta());
-            ps.setInt(6, login.getIdLogin());
+            ps.setString(6, login.getNombreImg());
+            ps.setInt(7, login.getIdLogin());
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
@@ -88,7 +89,7 @@ public class LoginData {
 
     public Login buscarLoginPorUsuario(String usuario) {
         Login login = null;
-        String sql = "SELECT idLogin, usuario, contraseña, idLector , pregunta, respuesta FROM login WHERE usuario=?";
+        String sql = "SELECT idLogin, usuario, contraseña, idLector , pregunta, respuesta, nombreImg FROM login WHERE usuario=?";
         PreparedStatement ps = null;
         try {
             ps = connection.prepareStatement(sql);
@@ -103,6 +104,7 @@ public class LoginData {
                 login.setLector(lectorData.buscarLector(rs.getInt(4)));
                 login.setPregunta(rs.getString(5));
                 login.setRespueta(rs.getString(6));
+                login.setNombreImg(rs.getString(7));
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el usuario");
 

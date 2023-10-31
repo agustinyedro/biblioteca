@@ -109,6 +109,32 @@ public class Libro {
         return  titulo +", "+ autor ;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 83 * hash + this.idLibro;
+        hash = 83 * hash + this.isbn;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Libro other = (Libro) obj;
+        if (this.idLibro != other.idLibro) {
+            return false;
+        }
+        return this.isbn == other.isbn;
+    }
+
     
     
 

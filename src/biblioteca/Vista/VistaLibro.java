@@ -439,7 +439,7 @@ public final class VistaLibro extends javax.swing.JInternalFrame {
             prestamo.guardarPrestamo(prest);
 
             if (prestamo.B == 0) {
-                VistaIngreso p = new VistaIngreso();
+                VistaIngreso p = new VistaIngreso(login);
                 p.IngresoPrestamo();
                 p.setLogin(login);
                 p.setVisible(true);

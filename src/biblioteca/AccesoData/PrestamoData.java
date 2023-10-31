@@ -147,24 +147,28 @@ public class PrestamoData {
 
             if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Modificado Exitosamente.");
-            } else {
+            } else 
+            {
                 JOptionPane.showMessageDialog(null, "El prestamo no existe");
             }
 
-        } catch (SQLException ex) {
+        } 
+        catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla prestamo " + ex.getMessage());
-        } catch (NullPointerException ex) {
+        } 
+        catch (NullPointerException ex) {
 
         }
 
     }
 
-    public void devolverPrestamo(int id) {
+    public void devolverPrestamo(int id, Date fechafin) {
         prestamo = buscarPrestamo(id);
         try {
-            String sql = "UPDATE prestamo SET estado = 0 WHERE idPrestamo = ? ";
+            String sql = "UPDATE prestamo SET estado = 0, fechaFin = ? WHERE idPrestamo = ? ";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setDate(1, fechafin);
+            ps.setInt(2, id);
             int fila = ps.executeUpdate();
             System.out.println(fila);
             if (buscarPrestamo(id) == null) {
@@ -180,9 +184,11 @@ public class PrestamoData {
             }
 
             ps.close();
-        } catch (SQLException e) {
+        } catch
+                (SQLException e) {
             JOptionPane.showMessageDialog(null, " Error al acceder a la tabla Prestamo");
-        } catch (NullPointerException e) {
+        } 
+        catch (NullPointerException e) {
 
         }
     }

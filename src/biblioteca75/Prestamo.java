@@ -106,5 +106,28 @@ public class Prestamo {
     public String toString() {
         return  idPrestamo + ", "+ejemplar.getLibro().getTitulo();
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + this.idPrestamo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Prestamo other = (Prestamo) obj;
+        return this.idPrestamo == other.idPrestamo;
+    }
+    
     
 }
