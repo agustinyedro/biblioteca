@@ -149,9 +149,7 @@ public class MenuTest extends javax.swing.JFrame {
         r.setVisible(true);
     }//GEN-LAST:event_VistaIngresoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+   
     public static void main(String args[]) {
 
         FlatSolarizedLightIJTheme.registerCustomDefaultsSource("style");

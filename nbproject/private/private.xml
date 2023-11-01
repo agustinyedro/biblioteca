@@ -3,31 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/biblioteca/Vista/VistaRegistrarse.java</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/biblioteca/AccesoData/LectorData.java</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/biblioteca75/Prestamo.java</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/style/FlatLaf.properties</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/biblioteca/Vista/VistaRecuperarContraseña.java</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/biblioteca/AccesoData/LibroData.java</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/biblioteca/Vista/VistaPrestamo.java</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/biblioteca75/Libro.java</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/biblioteca75/Lector.java</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/biblioteca/AccesoData/PrestamoData.java</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/biblioteca75/Login.java</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/biblioteca/Vista/VistaLogin.java</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/iconos/Recurso%201-8.png</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/biblioteca/Vista/VistaInicio.java</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/biblioteca/Vista/VistaLibro.java</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/biblioteca/Vista/VistaPremium.java</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/biblioteca/Vista/PantallaDeInicio.java</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/biblioteca/AccesoData/EjemplarData.java</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/biblioteca/AccesoData/LoginData.java</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/biblioteca/Vista/PanelRound.java</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/biblioteca/Vista/VistaIngreso.java</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/biblioteca75/Ejemplar.java</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/biblioteca/Vista/TableGradientCell.java</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/biblioteca/Vista/VistaPerfil.java</file>
-            <file>file:/E:/Cursos/java/Proyecto%20Final/biblioteca/src/biblioteca/Vista/MenuTest.java</file>
+            <file>file:/C:/Users/luzel/OneDrive/Documentos/GitHub/Repo/biblioteca/src/biblioteca/Vista/VistaInicio.java</file>
+            <file>file:/C:/Users/luzel/OneDrive/Documentos/GitHub/Repo/biblioteca/src/biblioteca/Vista/VistaPerfil.java</file>
+            <file>file:/C:/Users/luzel/OneDrive/Documentos/GitHub/Repo/biblioteca/src/biblioteca/Vista/MenuTest.java</file>
+            <file>file:/C:/Users/luzel/OneDrive/Documentos/GitHub/Repo/biblioteca/src/biblioteca/Vista/PantallaDeInicio.java</file>
         </group>
     </open-files>
 </project-private>

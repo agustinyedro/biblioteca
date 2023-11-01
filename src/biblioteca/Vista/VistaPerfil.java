@@ -54,7 +54,7 @@ public class VistaPerfil extends javax.swing.JInternalFrame {
     }
 
     public void cargarLogin() {
-//        login = this.getLogin();
+        login = this.getLogin();
 
         Lector lector = new LectorData().buscarLector(login.getLector().getNroSocio());
         jTNombre.setText(lector.getNombre());
@@ -92,13 +92,13 @@ public class VistaPerfil extends javax.swing.JInternalFrame {
         jSDia = new javax.swing.JSpinner();
         jLemail = new javax.swing.JLabel();
         jTNombre = new javax.swing.JTextField();
-        jBEditar = new javax.swing.JButton();
         verificacion = new javax.swing.JLabel();
         jLTel = new javax.swing.JLabel();
         jTcel = new javax.swing.JTextField();
         jLCumpleanios = new javax.swing.JLabel();
         jYAño = new com.toedter.calendar.JYearChooser();
         JBPremium = new javax.swing.JButton();
+        jBEditar = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(1065, 720));
         setMinimumSize(new java.awt.Dimension(1065, 720));
@@ -215,18 +215,6 @@ public class VistaPerfil extends javax.swing.JInternalFrame {
             }
         });
 
-        jBEditar.setText("Editar");
-        jBEditar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jBEditarMouseClicked(evt);
-            }
-        });
-        jBEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEditarActionPerformed(evt);
-            }
-        });
-
         jLTel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLTel.setForeground(new java.awt.Color(204, 204, 204));
         jLTel.setText("N° de Telefono");
@@ -242,15 +230,13 @@ public class VistaPerfil extends javax.swing.JInternalFrame {
         jLCumpleanios.setForeground(new java.awt.Color(204, 204, 204));
         jLCumpleanios.setText("Cumpleaños");
 
-        jYAño.setForeground(new java.awt.Color(20, 16, 38));
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 569, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -270,7 +256,6 @@ public class VistaPerfil extends javax.swing.JInternalFrame {
                         .addComponent(verificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jBEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTusuario)
                             .addComponent(jTapellido)
                             .addComponent(jTNombre)
@@ -323,9 +308,7 @@ public class VistaPerfil extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jCgenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLgenero))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(jBEditar)
-                .addGap(54, 54, 54))
+                .addContainerGap(243, Short.MAX_VALUE))
         );
 
         JBPremium.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/diamente18.png"))); // NOI18N
@@ -342,6 +325,18 @@ public class VistaPerfil extends javax.swing.JInternalFrame {
             }
         });
 
+        jBEditar.setText("Editar");
+        jBEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBEditarMouseClicked(evt);
+            }
+        });
+        jBEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEditarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -355,7 +350,10 @@ public class VistaPerfil extends javax.swing.JInternalFrame {
                     .addComponent(selector, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBImg1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBCambiarContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JBPremium))
+                    .addComponent(JBPremium)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(jBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(2, 2, 2))
         );
         jPanel1Layout.setVerticalGroup(
@@ -375,7 +373,9 @@ public class VistaPerfil extends javax.swing.JInternalFrame {
                 .addComponent(jBCambiarContraseña)
                 .addGap(18, 18, 18)
                 .addComponent(JBPremium)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
+                .addComponent(jBEditar)
+                .addGap(124, 124, 124))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -427,12 +427,28 @@ public class VistaPerfil extends javax.swing.JInternalFrame {
                 || jTusuario.getText().isEmpty() || jTcel.getText().isEmpty() || jSDia.equals("") || jMonMes.equals("")
                 || jYAño.equals("") || jCgenero.equals("")) {
             JOptionPane.showMessageDialog(null, "Complete todos los campos");
+            
+        }else{
 
-        }
-
-        ValidacionDeNombre();
+          Lector lector= new Lector(); 
+            
+            ValidacionDeNombre();
         ValidacionDeTelefono();
         ValidacionDeUsuario();
+        
+        lector=new LectorData().buscarLector(login.getLector().getNroSocio());
+        
+        login.setUsuario(jTusuario.getText());
+        lector.setNombre(jTNombre.getText());
+        lector.setApellido(jTapellido.getText());
+        lector.setMail(jTMail.getText());
+        lector.setTelefono(Integer.parseInt(jTcel.getText()));
+        login.setLector(lector);
+        new LectorData().modificarLector(lector);
+        new LoginData().modificarLogin(login);
+        }
+
+        
     }//GEN-LAST:event_jBEditarActionPerformed
 
     private void jBEditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBEditarMouseClicked
@@ -564,40 +580,30 @@ public class VistaPerfil extends javax.swing.JInternalFrame {
         }
     }
 
+    
+
     public void ValidacionDeTelefono() {
 
         if (validarNumeroTelefono(jTcel.getText())) {
-
-//                        JOptionPane.showMessageDialog(null, "Número de teléfono válido: " + jTcel.getText());
-            throw new NullPointerException();
+            System.out.println("El número de telefono es válido:" + jTcel.getText());
         } else {
-
-            JOptionPane.showMessageDialog(null, "Número de teléfono inválido: " + jTcel.getText());
+            JOptionPane.showMessageDialog(null, "Número de teléfono inválido: " + jTcel.getText() + " Formtato : 00-00000-00000");
 
         }
 
     }
 
-    public boolean validarNumeroTelefono(String numeroTelefono) {
+    private static final String patron = "^(0[1-9]|[1-8][0-9])\\d{10}$";
+    private static final Pattern pattern = Pattern.compile(patron);
 
-        if (numeroTelefono.length() != 10) {
+    public static boolean validarNumeroTelefono(String numeroTelefono) {
+
+        if (numeroTelefono.isEmpty()) {
             return false;
         }
-        String patron = "^01[0-9]{8}$";
 
-        if (numeroTelefono.matches(patron)) {
-
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    class NumeroTelefonoInvalidoException extends Exception {
-
-        public NumeroTelefonoInvalidoException(String mensaje) {
-            super(mensaje);
-        }
+        Matcher matcher = pattern.matcher(numeroTelefono);
+        return matcher.matches();
     }
 
     class NumberFormatException extends Exception {
