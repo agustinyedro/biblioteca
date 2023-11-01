@@ -145,8 +145,8 @@ public class MenuTest extends javax.swing.JFrame {
     }//GEN-LAST:event_PantallaInicioActionPerformed
 
     private void VistaIngresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VistaIngresoActionPerformed
-        VistaIngreso r = new VistaIngreso();
-        r.setVisible(true);
+//        VistaIngreso r = new VistaIngreso();
+  //      r.setVisible(true);
     }//GEN-LAST:event_VistaIngresoActionPerformed
 
    

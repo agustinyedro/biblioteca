@@ -430,7 +430,7 @@ public final class VistaLibro extends javax.swing.JInternalFrame {
         if (ejem != null) {
             prest.setFechaInicio(Date.valueOf(LocalDate.now()));
             LocalDate fechaactual = LocalDate.now();
-            prest.setFechaFin(Date.valueOf(fechaactual.plusDays(7)));
+            prest.setFechaFin(null);
             prest.setEjemplar(ejem);
 
             prest.setLector(login.getLector());
@@ -440,11 +440,12 @@ public final class VistaLibro extends javax.swing.JInternalFrame {
 
             if (prestamo.B == 0) {
                 VistaIngreso p = new VistaIngreso(login);
-                p.IngresoPrestamo();
-                p.setLogin(login);
+                //p.IngresoPrestamo();
+                //p.setLogin(login);
+                p.setLibro(true);
                 p.setVisible(true);
                 this.setVisible(false);
-
+                JOptionPane.showMessageDialog(null, "Recuerda que la fecha de devolucion es " + Date.valueOf(LocalDate.now().plusDays(7)));
             }
 
         } else {

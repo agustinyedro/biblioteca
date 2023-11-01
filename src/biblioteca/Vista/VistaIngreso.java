@@ -27,6 +27,7 @@ public class VistaIngreso extends javax.swing.JFrame {
     private Login login;
     private int tamañoDeEscritorio;
     private boolean perfil = false;
+    private boolean libro = false;
 
     public VistaIngreso(Login login) {
         this.login = login;
@@ -48,6 +49,16 @@ public class VistaIngreso extends javax.swing.JFrame {
         this.perfil = perfil;
     }
 
+    public boolean isLibro() {
+        return libro;
+    }
+
+    public void setLibro(boolean libro) {
+        this.libro = libro;
+    }
+
+    
+    
     public JPanel[] paneles() {
         JPanel[] paneles = new JPanel[10];
         paneles[0] = JPInicio;
@@ -618,7 +629,7 @@ public class VistaIngreso extends javax.swing.JFrame {
 
         }
 
-        if (perfil == false) {
+        if (perfil == false && libro == false) {
             escritorio.removeAll();
             escritorio.repaint();
             VistaInicio materiaView = new VistaInicio();
@@ -634,7 +645,24 @@ public class VistaIngreso extends javax.swing.JFrame {
             escritorio.add(materiaView);
             escritorio.moveToFront(materiaView);
             darleColorPanel(JPInicio, JPInicio1);
-        } else {
+        } else if (libro == true && perfil == false){
+            escritorio.removeAll();
+        escritorio.repaint();
+        VistaPrestamo materiaView = new VistaPrestamo(login);
+        Dimension descot = escritorio.getSize();
+        materiaView.setSize(descot);
+        materiaView.setVisible(true);
+        BasicInternalFrameUI internalFrameUI = (BasicInternalFrameUI) materiaView.getUI();
+        internalFrameUI.setNorthPane(null);
+        materiaView.setBorder(null);
+        materiaView.setBackground(new Color(0, 0, 0, 0));
+        achicarMenu();
+//        materiaView.setLogin(login);
+        escritorio.add(materiaView);
+        escritorio.moveToFront(materiaView);
+        darleColorPanel(jPPrestamos, jPPrestamos1);
+        }
+        else {
             escritorio.removeAll();
             escritorio.repaint();
             VistaPerfil materiaView = new VistaPerfil(login);
@@ -928,7 +956,23 @@ public class VistaIngreso extends javax.swing.JFrame {
         this.jImg = jLabel1;
     }
 
-
+public void vistaPrestamo (){
+    escritorio.removeAll();
+        escritorio.repaint();
+        VistaPrestamo materiaView = new VistaPrestamo(login);
+        Dimension descot = escritorio.getSize();
+        materiaView.setSize(descot);
+        materiaView.setVisible(true);
+        BasicInternalFrameUI internalFrameUI = (BasicInternalFrameUI) materiaView.getUI();
+        internalFrameUI.setNorthPane(null);
+        materiaView.setBorder(null);
+        materiaView.setBackground(new Color(0, 0, 0, 0));
+        achicarMenu();
+//        materiaView.setLogin(login);
+        escritorio.add(materiaView);
+        escritorio.moveToFront(materiaView);
+        darleColorPanel(jPPrestamos, jPPrestamos1);
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLInicio;
     private javax.swing.JLabel JLperfil;

@@ -442,7 +442,7 @@ public class VistaPerfil extends javax.swing.JInternalFrame {
         lector.setNombre(jTNombre.getText());
         lector.setApellido(jTapellido.getText());
         lector.setMail(jTMail.getText());
-        lector.setTelefono(Integer.parseInt(jTcel.getText()));
+        lector.setTelefono(Long.parseLong(jTcel.getText()));
         login.setLector(lector);
         new LectorData().modificarLector(lector);
         new LoginData().modificarLogin(login);
